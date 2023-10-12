@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 // api url
-const baseUrl = "http://159.89.188.174:9000/api";
+const baseUrl = "https://159.89.188.174:9000/api";
 
 // Heroes' Section
 export const HomeDetails = createApi({
@@ -9,7 +9,7 @@ export const HomeDetails = createApi({
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: (builder) => ({
     getHomeDetails: builder.query({
-      query: () => "/home-api",
+      query: () => "/home-api/",
     }),
   }),
 });
@@ -20,7 +20,7 @@ export const AboutMe = createApi({
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: (builder) => ({
     getAboutMe: builder.query({
-      query: () => "/aboutme-api",
+      query: () => "/aboutme-api/",
     }),
   }),
 });
@@ -31,7 +31,7 @@ export const Services = createApi({
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: (builder) => ({
     getServices: builder.query({
-      query: () => "/allServices-api",
+      query: () => "/allServices-api/",
     }),
   }),
 });
@@ -42,7 +42,7 @@ export const Progress = createApi({
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: (builder) => ({
     getProgress: builder.query({
-      query: () => "/progress-api",
+      query: () => "/progress-api/",
     }),
   }),
 });
@@ -53,7 +53,7 @@ export const Projects = createApi({
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: (builder) => ({
     getProjects: builder.query({
-      query: () => "/projects-api",
+      query: () => "/projects-api/",
     }),
   }),
 });
@@ -64,7 +64,7 @@ export const Contacts = createApi({
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: (builder) => ({
     getContacts: builder.query({
-      query: () => "/contacts-api",
+      query: () => "/contacts-api/",
     }),
   }),
 });
@@ -75,7 +75,7 @@ export const SocialMedia = createApi({
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: (builder) => ({
     getSocialMedia: builder.query({
-      query: () => "/links-api",
+      query: () => "/links-api/",
     }),
   }),
 });
@@ -86,7 +86,7 @@ export const LanguagesIcons = createApi({
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: (builder) => ({
     getLanguagesIcons: builder.query({
-      query: () => "/lang-icons-api",
+      query: () => "/lang-icons-api/",
     }),
   }),
 });
