@@ -36,7 +36,6 @@ INSTALLED_APPS = [
     "corsheaders",
     'ckeditor',
     'tinymce',
-    'corsheaders'
 
 
 ]
@@ -44,7 +43,6 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
 
     "corsheaders.middleware.CorsMiddleware",
-    'corsheaders.middleware.CorsMiddleware',
 
     'django.middleware.security.SecurityMiddleware',
     # "whitenoise.middleware.WhiteNoiseMiddleware",
@@ -133,7 +131,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #     "https://jimmywaweru.herokuapp.com",
 
 # ]
-CORS_ORIGIN_ALLOW_ALL = True
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'build/static'),
