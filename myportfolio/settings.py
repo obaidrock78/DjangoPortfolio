@@ -37,13 +37,11 @@ INSTALLED_APPS = [
     'ckeditor',
     'tinymce',
 
-
 ]
 
 MIDDLEWARE = [
 
     "corsheaders.middleware.CorsMiddleware",
-    'django_cors.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     # "whitenoise.middleware.WhiteNoiseMiddleware",
 
@@ -53,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'myportfolio.urls'
@@ -122,7 +121,6 @@ USE_TZ = True
 
 
 STATIC_URL = 'static/'
-CORS_ALLOWED_ORIGINS = ['*']
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # CORS_ALLOWED_ORIGINS = [
