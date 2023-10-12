@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 // api url
-const baseUrl = "https://159.89.188.174:9000/api";
+const baseUrl = "http://159.89.188.174:9000/api";
 
 // Heroes' Section
 export const HomeDetails = createApi({
