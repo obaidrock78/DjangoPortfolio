@@ -15,11 +15,11 @@
   background: var(--color-card2);
   margin-bottom: 10px;
   position: relative;
-  width: 280px;
+  width: 265px;
   border-radius: 10px !important;
   padding: 10px 10px;
   display: flex;
-  height: 240px;
+  height: 265px;
   overflow: hidden;
   align-items: center;
   flex-direction: column;
