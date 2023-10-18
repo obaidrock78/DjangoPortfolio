@@ -68,43 +68,7 @@ const Intro = () => {
                       {detail.par_inro}
                     </p>
                   </div>
-                  <div
-                    className="intro-btns"
-                    data-aos="fade-up"
-                    data-aos-duration="1900"
-                  >
-                    <a
-                      href={`mailto:${detail.hireMe_link}`}
-                      className="contactMe"
-                    >
-                      <button className="contact-me">
-                        Hire me <i class="bx bx-send "></i>
-                      </button>
-                    </a>
-                  </div>
-                  <div
-                    class="intro-contact"
-                    data-aos="fade-up"
-                    data-aos-duration="1800"
-                  >
-                    <span>Follow Me:</span>
-                    <ul>
-                      <li>
-                        {contacts1Details &&
-                          contacts1Details.map((data1) => (
-                            <a
-                              href={data1.link}
-                              className="icon-link"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              key={data1.id}
-                            >
-                              <i className={data1.social_icon}></i>
-                            </a>
-                          ))}
-                      </li>
-                    </ul>
-                  </div>
+
                 </div>
                 <div
                   className="col-lg-7 col-md-6 col-sm-12 left-img "

@@ -43,9 +43,6 @@ const Navbar = () => {
                     <a href="#work">My Work</a>
                   </li>
 
-                  <li data-aos="fade-down" data-aos-duration="1800">
-                    <a href="#contact">Contact</a>
-                  </li>
                 </ul>
               </nav>
                   <div className="nav-social">
@@ -60,9 +57,6 @@ const Navbar = () => {
                   <input id="toggle" class="toggle" type="checkbox"></input>
                 </div>
                 <div>
-                  <div className="CvMe">
-                    <button className="my-cv">Contact Me</button>
-                  </div>
                 </div>
 
                 <div className=" " id="theme-button">
