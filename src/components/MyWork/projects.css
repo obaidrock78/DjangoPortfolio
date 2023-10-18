@@ -223,3 +223,8 @@
   font-size: 11px;
   color: rgb(5, 5, 5) !important;
 }
+.modalStyle {
+  border-radius: 30px;
+  background-color: transparent;
+  /* max-width: 500px; */
+}

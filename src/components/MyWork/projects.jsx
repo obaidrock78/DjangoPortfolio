@@ -1,15 +1,24 @@
 import { useGetProjectsQuery } from "../../Api/api";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import "./projects.css";
 import React from "react";
 import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
+import { Button, Modal } from "react-bootstrap";
 
 const Projects = () => {
   const { data: projects, isFetching } = useGetProjectsQuery();
   const img_300 = "http://drive.google.com/uc?id=";
 
+  
+  const [projectsDetails, setProjectsDetails] = useState(projects);
+  const [modalShow, setModalShow] = useState(false);
+  const [modalData, setModalData] = useState(null);
+  useEffect(() => {
+    setProjectsDetails(projects);
+  }, [projectsDetails, projects]);
+const renderCouresel = useMemo(() => {
   const options = {
     margin: 30,
     responsiveClass: true,
@@ -45,25 +54,13 @@ const Projects = () => {
       },
     },
   };
-  const [projectsDetails, setProjectsDetails] = useState(projects);
-  useEffect(() => {
-    setProjectsDetails(projects);
-    console.log(projectsDetails);
-  }, [projectsDetails, projects]);
-  if (isFetching) return "loading";
-
-  return (
-    <div className="mywork " id="work">
-      <div className="mywork-title">
-        <h2>Check Out My Reacet Projects</h2>
-
-        <h3>My Work</h3>
-      </div>
-      <div className="project-row">
-        {projectsDetails?.length && (
-          <OwlCarousel className="owl-theme" {...options}>
+return (
+  <OwlCarousel className="owl-theme" {...options}>
             {projectsDetails?.map((details) => (
-              <div className="project" data-aos="fade-up">
+              <div className="project" style={{cursor: 'pointer'}} data-aos="fade-up" onClick={() => {
+                setModalData(details);
+                setModalShow(true);
+              }}>
                 <div className="project-img">
                   <img
                     src={`${img_300}${details.about_avatar}`}
@@ -78,11 +75,52 @@ const Projects = () => {
                   </div>
                 </div>
                 <div className="work-details">
-                  <h2>{details.Project_title}</h2>
-                  <p className="work-info">{details.Project_info}</p>
+                  <h2 style={{marginBottom: 0}}>{details.Project_title}</h2>
+                </div>
+              </div>
+            ))}
+          </OwlCarousel>
+)
+}, [projectsDetails]);
+if (isFetching) return "loading";
+  return (<>
+    <div className="mywork " id="work">
+      <div className="mywork-title">
+        <h2>Check Out My Reacet Projects</h2>
+
+        <h3>My Work</h3>
+      </div>
+      <div className="project-row">
+        {projectsDetails?.length && renderCouresel}
+      </div>
+    </div>
+    <Modal
+      size="md"
+      centered
+      show={modalShow}
+      onHide={() => setModalShow(false)}
+      contentClassName="modalStyle"
+    >
+      <div className="project" data-aos="fade-down">
+                <div className="project-img">
+                  <img
+                    src={`${img_300}${modalData?.about_avatar}`}
+                    alt=""
+                    className="work-img"
+                  />
+                </div>
+
+                <div className="date-posted">
+                  <div className="who-post">
+                    <p className="admin">{modalData?.language_used}</p>
+                  </div>
+                </div>
+                <div className="work-details">
+                  <h2>{modalData?.Project_title}</h2>
+                  <p className="work-info">{modalData?.Project_info}</p>
                   <div className="project-links">
                     <a
-                      href={details.demo_link}
+                      href={modalData?.demo_link}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -92,7 +130,7 @@ const Projects = () => {
                       </h6>
                     </a>
                     <a
-                      href={details.project_link}
+                      href={modalData?.project_link}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -103,12 +141,12 @@ const Projects = () => {
                     </a>
                   </div>
                 </div>
+                <div style={{display: 'flex', justifyContent: 'flex-end', margin: '-10px 18px 0 0'}}><Button onClick={() => {
+                  setModalShow(false);
+                }} size="sm"><i class="fa fa-close"></i>&nbsp;Close</Button></div>
               </div>
-            ))}
-          </OwlCarousel>
-        )}
-      </div>
-    </div>
+    </Modal>
+    </>
   );
 };
 
