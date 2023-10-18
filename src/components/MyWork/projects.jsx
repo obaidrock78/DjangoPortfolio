@@ -18,6 +18,7 @@ const Projects = () => {
   useEffect(() => {
     setProjectsDetails(projects);
   }, [projectsDetails, projects]);
+
 const renderCouresel = useMemo(() => {
   const options = {
     margin: 30,
@@ -27,6 +28,8 @@ const renderCouresel = useMemo(() => {
     autoplay: false,
     navText: false,
     smartSpeed: 1000,
+    mouseDrag: true,
+    touchDrag: true,
     responsive: {
       0: {
         items: 1,
@@ -54,6 +57,7 @@ const renderCouresel = useMemo(() => {
       },
     },
   };
+
 return (
   <OwlCarousel className="owl-theme" {...options}>
             {projectsDetails?.map((details) => (
