@@ -19,7 +19,8 @@
   border-radius: 10px !important;
   padding: 10px 10px;
   display: flex;
-  height: 265px;
+  min-height: 265px;
+  height: fit-content;
   overflow: hidden;
   align-items: center;
   flex-direction: column;
@@ -66,7 +67,7 @@
   margin-bottom: 20px;
 }
 .service-info {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 400;
   color: #676a6a;
 }
