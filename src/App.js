@@ -12,7 +12,7 @@ import $ from "jquery";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
-import Email from "./components/EmailMe/Email";
+// import Email from "./components/EmailMe/Email";
 
 function App() {
   // Preloader
