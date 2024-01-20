@@ -9,7 +9,7 @@ import { Button, Modal } from "react-bootstrap";
 
 const Projects = () => {
   const { data: projects, isFetching } = useGetProjectsQuery();
-  const img_300 = "http://drive.google.com/uc?id=";
+  const img_300 = "https://globaltechserivce.online";
 
   
   const [projectsDetails, setProjectsDetails] = useState(projects);
@@ -67,7 +67,7 @@ return (
               }}>
                 <div className="project-img">
                   <img
-                    src={`${img_300}${details.about_avatar}`}
+                    src={`${img_300}${details.image}`}
                     alt=""
                     className="work-img"
                   />
@@ -108,7 +108,7 @@ if (isFetching) return "loading";
       <div className="project" data-aos="fade-down">
                 <div className="project-img">
                   <img
-                    src={`${img_300}${modalData?.about_avatar}`}
+                    src={`${img_300}${modalData?.image}`}
                     alt=""
                     className="work-img"
                   />
