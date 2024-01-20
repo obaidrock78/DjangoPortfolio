@@ -84,8 +84,13 @@ class Project(models.Model):
     Project_title = models.CharField(max_length=90, blank=True, null=True)
     Project_info = models.TextField(blank=True, null=True)
     project_link = models.URLField(blank=True, null=True)
-    image = models.ImageField(upload_to='images/')  # 'images/' is the upload path, change it as needed
+    image = models.ImageField(
+        upload_to='images/',  # 'images/' is the upload path, change it as needed
+        blank=True,  # Allow the field to be left blank in forms
+        null=True,  # Allow the field to be null in the database
+        default='default_image.jpg')  # Default image filename (change it to your default image))
     demo_link = models.URLField(blank=True, null=True)
+
 
     class Meta:
         verbose_name_plural = 'Projects Section'
