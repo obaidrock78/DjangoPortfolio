@@ -45,6 +45,11 @@ class ServicesOffred(models.Model):
     shadow_icon = models.CharField(max_length=40, blank=True, null=True)
     service_description = models.TextField(
         blank=True, null=True)
+    image = models.ImageField(
+        upload_to='images/',  # 'images/' is the upload path, change it as needed
+        blank=True,  # Allow the field to be left blank in forms
+        null=True,  # Allow the field to be null in the database
+        default='Screenshot_from_2024-01-19_16-57-31.png')  # Default image filename (change it to your default image))
 
     class Meta:
         verbose_name_plural = 'Services Section'
@@ -88,7 +93,7 @@ class Project(models.Model):
         upload_to='images/',  # 'images/' is the upload path, change it as needed
         blank=True,  # Allow the field to be left blank in forms
         null=True,  # Allow the field to be null in the database
-        default='default_image.jpg')  # Default image filename (change it to your default image))
+        default='Screenshot_from_2024-01-19_16-57-31.png')  # Default image filename (change it to your default image))
     demo_link = models.URLField(blank=True, null=True)
 
 
