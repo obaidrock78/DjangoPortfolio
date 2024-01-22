@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 const Services = () => {
   const { data: services, isFetching } = useGetServicesQuery();
   const [servicesDetails, setServicesDetails] = useState(services);
-  const img_300 = "https://globaltechserivce.online/images";
+  const img_300 = "https://globaltechserivce.online";
 
   useEffect(() => {
     setServicesDetails(services);
