@@ -12,8 +12,11 @@ class HomeDetails(models.Model):
     job_title = models.CharField(max_length=100, blank=True, null=True)
     par_inro = models.TextField(
         blank=True, null=True, verbose_name="Introduction")
-    avatar_img = models.CharField(max_length=100, blank=True, null=True,
-                                  verbose_name="Google Drive Image Id")
+    image = models.ImageField(
+        upload_to='images/',  # 'images/' is the upload path, change it as needed
+        blank=True,  # Allow the field to be left blank in forms
+        null=True,  # Allow the field to be null in the database
+        default='Screenshot_from_2024-01-19_16-57-31.png')  # Default image filename (change it to your default image))
     hireMe_link = models.CharField(max_length=200, blank=True, null=True)
     cv_link = models.URLField(blank=True, null=True)
 
@@ -28,8 +31,11 @@ class AboutMe(models.Model):
     title = models.CharField(max_length=20, blank=True, null=True)
     title_2 = models.CharField(max_length=100, blank=True, null=True)
     description_one = RichTextField(blank=True, null=True)
-    about_avatar = models.CharField(max_length=100, blank=True, null=True,                    verbose_name="Google Drive Image Id"
-                                    )
+    image = models.ImageField(
+        upload_to='images/',  # 'images/' is the upload path, change it as needed
+        blank=True,  # Allow the field to be left blank in forms
+        null=True,  # Allow the field to be null in the database
+        default='Screenshot_from_2024-01-19_16-57-31.png')  # Default image filename (change it to your default image))
 
     class Meta:
         verbose_name_plural = 'About Me Section'
