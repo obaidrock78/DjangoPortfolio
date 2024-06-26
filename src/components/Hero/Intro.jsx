@@ -116,11 +116,12 @@ const Intro = () => {
                       src="https://drive.google.com/uc?id=1iyVyaGyw5HniEugxd1-qZ54rpFpn2UTc"
                       alt=""
                     /> */}
-                    <img
+                    {/* <img
                       className="intro-img"
                       src={`${img_300}${detail.avatar_img}`}
                       alt=""
-                    />
+                    /> */}
+                    <img src="/python-service.png" alt=""/>
                   </div>
                 </div>
               </div>
