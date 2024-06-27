@@ -20,7 +20,7 @@ const Navbar = () => {
                 />
                 obaidrock78 <span className="blink"> _</span>
               </h5>
-              <nav className="nav-menu  mainMenu">
+              <nav className="nav-menu mainMenu">
                 <ul>
                   <li
                     className="active"

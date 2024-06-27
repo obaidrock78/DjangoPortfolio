@@ -24,12 +24,14 @@ const Main = () => {
         },
         1000
       );
-      $(".mainMenu").removeClass("act");
 
-      if ($(this).hasClass("act")) {
-        $(".menuBtn").addClass("act");
+      const mainLabel = this;
+      const parentElement = mainLabel.closest('li');
+      $(".mainMenu li").removeClass("active")
+      if (parentElement.classList.contains("active")) {
+        parentElement.classList.remove("active");
       } else {
-        $(".menuBtn").removeClass("act");
+        parentElement.classList.add("active");
       }
 
       e.preventDefault();
