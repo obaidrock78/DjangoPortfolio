@@ -211,7 +211,7 @@ section > div {
   bottom: 0;
   z-index: 9999;
   overflow: hidden;
-  background: #0d0d14 !important;
+  background: #161616 !important;
 }
 .name-load {
   color: #fff !important;
@@ -249,7 +249,7 @@ section > div {
     background-position: 200% center;
   }
 }
-#preloader:before {
+/* #preloader:before {
   content: "";
   position: fixed;
   top: calc(50% - 30px);
@@ -277,4 +277,4 @@ section > div {
   100% {
     transform: rotate(360deg);
   }
-}
+} */
