@@ -121,7 +121,17 @@ const Intro = () => {
                       src={`${img_300}${detail.avatar_img}`}
                       alt=""
                     /> */}
-                    <img src="/python-service.png" alt=""/>
+                    {/* <img src="/python-service.png" alt=""/> */}
+                    <div class="flip-box">
+                      <div class="flip-box-inner">
+                        <div class="flip-box-front">
+                          <img src="/python-service.png" alt="" />
+                        </div>
+                        <div class="flip-box-back">
+                          <img style={{paddingTop: '130px'}} src="/welcome-to-portfolio.png" alt="" />
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

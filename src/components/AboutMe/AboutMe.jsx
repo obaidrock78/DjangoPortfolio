@@ -44,7 +44,7 @@ const AboutMe = () => {
                   data-aos="fade-up-right"
                 >
                   {/* <img src={`${img_300}${details.about_avatar}`} alt="" /> */}
-                  <img src={`/about-me.jpeg`} alt="" />
+                  <img className="zoomOnHover" src={`/about-me.jpeg`} alt="" />
                 </div>
                 <div
                   className=" col-lg-6 col-md-7  col-sm-12 about_myinfo"
