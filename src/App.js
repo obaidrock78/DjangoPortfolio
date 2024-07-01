@@ -37,7 +37,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-      <AnimatedCursor />
+      {window.innerWidth > 768 && <AnimatedCursor />}
         <div id="preloader">
           <img style={{height: '100px', width: '130px'}} src="/giphy.webp" alt="" />
           <h2 className="name-load  animate-charcter">l O A D I N G</h2>

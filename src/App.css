@@ -54,9 +54,15 @@
 
 .flip-box {
   background-color: transparent;
-  width: 650px;
+  width: 100%;
+  max-width: 650px;
   height: 600px;
   perspective: 1000px;
+}
+@media only screen and (max-width: 767px) {
+  .flip-box {
+    height: 280px;
+  }
 }
 
 .flip-box-inner {
@@ -91,9 +97,11 @@
   transform: rotateY(180deg);
 }
 
-.zoomOnHover {
-  transition: transform .3s;
-  margin-left: 20px;
+@media only screen and (min-width: 767px) {
+  .zoomOnHover {
+    transition: transform .3s;
+    margin-left: 20px;
+  }
 }
 
 .zoomOnHover:hover {
