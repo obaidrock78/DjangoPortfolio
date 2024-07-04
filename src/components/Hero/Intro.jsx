@@ -128,7 +128,7 @@ const Intro = () => {
                           <img src="/python-service.png" alt="" />
                         </div>
                         <div class="flip-box-back">
-                          <img style={{paddingTop: '130px'}} src="/welcome-to-portfolio.png" alt="" />
+                          <img style={{paddingTop: '90px'}} src="/welcome-to-portfolio.png" alt="" />
                         </div>
                       </div>
                     </div>
