@@ -89,12 +89,16 @@
 .flip-box-front {
   /* background-color: #bbb; */
   color: black;
+  display: flex;
+  align-items: center;
 }
 
 .flip-box-back {
   /* background-color: #555; */
   color: white;
   transform: rotateY(180deg);
+  display: flex;
+  align-items: center;
 }
 
 @media only screen and (min-width: 767px) {
