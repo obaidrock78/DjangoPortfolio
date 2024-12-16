@@ -1,4 +1,4 @@
-import { useGetProjectsQuery } from "../../Api/api";
+import { baseUrlImages, useGetProjectsQuery } from "../../Api/api";
 import { useEffect, useMemo, useState } from "react";
 import "./projects.css";
 import React from "react";
@@ -9,7 +9,7 @@ import { Button, Modal } from "react-bootstrap";
 
 const Projects = () => {
   const { data: projects, isFetching } = useGetProjectsQuery();
-  const img_300 = "https://globaltechserivce.online";
+  const img_300 = baseUrlImages;
 
   
   const [projectsDetails, setProjectsDetails] = useState(projects);

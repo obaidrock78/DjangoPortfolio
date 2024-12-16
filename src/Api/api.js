@@ -1,7 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 // api url
-const baseUrl = "https://globaltechserivce.online/api";
+const baseUrl = "https://globaltechserivce.com/api";
+export const baseUrlImages = "https://globaltechserivce.com"
 
 // Heroes' Section
 export const HomeDetails = createApi({

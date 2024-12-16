@@ -1,11 +1,11 @@
 import "./Services.css";
-import { useGetServicesQuery } from "../../Api/api";
+import { baseUrlImages, useGetServicesQuery } from "../../Api/api";
 import { useEffect, useState } from "react";
 
 const Services = () => {
   const { data: services, isFetching } = useGetServicesQuery();
   const [servicesDetails, setServicesDetails] = useState(services);
-  const img_300 = "https://globaltechserivce.online";
+  const img_300 = baseUrlImages;
 
   useEffect(() => {
     setServicesDetails(services);
