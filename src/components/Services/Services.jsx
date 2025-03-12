@@ -1,11 +1,11 @@
 import "./Services.css";
-import { useGetServicesQuery } from "../../Api/api";
+import { baseUrlImages, useGetServicesQuery } from "../../Api/api";
 import { useEffect, useState } from "react";
 
 const Services = () => {
   const { data: services, isFetching } = useGetServicesQuery();
   const [servicesDetails, setServicesDetails] = useState(services);
-  const img_300 = "http://drive.google.com/uc?id=";
+  const img_300 = baseUrlImages;
 
   useEffect(() => {
     setServicesDetails(services);
@@ -33,7 +33,7 @@ const Services = () => {
                   data-aos-duration="1500"
                 >
                   <div className="ser-back">
-                    <img src={`${img_300}${service.icon_image}`} alt="" />
+                    <img src={`${img_300}${service.image}`} alt="" />
                   </div>
                   <h4 className="web">{service.service_name}</h4>
                   <p className="service-info">{service.service_description}</p>
