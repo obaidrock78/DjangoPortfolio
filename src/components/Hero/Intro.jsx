@@ -89,7 +89,7 @@ const Intro = () => {
                     <div class="flip-box">
                       <div class="flip-box-inner">
                         <div class="flip-box-front">
-                          <img src="/python-service.png" alt="" />
+                          <img src="/python-service-1.png" alt="" />
                         </div>
                         <div class="flip-box-back">
                           <img src="/welcome-to-portfolio.png" alt="" />

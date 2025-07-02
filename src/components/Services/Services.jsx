@@ -27,13 +27,13 @@ const Services = () => {
             {services &&
               services.map((service) => (
                 <div
-                  className=" my-service"
+                  className="my-service"
                   key={service.id}
                   data-aos="zoom-in-up"
                   data-aos-duration="1500"
                 >
                   <div className="ser-back">
-                    <img src={`${img_300}${service.image}`} alt="" />
+                    <img src={`${img_300}${service.image}`} alt="" style={{borderRadius: '10px', height: '50px', marginTop: '20px'}}/>
                   </div>
                   <h4 className="web">{service.service_name}</h4>
                   <p className="service-info">{service.service_description}</p>
