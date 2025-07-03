@@ -132,9 +132,9 @@
 }
 
 @media only screen and (max-width: 689px) {
-  .reachme-title .row {
+  /* .reachme-title .row {
     justify-content: center;
-  }
+  } */
   .reachme-title h2 {
     text-align: center;
   }

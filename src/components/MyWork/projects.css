@@ -59,8 +59,7 @@
 .project:hover .work-img {
   transform: scale(1.06) !important;
 }
-.project {
-}
+
 .date-posted {
   display: flex !important;
   align-items: center !important;
@@ -111,9 +110,6 @@
   font-size: 12px;
 }
 
-.project {
-  /* border-bottom: 1px solid var(--color-title); */
-}
 .project .learnmore {
   background: none;
   padding-right: 10px;
@@ -142,13 +138,8 @@
   border-bottom: 4px solid var(--color-button);
 }
 
-/*  */
-
 .light .project {
   background: var(--color-card-background);
-  box-shadow: var(--card-box-shadow);
-  margin-top: 20px;
-  margin-bottom: 20px;
 }
 @media only screen and (max-width: 768px) {
   .project {
@@ -168,8 +159,6 @@
   }
   .work-togather-form {
     padding-left: 0px;
-  }
-  .project-row {
   }
   .owl-item {
     display: flex !important;
@@ -192,8 +181,6 @@
   }
   .mywork {
     padding: 0 0 0 0px;
-  }
-  .project {
   }
   .work-img {
     padding: 10px;
@@ -227,4 +214,61 @@
   border-radius: 30px;
   background-color: transparent;
   /* max-width: 500px; */
+}
+
+.owl-dots {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.custom-owl-nav {
+  position: absolute;
+  top: 40%;
+  width: 100%;
+  pointer-events: none;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-40%);
+}
+
+.custom-owl-nav button.owl-prev,
+.custom-owl-nav button.owl-next {
+  background: rgba(255, 255, 255, 0.1) !important; /* or any color you like */
+  border: none;
+  border-radius: 50px !important;
+  width: 40px;
+  height: 40px;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: background 0.3s ease;
+}
+
+.custom-owl-nav button.owl-prev:hover,
+.custom-owl-nav button.owl-next:hover {
+  background: var(--color-button-hover) !important;
+}
+
+.custom-owl-nav button.owl-prev {
+  position: absolute;
+  left: -25px;
+}
+
+.custom-owl-nav button.owl-next {
+  position: absolute;
+  right: -25px;
+}
+
+@media only screen and (max-width: 768px) {
+  .custom-owl-nav button.owl-prev {
+    left: 0px;
+  }
+
+  .custom-owl-nav button.owl-next {
+    right: 0px;
+  }
 }

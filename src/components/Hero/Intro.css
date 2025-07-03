@@ -501,6 +501,5 @@
   color: #020222 !important;
 }
 .light .intro-page::after {
-  background: none !important;
-  opacity: 0.2;
+  opacity: 0.1;
 }
