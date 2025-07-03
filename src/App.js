@@ -33,7 +33,6 @@ function App() {
       once: true,
     });
   }, []);
-console.log('window.innerWidth', window.innerWidth);
   return (
     <>
       <BrowserRouter>
