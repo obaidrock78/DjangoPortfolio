@@ -1,115 +1,124 @@
+/* ========== V3 MATRIX – GLOBAL EFFECTS ========== */
+
 .App {
-  text-align: center;
   background: var(--color-background);
+  position: relative;
 }
-.cursor-dot,
-.cursor-dot-outline {
-  z-index: 9000;
+
+.homepage {
+  position: relative;
+}
+
+/* Scan line overlay – full page */
+.scanlines {
+  position: fixed;
+  inset: 0;
   pointer-events: none;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  opacity: 1;
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  z-index: 9990;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.15) 2px,
+    rgba(0, 0, 0, 0.15) 4px
+  );
+  opacity: 0.4;
 }
 
-.cursor-dot {
-  width: 8px;
-  height: 8px;
-  background-color: #dcc356;
+@media (prefers-reduced-motion: reduce) {
+  .scanlines { opacity: 0.15; }
 }
-.cursor-dot-outline {
-  width: 50px;
-  height: 50px;
-  background-color: transparent;
-  border: 1px solid #dcc356;
+
+/* Noise / grain overlay */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9989;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
-#theme-button3 {
+
+/* Glitch effect – use .glitch on text/logo */
+.glitch {
   position: relative;
 }
-#theme-button3 input {
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
   position: absolute;
-  left: 50px;
-  top: 90px;
-}
-
-.load_app {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  left: 0;
+  top: 0;
+  width: 100%;
   height: 100%;
-  margin-top: 130px !important;
-  flex-direction: column;
 }
 
+.glitch::before {
+  left: 2px;
+  text-shadow: -2px 0 var(--matrix-cyan);
+  clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+  animation: glitch-1 2s infinite linear alternate;
+}
 
+.glitch::after {
+  left: -2px;
+  text-shadow: 2px 0 var(--matrix-red);
+  clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+  animation: glitch-2 3s infinite linear alternate;
+}
+
+@keyframes glitch-1 {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(2px, -2px); }
+  60% { transform: translate(-2px, -2px); }
+  80% { transform: translate(2px, 2px); }
+  100% { transform: translate(0); }
+}
+
+@keyframes glitch-2 {
+  0% { transform: translate(0); }
+  20% { transform: translate(2px, -2px); }
+  40% { transform: translate(-2px, 2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(-2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glitch::before,
+  .glitch::after { animation: none; opacity: 0; }
+}
+
+/* Bracket decoration for headings */
+.bracket-wrap {
+  font-family: var(--font-mono);
+  color: var(--matrix-green);
+}
+
+.bracket-wrap .bracket-open,
+.bracket-wrap .bracket-close {
+  opacity: 0.8;
+  animation: bracket-blink 2s ease-in-out infinite;
+}
+
+@keyframes bracket-blink {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 0.3; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bracket-wrap .bracket-open,
+  .bracket-wrap .bracket-close { animation: none; }
+}
+
+/* Cursor – Matrix green (overridden by animatedCursor when active) */
 :root {
-  --color-cursor: 220, 90, 90;
-  --cursor-outline-shade: 0.3;
-  --cursor-size: 10px;
-  --cursor-outline-size: 12px;
-}
-
-.flip-box {
-  background-color: transparent;
-  width: 100%;
-  max-width: 650px;
-  height: 600px;
-  perspective: 1000px;
-}
-@media only screen and (max-width: 767px) {
-  .flip-box {
-    height: 280px;
-  }
-}
-
-.flip-box-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
-}
-
-.flip-box:hover .flip-box-inner {
-  transform: rotateY(180deg);
-}
-
-.flip-box-front, .flip-box-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-
-.flip-box-front {
-  /* background-color: #bbb; */
-  color: black;
-  display: flex;
-  align-items: center;
-}
-
-.flip-box-back {
-  /* background-color: #555; */
-  color: white;
-  transform: rotateY(180deg);
-  display: flex;
-  align-items: center;
-}
-
-@media only screen and (min-width: 767px) {
-  .zoomOnHover {
-    transition: transform .3s;
-    margin-left: 20px;
-  }
+  --color-cursor: 0, 255, 65;
 }
 
 .zoomOnHover:hover {
-  -ms-transform: scale(1.1); /* IE 9 */
-  -webkit-transform: scale(1.1); /* Safari 3-8 */
-  transform: scale(1.1); 
+  transform: scale(1.02);
+  transition: transform 0.2s ease;
 }

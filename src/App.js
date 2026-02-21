@@ -43,6 +43,8 @@ function App() {
           <h2 className="name-load  animate-charcter">l O A D I N G</h2>
         </div>
 
+        <div className="scanlines" aria-hidden="true" />
+        <div className="noise-overlay" aria-hidden="true" />
         <div className="homepage">
           <Navbar />
           <Home />

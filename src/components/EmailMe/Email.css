@@ -1,160 +1,161 @@
+/* ========== V3 EMAIL / CONTACT ME – MATRIX ========== */
+
 .reachme-container {
-  color: var(--color-info-light);
   width: 100%;
-  padding: 0 40px;
-  position: relative;
-  padding: 50px 40px 20px 40px;
-  margin: auto;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--section-padding) clamp(1rem, 4vw, 2rem);
   background: var(--color-background-2);
 }
-.reachme-container .row {
-  display: flex !important;
-  justify-content: flex-start;
-  margin: auto;
-}
-.email-me input {
-  width: 100%;
-  margin-bottom: 10px;
-  height: 55px;
-  background: var(--color-card2);
-  border: none;
-  border-radius: 6px;
-  text-indent: 20px;
-  color: #ffffff;
-}
-.email-me textarea {
-  width: 100%;
-  background: var(--color-card2);
 
-  border-radius: 5px;
-  text-indent: 20px;
-  color: #ffffff;
-  padding-top: 20px;
-}
-.hire-me-title h2 {
-  font-size: 1.2rem;
-}
-.hire-btn {
-  height: 50px;
-  width: 150px;
-  background: var(--color-button-hover);
-  border-radius: 10px;
-  font-size: 15px;
-  margin-top: 30px;
-}
-.reachme-title {
-  width: 100%;
-}
 .reachme-title2 {
   text-align: center;
-  margin: auto;
-  max-width: 450px;
-}
-.reachme-title2 h3 {
-  text-align: center;
-  font-size: 2.6rem;
-  padding-bottom: 10px;
+  margin-bottom: 2rem;
 }
 
 .reachme-title2 h2 {
-  font-size: 15px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--matrix-green);
+  margin-bottom: 0.35rem;
 }
+
+.reachme-title2 h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  color: var(--matrix-white);
+}
+
+.reachme-container .row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  align-items: flex-start;
+}
+
 .reachme-title .row {
-  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
-.reachme-title h2 {
-  font-size: 1.8rem;
-}
-.reachme-title p {
-  font-size: 15px;
-  line-height: 30px;
-}
-.contact-info {
-}
+
 .contact-info {
   display: flex;
-  cursor: pointer;
-  align-items: center;
-  margin-bottom: 10px;
-  margin-right: 10px;
-  border-radius: 10px;
-  cursor: pointer;
-  padding: 10px 0px 0px 10px;
+  align-items: flex-start;
+  padding: 1rem;
+  border: var(--terminal-border);
+  background: var(--color-card2);
+  transition: box-shadow 0.2s ease;
+}
+
+.contact-info:hover {
+  box-shadow: var(--card-box-shadow);
 }
 
 .contact-details {
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  margin-right: 30px;
-}
-.contact-mi {
-  margin-left: 10px;
-  margin-top: 10px;
-}
-.email-me {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.contact-mi p {
-  font-size: 14px;
-}
-.contact-mi h4 {
-  margin-bottom: 0;
-  padding-bottom: 0;
-  font-size: 1.3rem;
-}
-.contact-info i {
-  margin-bottom: 10px;
-  font-size: 27px;
-  border-radius: 50%;
-  display: flex;
-  color: var(--color-button-hover);
-  justify-content: center;
-  align-items: center;
-  height: 80px;
-  width: 80px;
-  border-radius: 150px;
-  margin-right: 20px;
-}
-.contact-info:nth-child(1) i {
-  color: #f06a6a !important;
-  background: #fcdcdc;
-}
-.contact-info:nth-child(2) i {
-  color: #6ecc21 !important;
-  background: #ddf5e6;
-}
-.contact-info:nth-child(3) i {
-  color: #8b71e9 !important;
-  background: #ddd6fa;
+  gap: 1rem;
 }
 
-@media only screen and (max-width: 689px) {
-  /* .reachme-title .row {
-    justify-content: center;
-  } */
-  .reachme-title h2 {
-    text-align: center;
-  }
-  .reachme-title p {
-    text-align: center;
-  }
+.contact-info i {
+  font-size: 1.5rem;
+  color: var(--matrix-green);
+  flex-shrink: 0;
 }
-@media only screen and (max-width: 550px) {
+
+.contact-mi h4 {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--matrix-white);
+  margin-bottom: 0.25rem;
+}
+
+.contact-mi p {
+  font-size: 0.85rem;
+  color: var(--matrix-text);
+  margin: 0;
+}
+
+.email-me .contact-form input,
+.email-me .contact-form textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  background: var(--color-card2);
+  border: var(--terminal-border);
+  color: var(--matrix-text);
+  margin-bottom: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.email-me .contact-form input:focus,
+.email-me .contact-form textarea:focus {
+  outline: none;
+  border-color: var(--matrix-green);
+  box-shadow: 0 0 12px rgba(0, 255, 65, 0.1);
+}
+
+.email-me .contact-form input::placeholder,
+.email-me .contact-form textarea::placeholder {
+  color: var(--matrix-text);
+  opacity: 0.7;
+}
+
+.email-me textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.hire-btn {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  padding: 0.6rem 1.5rem;
+  background: transparent;
+  border: var(--terminal-border);
+  color: var(--matrix-green);
+  cursor: pointer;
+  transition: box-shadow 0.2s ease, color 0.2s ease;
+  margin-top: 0.5rem;
+}
+
+.hire-btn:hover {
+  color: var(--matrix-cyan);
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.25);
+}
+
+@media (max-width: 768px) {
+  .reachme-container .row {
+    flex-direction: column;
+    align-items: stretch;
+  }
   .email-me {
-    padding: 0px !important;
+    padding: 0;
   }
+}
+
+@media (max-width: 550px) {
   .reachme-container {
-    padding: 10px;
+    padding: 2rem 1rem;
   }
 }
-.light .contact-info {
+
+body.light .email-me input,
+body.light .email-me textarea {
+  color: var(--matrix-text);
+  background: var(--color-card2);
+  border-color: rgba(0, 255, 65, 0.4);
 }
-.light .email-me input {
-  color: #000000;
+
+body.light .contact-mi h4 {
+  color: var(--matrix-white);
 }
-.light .email-me textarea {
-  color: #000000;
+
+body.light .contact-mi p {
+  color: var(--matrix-text);
 }

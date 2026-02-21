@@ -55,7 +55,7 @@ const AboutMe = () => {
                     <h3>{details.title_2}</h3>
                   </div>
                   <div className="about-description">
-                    <div id="foo" unselectable="on" class="unselectable">
+                    <div id="foo" unselectable="on" className="unselectable">
                       <div
                         dangerouslySetInnerHTML={{
                           __html: `${details.description_one}`,
@@ -72,7 +72,7 @@ const AboutMe = () => {
                       rel="noopener noreferrer"
                     >
                       <button className="download-cv">
-                        Download Cv <i class="bx bx-download"></i>
+                        Download Cv <i className="bx bx-download"></i>
                       </button>
                     </a>
                   </div>
