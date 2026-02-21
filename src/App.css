@@ -1,115 +1,135 @@
+/* ========== V4 – APP LAYOUT & BACKGROUND ========== */
+
 .App {
-  text-align: center;
   background: var(--color-background);
-}
-.cursor-dot,
-.cursor-dot-outline {
-  z-index: 9000;
-  pointer-events: none;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  opacity: 1;
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  position: relative;
+  min-height: 100vh;
 }
 
-.cursor-dot {
-  width: 8px;
-  height: 8px;
-  background-color: #dcc356;
-}
-.cursor-dot-outline {
-  width: 50px;
-  height: 50px;
-  background-color: transparent;
-  border: 1px solid #dcc356;
-}
-#theme-button3 {
+.homepage {
   position: relative;
 }
-#theme-button3 input {
+
+/* Subtle animated gradient background */
+.v4-bg-wrap {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.v4-bg-gradient {
   position: absolute;
-  left: 50px;
-  top: 90px;
+  width: 140%;
+  height: 140%;
+  top: -20%;
+  left: -20%;
+  background: radial-gradient(
+      ellipse 80% 50% at 50% -20%,
+      rgba(139, 92, 246, 0.18) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse 60% 40% at 100% 50%,
+      rgba(124, 58, 237, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse 50% 30% at 0% 80%,
+      rgba(139, 92, 246, 0.08) 0%,
+      transparent 50%
+    );
+  animation: v4-bg-drift 20s ease-in-out infinite;
 }
 
-.load_app {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  margin-top: 130px !important;
-  flex-direction: column;
+body.light .v4-bg-gradient {
+  background: radial-gradient(
+      ellipse 80% 50% at 50% -20%,
+      rgba(124, 58, 237, 0.12) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse 60% 40% at 100% 50%,
+      rgba(139, 92, 246, 0.06) 0%,
+      transparent 50%
+    );
 }
 
-
-:root {
-  --color-cursor: 220, 90, 90;
-  --cursor-outline-shade: 0.3;
-  --cursor-size: 10px;
-  --cursor-outline-size: 12px;
+@keyframes v4-bg-drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(2%, 1%) scale(1.02); }
+  66% { transform: translate(-1%, 2%) scale(0.98); }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .v4-bg-gradient { animation: none; }
+}
+
+/* Ensure content above background */
+.homepage,
+section {
+  position: relative;
+  z-index: 1;
+}
+
+/* Hero flip box – rounded for V4 */
 .flip-box {
-  background-color: transparent;
+  background: transparent;
   width: 100%;
-  max-width: 650px;
-  height: 600px;
+  max-width: 480px;
+  height: 420px;
   perspective: 1000px;
-}
-@media only screen and (max-width: 767px) {
-  .flip-box {
-    height: 280px;
-  }
+  border-radius: var(--radius-hero);
+  overflow: hidden;
+  box-shadow: var(--card-box-shadow);
 }
 
 .flip-box-inner {
   position: relative;
   width: 100%;
   height: 100%;
-  text-align: center;
-  transition: transform 0.8s;
+  transition: transform 0.7s ease;
   transform-style: preserve-3d;
+  border-radius: var(--radius-hero);
 }
 
 .flip-box:hover .flip-box-inner {
   transform: rotateY(180deg);
 }
 
-.flip-box-front, .flip-box-back {
+.flip-box-front,
+.flip-box-back {
   position: absolute;
   width: 100%;
   height: 100%;
-  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-}
-
-.flip-box-front {
-  /* background-color: #bbb; */
-  color: black;
+  border-radius: var(--radius-hero);
   display: flex;
   align-items: center;
+  justify-content: center;
+}
+
+.flip-box-front img,
+.flip-box-back img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 1rem;
 }
 
 .flip-box-back {
-  /* background-color: #555; */
-  color: white;
   transform: rotateY(180deg);
-  display: flex;
-  align-items: center;
 }
 
-@media only screen and (min-width: 767px) {
-  .zoomOnHover {
-    transition: transform .3s;
-    margin-left: 20px;
+@media (max-width: 767px) {
+  .flip-box {
+    height: 280px;
+    max-width: 100%;
   }
 }
 
 .zoomOnHover:hover {
-  -ms-transform: scale(1.1); /* IE 9 */
-  -webkit-transform: scale(1.1); /* Safari 3-8 */
-  transform: scale(1.1); 
+  transform: scale(1.03);
+  transition: transform 0.3s ease;
 }

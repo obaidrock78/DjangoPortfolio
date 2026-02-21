@@ -4,49 +4,41 @@ import { useEffect, useState } from "react";
 
 const Services = () => {
   const { data: services, isFetching } = useGetServicesQuery();
-  const [servicesDetails, setServicesDetails] = useState(services);
-  const img_300 = baseUrlImages;
+  const [list, setList] = useState(services);
+  const imgBase = baseUrlImages || "";
 
   useEffect(() => {
-    setServicesDetails(services);
-    console.log(servicesDetails);
-  }, [servicesDetails, services]);
-  if (isFetching) return "loading";
+    setList(services);
+  }, [services]);
+
+  if (isFetching) return null;
 
   return (
-    <>
-      <section id="services">
-        <div className="service-container">
-          <div className="service-title">
-            <h2>What Service i Offer you</h2>
-
-            <h3>Services</h3>
-          </div>
-
-          <div className="service-row">
-            {services &&
-              services.map((service) => (
-                <div
-                  className=" my-service"
-                  key={service.id}
-                  data-aos="zoom-in-up"
-                  data-aos-duration="1500"
-                >
-                  <div className="ser-back">
-                    <img src={`${img_300}${service.image}`} alt="" style={{borderRadius:"10px", height: "50px", marginTop: "20px"}} />
-                  </div>
-                  <h4 className="web">{service.service_name}</h4>
-                  <p className="service-info">{service.service_description}</p>
-                  {/* <h6 className="learn-more">{service.learn_more}</h6> */}
-                  <div class="shadow-icon">
-                    <i class={service.shadow_icon}></i>
-                  </div>
-                </div>
-              ))}
-          </div>
+    <section className="page-section services-section" id="services">
+      <div className="section-inner">
+        <header className="section-head">
+          <span className="section-label">What I offer</span>
+          <h2 className="section-title">Services</h2>
+          <p className="section-subtitle">
+            From development to deployment, I help you ship quality software.
+          </p>
+        </header>
+        <div className="services-grid">
+          {list?.map((service) => (
+            <article className="service-card" key={service.id}>
+              <div className="service-card-icon">
+                <img
+                  src={`${imgBase}${service.image}`}
+                  alt=""
+                />
+              </div>
+              <h3 className="service-card-title">{service.service_name}</h3>
+              <p className="service-card-desc">{service.service_description}</p>
+            </article>
+          ))}
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 };
 

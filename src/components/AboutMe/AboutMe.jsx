@@ -1,87 +1,46 @@
 import "./AboutMe.css";
-import { useGetAboutMeQuery, useGetHomeDetailsQuery } from "../../Api/api";
+import { useGetAboutMeQuery } from "../../Api/api";
 import { useEffect, useState } from "react";
-import decor1 from "../../images/decoration/dots-1.png";
-import reactagle from "../../images/decoration/Rectangle-7.png";
-import shady from "../../images/decoration/dots.png";
 
 const AboutMe = () => {
   const { data: aboutData, isFetching } = useGetAboutMeQuery();
   const [aboutMe, setAboutMe] = useState(aboutData);
-  const img_300 = "https://drive.google.com/uc?id=";
-
-  const { data: conta2 } = useGetHomeDetailsQuery();
-  const [contacts1Details, setContact2Details] = useState(conta2);
-  const cv = contacts1Details && contacts1Details.map((data1) => data1.cv_link);
-  console.log(cv);
-  console.log(conta2);
 
   useEffect(() => {
     setAboutMe(aboutData);
-    setContact2Details(conta2);
-  }, [aboutData, conta2]);
+  }, [aboutData]);
+
+  if (isFetching || !aboutMe?.length) return null;
 
   return (
-    <>
-      {aboutMe &&
-        aboutMe.map((details) => (
-          <main id="about" key={details.id}>
-            <div className="aboutMe-container">
-              <div className="about-decor">
-                <div className="about-dots">
-                  <img src={decor1} alt="" />
-                </div>
-                <div className="about-rect">
-                  <img src={reactagle} alt="" />
-                </div>
-                <div className="about-shady">
-                  <img src={shady} alt="" />
-                </div>
-              </div>
-              <div className="abouMe-row">
-                <div
-                  className=" col-lg-6 col-md-5 col-sm-12 about-img"
-                  data-aos="fade-up-right"
-                >
-                  {/* <img src={`${img_300}${details.about_avatar}`} alt="" /> */}
-                  <img className="zoomOnHover" src={`/about-me.png`} alt="" />
-                </div>
-                <div
-                  className=" col-lg-6 col-md-7  col-sm-12 about_myinfo"
-                  data-aos="fade-up-left"
-                >
-                  <div className="title">
-                    <h2>{details.title}</h2>
-                    <h3>{details.title_2}</h3>
-                  </div>
-                  <div className="about-description">
-                    <div id="foo" unselectable="on" class="unselectable">
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: `${details.description_one}`,
-                        }}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="itscv">
-                    <a
-                      href="https://drive.google.com/file/d/1vJBEV0fe3hdtsToBDl-h6ZfxewlWyEoM/view"
-                      download="RESUME.pdf"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <button className="download-cv">
-                        Download Cv <i class="bx bx-download"></i>
-                      </button>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </main>
-        ))}
-    </>
+    <main className="page-section about-section" id="about">
+      <div className="section-inner">
+        <div className="about-grid">
+          <div className="about-image-block">
+            <img src="/about-me.png" alt="" className="about-photo" />
+          </div>
+          <div className="about-text-block">
+            <header className="section-head section-head-left">
+              <span className="section-label">{aboutMe[0].title}</span>
+              <h2 className="section-title">{aboutMe[0].title_2}</h2>
+            </header>
+            <div
+              className="about-body"
+              dangerouslySetInnerHTML={{ __html: aboutMe[0].description_one }}
+            />
+            <a
+              href="https://drive.google.com/file/d/1vJBEV0fe3hdtsToBDl-h6ZfxewlWyEoM/view"
+              download="RESUME.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="about-cv-btn"
+            >
+              Download CV <i className="bx bx-download" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
   );
 };
 

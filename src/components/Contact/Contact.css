@@ -1,0 +1,120 @@
+/* ========== CONTACT – SINGLE SECTION LAYOUT ========== */
+
+.contact-section {
+  background: var(--color-background-2);
+}
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.contact-info-block {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contact-info-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--v4-card);
+  border: 1px solid var(--v4-border);
+  border-radius: var(--border-radius-2);
+}
+
+.contact-info-card i {
+  font-size: 1.25rem;
+  color: var(--v4-accent);
+  flex-shrink: 0;
+}
+
+.contact-info-card div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.contact-info-card strong {
+  font-size: 0.85rem;
+  color: var(--v4-text);
+}
+
+.contact-info-card span {
+  font-size: 0.9rem;
+  color: var(--v4-text-muted);
+}
+
+.contact-form-block {
+  min-width: 0;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  font-family: inherit;
+  background: var(--v4-card);
+  border: 1px solid var(--v4-border);
+  border-radius: var(--border-radius-2);
+  color: var(--v4-text);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: var(--v4-text-muted);
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--v4-accent);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+}
+
+.contact-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.contact-form-btn {
+  align-self: flex-start;
+  padding: 0.7rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--v4-accent);
+  border: none;
+  border-radius: var(--border-radius-2);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.contact-form-btn:hover {
+  background: var(--v4-accent-hover);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 700px) {
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+  .contact-form-row {
+    grid-template-columns: 1fr;
+  }
+}

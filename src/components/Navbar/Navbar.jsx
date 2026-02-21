@@ -56,9 +56,7 @@ const Navbar = () => {
         <i className="fa-solid fa-address-card"></i>    </a>
 </div>
               <div className="left-btns">
-                <div class=" " id="theme-button2">
-                  <input id="toggle" class="toggle" type="checkbox"></input>
-                </div>
+                <div className="nav-spacer" id="theme-button2" aria-hidden="true" />
                 <div>
                   <div className="CvMe">
                     <button className="my-cv">Contact Me</button>
@@ -66,8 +64,8 @@ const Navbar = () => {
                 </div>
 
                 <div className=" " id="theme-button">
-                  <Link to="#" class="menuBtn">
-                    <span class="lines"></span>
+                  <Link to="#" className="menuBtn" aria-label="Menu">
+                    <span className="lines" />
                   </Link>
                 </div>
               </div>
