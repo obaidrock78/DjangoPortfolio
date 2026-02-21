@@ -1,6 +1,6 @@
 .progress-container {
   color: var(--color-info-light);
-  padding: 20px 50px 120px 50px;
+  padding: var(--section-padding, 3rem) clamp(1.5rem, 4vw, 3rem) 4rem;
   background: var(--color-background-2);
 }
 .progress-row2 {
@@ -10,7 +10,7 @@
   flex-wrap: wrap;
 }
 .fullwidth {
-  background-color: rgb(114 226 174/0.2);
+  background-color: rgba(245, 158, 11, 0.15);
   height: 13px;
   width: 100%;
   bottom: 0;
@@ -75,8 +75,10 @@
   font-weight: 600;
 }
 .progress-title h3 {
+  font-family: var(--font-display);
   text-transform: capitalize;
-  font-size: 2.5rem;
+  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+  color: var(--color-white);
 }
 
 .fa-html5 {
@@ -120,11 +122,15 @@
   margin-right: 15px;
   display: flex;
   justify-content: center;
-  border-radius: 10px;
+  border-radius: var(--card-border-radius);
   cursor: pointer;
-  padding: 10px 0;
+  padding: 1rem 0;
   align-items: center;
-  border: 1px solid rgba(146, 146, 165, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.mylang:hover {
+  border-color: rgba(245, 158, 11, 0.2);
 }
 .mylang h3 {
   color: rgb(255, 255, 255);
@@ -147,17 +153,16 @@
 .lang-img {
   font-size: 3.7rem;
   width: 70px;
-  margin-bottom: 20px;
+  margin-bottom: 1rem;
   cursor: pointer;
   height: 70px;
-  margin-top: 5px;
-  border-radius: 5px;
+  margin-top: 0.25rem;
+  border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 50%;
-  background: rgb(23, 32, 61);
-  /* box-shadow: 0px 3px 5px rgb(16 70 197 / 20%); */
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.15);
 }
 .lang-info {
   display: flex;

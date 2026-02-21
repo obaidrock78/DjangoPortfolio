@@ -1,9 +1,7 @@
 .reachme-container {
   color: var(--color-info-light);
   width: 100%;
-  padding: 0 40px;
-  position: relative;
-  padding: 50px 40px 20px 40px;
+  padding: var(--section-padding, 3rem) clamp(1.5rem, 4vw, 2.5rem);
   margin: auto;
   background: var(--color-background-2);
 }
@@ -14,33 +12,62 @@
 }
 .email-me input {
   width: 100%;
-  margin-bottom: 10px;
-  height: 55px;
+  margin-bottom: 0.75rem;
+  height: 52px;
   background: var(--color-card2);
-  border: none;
-  border-radius: 6px;
-  text-indent: 20px;
-  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--border-radius-1);
+  padding: 0 1.25rem;
+  color: var(--color-white);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  transition: border-color 0.2s ease;
+}
+.email-me input::placeholder {
+  color: var(--grey);
+}
+.email-me input:focus {
+  outline: none;
+  border-color: rgba(245, 158, 11, 0.4);
 }
 .email-me textarea {
   width: 100%;
   background: var(--color-card2);
-
-  border-radius: 5px;
-  text-indent: 20px;
-  color: #ffffff;
-  padding-top: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--border-radius-1);
+  padding: 1rem 1.25rem;
+  color: var(--color-white);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  resize: vertical;
+  min-height: 120px;
+  transition: border-color 0.2s ease;
 }
-.hire-me-title h2 {
-  font-size: 1.2rem;
+.email-me textarea::placeholder {
+  color: var(--grey);
+}
+.email-me textarea:focus {
+  outline: none;
+  border-color: rgba(245, 158, 11, 0.4);
 }
 .hire-btn {
-  height: 50px;
-  width: 150px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.875rem 1.5rem;
+  margin-top: 1.5rem;
+  color: #08080c;
+  background: var(--color-button);
+  border: 1px solid transparent;
+  border-radius: var(--border-radius-1);
+  cursor: pointer;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+.hire-btn:hover {
   background: var(--color-button-hover);
-  border-radius: 10px;
-  font-size: 15px;
-  margin-top: 30px;
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.35);
 }
 .reachme-title {
   width: 100%;
@@ -106,29 +133,27 @@
   font-size: 1.3rem;
 }
 .contact-info i {
-  margin-bottom: 10px;
-  font-size: 27px;
-  border-radius: 50%;
+  margin-right: 1rem;
+  font-size: 1.5rem;
   display: flex;
-  color: var(--color-button-hover);
-  justify-content: center;
   align-items: center;
-  height: 80px;
-  width: 80px;
-  border-radius: 150px;
-  margin-right: 20px;
+  justify-content: center;
+  height: 3rem;
+  width: 3rem;
+  border-radius: var(--border-radius-2);
+  flex-shrink: 0;
 }
 .contact-info:nth-child(1) i {
-  color: #f06a6a !important;
-  background: #fcdcdc;
+  color: #f59e0b;
+  background: rgba(245, 158, 11, 0.12);
 }
 .contact-info:nth-child(2) i {
-  color: #6ecc21 !important;
-  background: #ddf5e6;
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.12);
 }
 .contact-info:nth-child(3) i {
-  color: #8b71e9 !important;
-  background: #ddd6fa;
+  color: #8b5cf6;
+  background: rgba(139, 92, 246, 0.12);
 }
 
 @media only screen and (max-width: 689px) {

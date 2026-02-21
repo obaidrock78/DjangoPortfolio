@@ -46,11 +46,15 @@ const Main = () => {
     });
   });
 
-  // toggle light and dark theme
+  // toggle light and dark theme (floating switch + any .toggle)
   $(window).on("load", function () {
-    $(".toggle").on("click", () => {
+    $(".toggle").on("click", function () {
       $("body").toggleClass("light");
     });
+    // sync checkbox state with body class on load
+    if ($("body").hasClass("light")) {
+      $(".toggle").prop("checked", true);
+    }
   });
 
   return <></>;

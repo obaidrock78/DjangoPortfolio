@@ -1,26 +1,37 @@
 import { useEffect, useState } from "react";
 import decor3 from "../../images/decoration/Group-31.png";
-import decor4 from "../../images/decoration/Path-25.png";
 import "./Intro.css";
 import { useGetHomeDetailsQuery } from "../../Api/api";
 import { useGetSocialMediaQuery } from "../../Api/api";
 
+const HERO_IMAGES = [
+  { src: "/python-service-1.png", alt: "Services" },
+  { src: "/welcome-to-portfolio.png", alt: "Welcome" },
+];
+
+const SLIDE_INTERVAL_MS = 4500;
+
 const Intro = () => {
   const { data: conta } = useGetSocialMediaQuery();
-
   const { data: homeData, isFetching } = useGetHomeDetailsQuery();
   const [homeDetails, setHomeDetails] = useState(homeData);
   const [contacts1Details, setContact2Details] = useState(conta);
-  const img_300 = "http://drive.google.com/uc?id=";
+  const [slideIndex, setSlideIndex] = useState(0);
   const title_name = homeDetails && homeDetails.map((detail2) => detail2.name);
 
   useEffect(() => {
     setHomeDetails(homeData);
     setContact2Details(conta);
-
     document.title = title_name;
-    // console.log(conta);
   }, [homeDetails, homeData, contacts1Details, conta, title_name]);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setSlideIndex((prev) => (prev + 1) % HERO_IMAGES.length);
+    }, SLIDE_INTERVAL_MS);
+    return () => clearInterval(timer);
+  }, []);
+
   if (isFetching) return "loading";
 
   return (
@@ -77,13 +88,13 @@ const Intro = () => {
                       href={`mailto:${detail.hireMe_link}`}
                       className="contactMe"
                     >
-                      <button className="contact-me">
-                        Hire me <i class="bx bx-send "></i>
+                      <button type="button" className="contact-me">
+                        Hire me <i className="bx bx-send" aria-hidden="true" />
                       </button>
                     </a>
                   </div>
                   <div
-                    class="intro-contact"
+                    className="intro-contact"
                     data-aos="fade-up"
                     data-aos-duration="1800"
                   >
@@ -107,30 +118,19 @@ const Intro = () => {
                   </div>
                 </div>
                 <div
-                  className="col-lg-7 col-md-6 col-sm-12 left-img "
+                  className="col-lg-7 col-md-6 col-sm-12 left-img"
                   data-aos="fade-down-left"
                 >
                   <div className="ff">
-                    {/* <img
-                      className="intro-img"
-                      src="https://drive.google.com/uc?id=1iyVyaGyw5HniEugxd1-qZ54rpFpn2UTc"
-                      alt=""
-                    /> */}
-                    {/* <img
-                      className="intro-img"
-                      src={`${img_300}${detail.avatar_img}`}
-                      alt=""
-                    /> */}
-                    {/* <img src="/python-service.png" alt=""/> */}
-                    <div class="flip-box">
-                      <div class="flip-box-inner">
-                        <div class="flip-box-front">
-                          <img src="/python-service-1.png" alt="" />
-                        </div>
-                        <div class="flip-box-back">
-                          <img src="/welcome-to-portfolio.png" alt="" />
-                        </div>
-                      </div>
+                    <div className="hero-slideshow">
+                      {HERO_IMAGES.map((img, i) => (
+                        <img
+                          key={img.src}
+                          src={img.src}
+                          alt={img.alt}
+                          className={`hero-slideshow-img ${i === slideIndex ? "hero-slideshow-active" : ""}`}
+                        />
+                      ))}
                     </div>
                   </div>
                 </div>

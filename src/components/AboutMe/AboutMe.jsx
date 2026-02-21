@@ -1,25 +1,17 @@
 import "./AboutMe.css";
-import { useGetAboutMeQuery, useGetHomeDetailsQuery } from "../../Api/api";
+import { useGetAboutMeQuery } from "../../Api/api";
 import { useEffect, useState } from "react";
 import decor1 from "../../images/decoration/dots-1.png";
 import reactagle from "../../images/decoration/Rectangle-7.png";
 import shady from "../../images/decoration/dots.png";
 
 const AboutMe = () => {
-  const { data: aboutData, isFetching } = useGetAboutMeQuery();
+  const { data: aboutData } = useGetAboutMeQuery();
   const [aboutMe, setAboutMe] = useState(aboutData);
-  const img_300 = "https://drive.google.com/uc?id=";
-
-  const { data: conta2 } = useGetHomeDetailsQuery();
-  const [contacts1Details, setContact2Details] = useState(conta2);
-  const cv = contacts1Details && contacts1Details.map((data1) => data1.cv_link);
-  console.log(cv);
-  console.log(conta2);
 
   useEffect(() => {
     setAboutMe(aboutData);
-    setContact2Details(conta2);
-  }, [aboutData, conta2]);
+  }, [aboutData]);
 
   return (
     <>
@@ -55,7 +47,7 @@ const AboutMe = () => {
                     <h3>{details.title_2}</h3>
                   </div>
                   <div className="about-description">
-                    <div id="foo" unselectable="on" class="unselectable">
+                    <div id="foo" unselectable="on" className="unselectable">
                       <div
                         dangerouslySetInnerHTML={{
                           __html: `${details.description_one}`,
@@ -71,8 +63,8 @@ const AboutMe = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <button className="download-cv">
-                        Download Cv <i class="bx bx-download"></i>
+                      <button type="button" className="download-cv">
+                        Download CV <i className="bx bx-download" aria-hidden="true" />
                       </button>
                     </a>
                   </div>
