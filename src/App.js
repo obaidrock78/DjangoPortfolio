@@ -1,4 +1,4 @@
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./App.css";
 import AboutMe from "./components/AboutMe/AboutMe";
 import ContactMe from "./components/ContactMe/ContactMe";
@@ -8,6 +8,7 @@ import Projects from "./components/MyWork/projects";
 import Navbar from "./components/Navbar/Navbar";
 import Services from "./components/Services/Services";
 import Progress from "./components/SkillBars/progress";
+import ProjectDetails from "./pages/ProjectDetails";
 import $ from "jquery";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -16,7 +17,6 @@ import Email from "./components/EmailMe/Email";
 import { AnimatedCursor } from "./components/animatedCursor";
 
 function App() {
-  // Preloader
   $(window).on("load", function () {
     if ($("#preloader").length) {
       $("#preloader")
@@ -28,34 +28,37 @@ function App() {
   });
 
   useEffect(() => {
-    AOS.init({
-      duration: 1500,
-      once: true,
-    });
+    AOS.init({ duration: 1500, once: true });
   }, []);
 
   return (
-    <>
-      <BrowserRouter>
+    <BrowserRouter>
       {window.innerWidth > 768 && <AnimatedCursor />}
-        <div id="preloader">
-          <img style={{height: '100px', width: '130px'}} src="/giphy.webp" alt="" />
-          <h2 className="name-load  animate-charcter">l O A D I N G</h2>
-        </div>
+      <div id="preloader">
+        <h2 className="name-load animate-charcter">Loading</h2>
+      </div>
 
-        <div className="homepage">
+      <Switch>
+        <Route path="/project/:id">
           <Navbar />
-          <Home />
-        </div>
-        <AboutMe />
-        <Services />
-        <Progress />
-        <Projects />
-        <ContactMe />
-        <Email />
-        <Footer />
-      </BrowserRouter>
-    </>
+          <ProjectDetails />
+          <Footer />
+        </Route>
+        <Route path="/">
+          <div className="homepage">
+            <Navbar />
+            <Home />
+          </div>
+          <AboutMe />
+          <Services />
+          <Progress />
+          <Projects />
+          <ContactMe />
+          <Email />
+          <Footer />
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
 }
 

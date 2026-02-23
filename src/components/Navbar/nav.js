@@ -48,13 +48,20 @@ const Main = () => {
 
   // toggle light and dark theme (floating switch + any .toggle)
   $(window).on("load", function () {
-    $(".toggle").on("click", function () {
-      $("body").toggleClass("light");
-    });
-    // sync checkbox state with body class on load
-    if ($("body").hasClass("light")) {
+    var storageKey = "portfolio-theme";
+    // Apply saved theme or default to light
+    var saved = localStorage.getItem(storageKey);
+    if (saved === "dark") {
+      $("body").removeClass("light");
+      $(".toggle").prop("checked", false);
+    } else {
+      $("body").addClass("light");
       $(".toggle").prop("checked", true);
     }
+    $(".toggle").on("click", function () {
+      $("body").toggleClass("light");
+      localStorage.setItem(storageKey, $("body").hasClass("light") ? "light" : "dark");
+    });
   });
 
   return <></>;

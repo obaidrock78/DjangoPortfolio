@@ -22,8 +22,9 @@ const Intro = () => {
   useEffect(() => {
     setHomeDetails(homeData);
     setContact2Details(conta);
-    document.title = title_name;
-  }, [homeDetails, homeData, contacts1Details, conta, title_name]);
+    const name = homeDetails?.[0]?.name || homeData?.[0]?.name;
+    if (typeof name === "string" && name.trim()) document.title = name;
+  }, [homeData, conta, homeDetails]);
 
   useEffect(() => {
     const timer = setInterval(() => {
