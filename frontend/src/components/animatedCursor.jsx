@@ -29,7 +29,7 @@ export function AnimatedCursor({
 }) {
   const innerRef = React.useRef(null);
   const outerRef = React.useRef(null);
-  const requestRef = React.useRef(null);
+  // const requestRef = React.useRef(null);
   const [pos, setPos] = React.useState({ x: 0, y: 0 });
   const [smoothPos, setSmoothPos] = React.useState({ x: 0, y: 0 });
   const [visible, setVisible] = React.useState(true);

@@ -17,7 +17,7 @@ const Intro = () => {
   const [homeDetails, setHomeDetails] = useState(homeData);
   const [contacts1Details, setContact2Details] = useState(conta);
   const [slideIndex, setSlideIndex] = useState(0);
-  const title_name = homeDetails && homeDetails.map((detail2) => detail2.name);
+  // const title_name = homeDetails && homeDetails.map((detail2) => detail2.name);
 
   useEffect(() => {
     setHomeDetails(homeData);
