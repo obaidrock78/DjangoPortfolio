@@ -176,7 +176,7 @@
 
 /* Right column: image / flip card – prevent overlap with name */
 .left-img {
-  flex: 0 1 520px;
+  flex: 0 1 620px;
   min-width: 280px;
   max-width: 100%;
   display: flex;
@@ -190,19 +190,16 @@
   justify-content: flex-end;
   align-items: center;
   width: 100%;
-  max-width: 520px;
+  max-width: 620px;
 }
 
-/* Auto-cycling welcome image with fade – larger on laptop/desktop */
+/* Auto-cycling welcome image with fade – no card, image only, larger */
 .hero-slideshow {
   position: relative;
   width: 100%;
-  max-width: 480px;
-  height: 480px;
-  border-radius: var(--card-border-radius);
+  max-width: 580px;
+  height: 580px;
   overflow: hidden;
-  border: 1px solid rgba(245, 158, 11, 0.15);
-  background: var(--color-card2);
 }
 
 .hero-slideshow-img {
@@ -211,7 +208,6 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-  padding: 1.25rem;
   opacity: 0;
   transition: opacity 0.8s ease-in-out;
   pointer-events: none;
@@ -224,21 +220,21 @@
 
 @media (max-width: 991px) {
   .hero-slideshow {
-    max-width: 380px;
-    height: 380px;
+    max-width: 440px;
+    height: 440px;
   }
   .ff {
-    max-width: 400px;
+    max-width: 460px;
   }
 }
 
 @media (max-width: 767px) {
   .hero-slideshow {
-    height: 280px;
-    max-width: 320px;
+    height: 320px;
+    max-width: 340px;
   }
   .ff {
-    max-width: 320px;
+    max-width: 340px;
   }
 }
 

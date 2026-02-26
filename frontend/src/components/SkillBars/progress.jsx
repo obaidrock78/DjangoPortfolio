@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 import $ from "jquery";
-
+import SectionHeading from "../SectionHeading/SectionHeading";
 var nav = $("body");
 
 if (nav.length) {
@@ -82,9 +82,7 @@ const Progress = () => {
       <section id="skills">
         <div className="progress-container">
           <div className="progress-title">
-            <h2>My Skills So Far</h2>
-
-            <h3>My Skills</h3>
+            <SectionHeading label="My Skills So Far" title="My Skills" />
           </div>
           <div className="progress-row2">
             <div className="lang">

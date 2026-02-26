@@ -51,9 +51,9 @@ function App() {
             <Navbar />
             <Home />
           </div>
-          <Projects />
-          <Services />
           <Progress />
+          <Services />
+          <Projects />
           <AboutMe />
           <Process />
           <Testimonials />

@@ -28,29 +28,6 @@
   opacity: 0.8;
 }
 
-.testimonials-title {
-  margin-bottom: 2.5rem;
-  text-align: center;
-}
-
-.testimonials-title h2 {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--color-title);
-  margin-bottom: 0.5rem;
-}
-
-.testimonials-title h3 {
-  font-family: var(--font-display);
-  font-size: clamp(1.75rem, 3vw, 2.25rem);
-  font-weight: 800;
-  color: var(--color-white);
-  letter-spacing: -0.02em;
-}
-
 .testimonials-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));

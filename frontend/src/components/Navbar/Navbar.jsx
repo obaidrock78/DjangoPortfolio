@@ -29,13 +29,13 @@ const Navbar = () => {
                     <a href="#home"> Home</a>
                   </li>
                   <li data-aos="fade-down" data-aos-duration="600">
-                    <a href="#work">My Work</a>
+                    <a href="#skills">Skills</a>
                   </li>
                   <li data-aos="fade-down" data-aos-duration="900">
                     <a href="#services">Services</a>
                   </li>
                   <li data-aos="fade-down" data-aos-duration="1200">
-                    <a href="#skills">Skills</a>
+                    <a href="#work">My Work</a>
                   </li>
                   <li data-aos="fade-down" data-aos-duration="1500">
                     <a href="#about">About</a>

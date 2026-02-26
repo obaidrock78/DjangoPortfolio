@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "./Email.css";
 import { useGetContactsQuery } from "../../Api/api";
 import emailjs from "@emailjs/browser";
+import SectionHeading from "../SectionHeading/SectionHeading";
 
 const Email = (e) => {
   const form = useRef();
@@ -36,11 +37,7 @@ const Email = (e) => {
   return (
     <>
       <div className="reachme-container">
-        <div className="reachme-title2">
-          <h2>I Want To Hear From You</h2>
-
-          <h3>Contact Me</h3>
-        </div>
+        <SectionHeading label="I Want To Hear From You" title="Contact Me" />
         <div className="row">
           <div className="col-md-5">
             <div className="reachme-title">

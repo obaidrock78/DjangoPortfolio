@@ -1,4 +1,5 @@
 import "./ContactMe.css";
+import SectionHeading from "../SectionHeading/SectionHeading";
 
 const ContactMe = () => {
   return (
@@ -6,7 +7,7 @@ const ContactMe = () => {
       <section id="contact">
         <div className="contact-me2">
           <div className="contactme-t1 pb-3">
-            <h2>Newsletter</h2>
+            <SectionHeading title="Newsletter" />
           </div>
           <div className="contact-me2-dec"></div>
           <div className="row align-items-center mb-5">

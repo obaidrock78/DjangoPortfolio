@@ -1,4 +1,5 @@
 import "./Process.css";
+import SectionHeading from "../SectionHeading/SectionHeading";
 
 const STEPS = [
   {
@@ -27,10 +28,7 @@ const Process = () => {
   return (
     <section id="process" className="process-section">
       <div className="process-container">
-        <div className="process-title">
-          <h2>How I work</h2>
-          <h3>Process</h3>
-        </div>
+        <SectionHeading label="How I work" title="Process" />
         <div className="process-timeline">
           {STEPS.map((item) => (
             <div

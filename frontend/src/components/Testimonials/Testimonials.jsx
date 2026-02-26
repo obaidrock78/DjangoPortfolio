@@ -1,4 +1,5 @@
 import "./Testimonials.css";
+import SectionHeading from "../SectionHeading/SectionHeading";
 
 /* Placeholder testimonials – replace with useGetTestimonialsQuery() when API is ready */
 const TESTIMONIALS = [
@@ -14,16 +15,19 @@ const TESTIMONIALS = [
     author: "Client",
     role: "Startup founder",
   },
+  {
+    id: 3,
+    quote: "Handled complex requirements with ease and kept the codebase clean and maintainable.",
+    author: "Client",
+    role: "CTO",
+  },
 ];
 
 const Testimonials = () => {
   return (
     <section id="testimonials" className="testimonials-section">
       <div className="testimonials-container">
-        <div className="testimonials-title">
-          <h2>What people say</h2>
-          <h3>Testimonials</h3>
-        </div>
+        <SectionHeading label="What people say" title="Testimonials" />
         <div className="testimonials-grid">
           {TESTIMONIALS.map((t) => (
             <blockquote

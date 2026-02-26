@@ -1,6 +1,7 @@
 import "./AboutMe.css";
 import { useGetAboutMeQuery } from "../../Api/api";
 import { useEffect, useState } from "react";
+import SectionHeading from "../SectionHeading/SectionHeading";
 import decor1 from "../../images/decoration/dots-1.png";
 import reactagle from "../../images/decoration/Rectangle-7.png";
 import shady from "../../images/decoration/dots.png";
@@ -43,8 +44,7 @@ const AboutMe = () => {
                   data-aos="fade-up-left"
                 >
                   <div className="title">
-                    <h2>{details.title}</h2>
-                    <h3>{details.title_2}</h3>
+                    <SectionHeading label={details.title} title={details.title_2} />
                   </div>
                   <div className="about-description">
                     <div id="foo" unselectable="on" className="unselectable">
