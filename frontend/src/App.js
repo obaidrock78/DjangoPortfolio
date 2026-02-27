@@ -6,8 +6,10 @@ import Footer from "./components/Footer/Footer";
 import Home from "./components/Hero/Intro";
 import Projects from "./components/MyWork/projects";
 import Navbar from "./components/Navbar/Navbar";
+import Process from "./components/Process/Process";
 import Services from "./components/Services/Services";
 import Progress from "./components/SkillBars/progress";
+import Testimonials from "./components/Testimonials/Testimonials";
 import ProjectDetails from "./pages/ProjectDetails";
 import $ from "jquery";
 import AOS from "aos";
@@ -49,10 +51,12 @@ function App() {
             <Navbar />
             <Home />
           </div>
-          <AboutMe />
-          <Services />
           <Progress />
+          <Services />
           <Projects />
+          <AboutMe />
+          <Process />
+          <Testimonials />
           <ContactMe />
           <Email />
           <Footer />

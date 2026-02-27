@@ -1,46 +1,63 @@
 import "./Services.css";
 import { baseUrlImages, useGetServicesQuery } from "../../Api/api";
+import SectionHeading from "../SectionHeading/SectionHeading";
 
 const Services = () => {
   const { data: services, isFetching } = useGetServicesQuery();
-  const img_300 = baseUrlImages;
 
   if (isFetching) return "loading";
 
+  const total = services?.length || 0;
+
   return (
-    <>
-      <section id="services">
-        <div className="service-container">
-          <div className="service-title">
-            <h2>What I Offer You</h2>
+    <section id="services">
+      <SectionHeading label="What I Offer You" title="Services" />
 
-            <h3>Services</h3>
-          </div>
+      <div className="services-grid">
+        {services &&
+          services.map((service, index) => {
+            const order = index + 1;
+            const paddedOrder = order.toString().padStart(2, "0");
+            const paddedTotal = total.toString().padStart(2, "0");
 
-          <div className="service-row">
-            {services &&
-              services.map((service) => (
-                <div
-                  className=" my-service"
-                  key={service.id}
-                  data-aos="zoom-in-up"
-                  data-aos-duration="1500"
-                >
-                  <div className="ser-back">
-                    <img src={`${img_300}${service.image}`} alt="" />
-                  </div>
-                  <h4 className="web">{service.service_name}</h4>
-                  <p className="service-info">{service.service_description}</p>
-                  {/* <h6 className="learn-more">{service.learn_more}</h6> */}
-                  <div className="shadow-icon">
-                    <i className={service.shadow_icon} aria-hidden="true" />
-                  </div>
+            return (
+              <div
+                className="service-card"
+                key={service.id}
+                data-aos="fade-up"
+                data-aos-duration="900"
+              >
+                <div className="service-overlay" />
+                <div className="service-bg-num">{paddedOrder}</div>
+                <div className="service-icon">
+                  {service.image ? (
+                    <img
+                      src={`${baseUrlImages}${service.image}`}
+                      alt={service.service_name}
+                    />
+                  ) : (
+                    service.shadow_icon && (
+                      <i className={service.shadow_icon} aria-hidden="true" />
+                    )
+                  )}
                 </div>
-              ))}
-          </div>
-        </div>
-      </section>
-    </>
+                <div className="service-content">
+                  <span className="service-num">
+                    {paddedOrder} / {paddedTotal}
+                  </span>
+                  <div className="service-line" />
+                  <h3 className="service-name">{service.service_name}</h3>
+                  {service.service_description && (
+                    <p className="service-desc">
+                      {service.service_description}
+                    </p>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+      </div>
+    </section>
   );
 };
 

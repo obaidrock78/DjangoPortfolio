@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { baseUrlImages, useGetProjectsQuery } from "../Api/api";
 import "./ProjectDetails.css";
@@ -7,6 +8,7 @@ const ProjectDetails = () => {
   const { data: projects, isFetching } = useGetProjectsQuery();
   const project = projects?.find((p) => String(p.id) === String(id));
   const imgBase = baseUrlImages || "";
+  const [imageFailed, setImageFailed] = useState(false);
 
   if (isFetching) {
     return (
@@ -43,10 +45,16 @@ const ProjectDetails = () => {
 
         <article className="project-details-card">
           <div className="project-details-image">
-            <img
-              src={`${imgBase}${project.image}`}
-              alt={project.Project_title || "Project"}
-            />
+            {project.image && !imageFailed && (
+              <img
+                src={`${imgBase}${project.image}`}
+                alt={project.Project_title || "Project"}
+                onError={() => setImageFailed(true)}
+              />
+            )}
+            <div className="project-details-image-fallback">
+              {project.Project_title || "Project"}
+            </div>
           </div>
           <div className="project-details-content">
             <span className="project-details-tag">{project.language_used}</span>

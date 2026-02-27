@@ -1,0 +1,85 @@
+/* Process – How I work */
+
+#process {
+  position: relative;
+}
+
+.process-section {
+  background: var(--color-background-2);
+}
+
+.process-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--section-padding) clamp(1.5rem, 4vw, 3rem);
+  color: var(--color-info-light);
+}
+
+.process-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--color-title), transparent);
+  border-radius: 2px;
+  opacity: 0.8;
+}
+
+.process-timeline {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.process-step {
+  position: relative;
+  padding: 1.5rem;
+  background: var(--color-card2);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--card-border-radius);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.process-step:hover {
+  border-color: rgba(245, 158, 11, 0.25);
+  box-shadow: var(--card-box-shadow-hover);
+}
+
+.process-step-number {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-background);
+  background: linear-gradient(135deg, var(--color-title), var(--color-special-color));
+  border-radius: var(--border-radius-2);
+  margin-bottom: 1rem;
+}
+
+.process-step-content h4 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-white);
+  margin-bottom: 0.5rem;
+}
+
+.process-step-content p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--color-info-light);
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .process-timeline {
+    grid-template-columns: 1fr;
+  }
+}
