@@ -55,26 +55,41 @@
   mix-blend-mode: overlay;
 }
 
+/* Service icon – full-width graphic rolling in from top-right (reference-inspired) */
 .service-icon {
   position: absolute;
-  top: 28px;
-  left: 28px;
-  width: 72px;
-  height: 72px;
-  border: 1.5px solid rgba(255, 255, 255, 0.25);
-  border-radius: 18px;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 3;
-  font-size: 1.75rem;
-  background: rgba(0, 0, 0, 0.12);
+  align-items: flex-start;
+  justify-content: flex-end;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  transform: rotate(25deg) translate(30%, -30%);
+  transform-origin: top right;
+  transition:
+    transform 0.65s cubic-bezier(0.23, 1, 0.32, 1),
+    opacity 0.5s ease;
 }
 
-.service-icon img {
-  width: 54px;
-  height: 54px;
+.service-card:hover .service-icon {
+  opacity: 0.22;
+  transform: rotate(0deg) translate(0, 0);
+}
+
+/* Circular icon \"ring\" inspired by reference design */
+/* No extra ring wrapper – image itself is the graphic */
+
+.service-icon img,
+.service-icon i {
+  width: 100%;
+  height: auto;
+  display: block;
   object-fit: contain;
+  filter: drop-shadow(0 8px 32px rgba(0, 0, 0, 0.2));
 }
 
 .service-content {
@@ -261,11 +276,6 @@
 
 .light .service-card::before {
   opacity: 0.04;
-}
-
-.light .service-icon {
-  border: 1.5px solid rgba(0, 0, 0, 0.12);
-  background: rgba(255, 255, 255, 0.7);
 }
 
 .light .service-num {
