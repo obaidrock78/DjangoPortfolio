@@ -67,8 +67,8 @@
   justify-content: flex-end;
   z-index: 2;
   pointer-events: none;
-  opacity: 0;
-  transform: rotate(25deg) translate(30%, -30%);
+  opacity: 0.22;
+  transform: rotate(0deg) translate(0, 0);
   transform-origin: top right;
   transition:
     transform 0.65s cubic-bezier(0.23, 1, 0.32, 1),
@@ -76,8 +76,8 @@
 }
 
 .service-card:hover .service-icon {
-  opacity: 0.22;
-  transform: rotate(0deg) translate(0, 0);
+  opacity: 0;
+  transform: rotate(25deg) translate(30%, -30%);
 }
 
 /* Circular icon \"ring\" inspired by reference design */
