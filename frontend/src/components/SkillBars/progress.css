@@ -1,233 +1,246 @@
+/* ══════════════════════════════════════
+   SKILLS / PROGRESS — redesigned
+   Matches portfolio: Playfair · DM Sans · Amber #C8860A
+══════════════════════════════════════ */
+
 .progress-container {
-  color: var(--color-info-light);
-  padding: var(--section-padding, 3rem) clamp(1.5rem, 4vw, 3rem) 4rem;
+  padding: 80px clamp(1.5rem, 4vw, 3rem) 96px;
   background: var(--color-background-2);
-}
-.progress-row2 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.fullwidth {
-  background-color: rgba(245, 158, 11, 0.15);
-  height: 13px;
-  width: 100%;
-  bottom: 0;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  border-radius: 10px;
   position: relative;
+  overflow: hidden;
 }
 
-.progress-bar2 {
-  height: 45px;
-  width: 100%;
-  position: relative;
-  border-radius: 5px;
-  margin-bottom: 30px;
-}
-.progress-container .skill-info {
-  display: flex;
-  padding: 10px 0px;
-  justify-content: space-between;
-}
-.skill-bar {
+/* Subtle grain overlay */
+.progress-container::before {
+  content: '';
   position: absolute;
-  left: 0;
-  background: var(--color-button-hover);
-  height: 13px;
-  bottom: 0;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  border-radius: 10px;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+  mix-blend-mode: overlay;
 }
-.skill-detail {
-  display: flex !important;
-  flex-direction: row;
-}
-.skill-name {
-  margin-left: 10px;
-  text-transform: uppercase;
-  font-size: 12px !important;
-  letter-spacing: 1px;
-}
-.skill-info {
-  padding-top: 10px;
-}
+
+/* ── Section heading ── */
 .progress-title {
-  margin-bottom: 50px;
+  margin-bottom: 56px;
   text-align: center;
-}
-.progress {
-  width: 100%;
-  height: 50px;
+  position: relative;
+  z-index: 1;
 }
 .progress-title h2 {
-  font-size: 14px;
-  font-weight: 300;
+  font-size: 0.72rem;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 0.22em;
+  color: var(--color-title, #C8860A);
   margin-bottom: 10px;
-  color: var(--color-title);
-  letter-spacing: 3px;
-  color: var(--color-title);
-  font-weight: 600;
 }
 .progress-title h3 {
-  font-family: var(--font-display);
+  font-family: var(--font-display, 'Playfair Display', serif);
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  font-weight: 900;
+  line-height: 1.05;
+  color: var(--color-white, #fff);
   text-transform: capitalize;
-  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
-  color: var(--color-white);
 }
 
-.fa-html5 {
-  color: #f35f29;
+/* ── Carousel wrapper ── */
+.progress-row2 {
+  position: relative;
+  z-index: 1;
 }
-.fa-css3 {
-  color: #00aeff;
-}
-.fa-js-square {
-  color: #e9b50a;
-}
-.fa-react {
-  color: #00aeff;
-}
-.fa-facebook {
-  color: #5656be;
-}
-.fa-python {
-  color: #57a4d1;
-}
+.lang { width: 100%; }
 
-.fa-database {
-  color: #0cf;
-}
-.progress-container .bxl-django {
-  color: green;
-  font-size: 3.7rem !important;
-  margin-top: 3px;
-}
-.bxl-firebase {
-  color: yellow;
-}
-.bxs-component {
-  color: rgb(115, 240, 84);
-}
-.bx-code-block {
-  color: rgb(255, 0, 179);
-}
+/* ─────────────────────────────────────
+   SKILL CARD
+───────────────────────────────────── */
 .mylang {
-  background: var(--color-card2);
-  margin-right: 15px;
-  display: flex;
-  justify-content: center;
-  border-radius: var(--card-border-radius);
+  position: relative;
+  margin: 0 8px;
+  padding: 0;
   cursor: pointer;
-  padding: 1rem 0;
-  align-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 2px;
+  overflow: hidden;
+  background: transparent;
+  border: none;
+  transition: transform 0.38s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Card face */
+.mylang::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  transition: border-color 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
+  z-index: 0;
 }
 .mylang:hover {
-  border-color: rgba(245, 158, 11, 0.2);
+  /* transform: translateY(-7px); */
 }
-.mylang h3 {
-  color: rgb(255, 255, 255);
-  font-size: 1.2rem;
-}
-.mylang p {
-  border: 1px solid rgb(37, 43, 88);
-  border-radius: 10px;
-  padding: 0 20px;
+.mylang:hover::before {
+  border-color: rgba(200, 134, 10, 0.5);
+  background: rgba(200, 134, 10, 0.04);
+  box-shadow:
+    0 0 0 1px rgba(200, 134, 10, 0.12),
+    0 20px 48px rgba(0, 0, 0, 0.5),
+    0 0 60px rgba(200, 134, 10, 0.07);
 }
 
-.lang {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-  justify-content: space-between !important;
-  flex-wrap: wrap;
-  width: 100%;
+/* Scanline shimmer */
+.mylang::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 40%;
+  top: -40%;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(200, 134, 10, 0.07) 50%,
+    transparent
+  );
+  pointer-events: none;
+  z-index: 1;
 }
-.lang-img {
-  font-size: 3.7rem;
-  width: 70px;
-  margin-bottom: 1rem;
-  cursor: pointer;
-  height: 70px;
-  margin-top: 0.25rem;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(245, 158, 11, 0.08);
-  border: 1px solid rgba(245, 158, 11, 0.15);
+.mylang:hover::after {
+  animation: scanline 0.7s ease forwards;
 }
+@keyframes scanline {
+  0%   { top: -40%; }
+  100% { top: 120%; }
+}
+
+/* ── Inner content ── */
 .lang-info {
+  position: relative;
+  z-index: 2;
   display: flex;
-  justify-content: flex-start;
   flex-direction: column;
   align-items: center;
+  padding: 28px 18px 24px;
+}
+
+/* ── Icon circle ── */
+.lang-img {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(200, 134, 10, 0.07);
+  border: 1px solid rgba(200, 134, 10, 0.18);
+  font-size: 2.4rem;
+  margin-bottom: 16px;
+  transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+.mylang:hover .lang-img {
+  background: rgba(200, 134, 10, 0.13);
+  border-color: rgba(200, 134, 10, 0.5);
+  box-shadow: 0 0 24px rgba(200, 134, 10, 0.18);
+}
+.lang-img img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
 }
 .lang-info img {
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
 }
-.lang-info p {
-  font-size: 13px;
+
+/* ── Name ── */
+.mylang h3 {
+  font-family: 'DM Sans', var(--font-body, sans-serif);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.88);
+  margin-bottom: 10px;
+  text-align: center;
+  white-space: nowrap;
 }
-.mylang .Junior {
-  color: #eb997c !important;
+
+/* ── Level badge ── */
+.mylang p {
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 1px;
+  border: 1px solid;
+  line-height: 1.6;
+  margin: 0;
 }
-.mylang .Beginner {
-  color: #e6cc79 !important;
+
+/* Level colours — dark */
+.mylang .Beginner     { color: #e6cc79; border-color: rgba(230, 204, 121, 0.3); background: rgba(230, 204, 121, 0.05); }
+.mylang .Junior       { color: #eb997c; border-color: rgba(235, 153, 124, 0.3); background: rgba(235, 153, 124, 0.05); }
+.mylang .Intermediate { color: #c774b9; border-color: rgba(199, 116, 185, 0.3); background: rgba(199, 116, 185, 0.05); }
+.mylang .Experienced  { color: #C8860A; border-color: rgba(200, 134, 10, 0.42); background: rgba(200, 134, 10, 0.08); }
+
+/* Amber underline reveals on hover */
+.lang-info::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, #C8860A, transparent);
+  transition: width 0.45s cubic-bezier(0.23, 1, 0.32, 1);
 }
-.mylang .Intermediate {
-  color: #c774b9 !important;
+.mylang:hover .lang-info::after {
+  width: 65%;
 }
-.mylang .Experienced {
-  color: #dd83dd !important;
+
+/* ── Alice carousel ── */
+.alice-carousel__stage-item {
+  padding: 6px 0 16px;
 }
-/* responsive */
+
+/* ── Strip old bar styles ── */
+.progress-bar2, .fullwidth, .skill-bar,
+.skill-info, .skill-detail, .skill-name { display: none; }
+
+/* ─────────────────────────────────────
+   LIGHT THEME
+───────────────────────────────────── */
+.light .mylang::before {
+  background: rgba(0, 0, 0, 0.015);
+  border-color: rgba(0, 0, 0, 0.07);
+}
+.light .mylang:hover::before {
+  border-color: rgba(200, 134, 10, 0.4);
+  background: rgba(200, 134, 10, 0.03);
+}
+.light .mylang h3 { color: rgba(26, 18, 8, 0.88); }
+.light .lang-img  { background: rgba(200, 134, 10, 0.06); border-color: rgba(200, 134, 10, 0.2); }
+.light .mylang:hover .lang-img { background: rgba(200, 134, 10, 0.12); }
+.light .mylang .Beginner     { color: #7a6200; border-color: rgba(122, 98, 0, 0.35);    background: rgba(122, 98, 0, 0.06); }
+.light .mylang .Junior       { color: #b34a1a; border-color: rgba(179, 74, 26, 0.35);   background: rgba(179, 74, 26, 0.06); }
+.light .mylang .Intermediate { color: #8e1f80; border-color: rgba(142, 31, 128, 0.35);  background: rgba(142, 31, 128, 0.06); }
+.light .mylang .Experienced  { color: #9a6200; border-color: rgba(154, 98, 0, 0.4);     background: rgba(154, 98, 0, 0.08); }
+
+/* ─────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────── */
 @media only screen and (max-width: 768px) {
-  .progress-title {
-    text-align: center;
-  }
-  .progress-title h3 {
-    font-size: 2rem;
-  }
+  .progress-title { text-align: center; }
+  .progress-title h3 { font-size: 2rem; }
+  .progress-container { padding: 60px 20px 80px; }
 }
-
 @media only screen and (max-width: 425px) {
-  .progress-container {
-    padding: 50px 20px;
-  }
-}
-/*light theme  */
-.light .skill-bar {
-  background: var(--btn-background);
-}
-.light .mylang h3 {
-  color: #000;
-}
-.light .lang-img {
-  background: rgb(240, 239, 239);
-}
-.light .mylang p {
-  border: 1px solid rgb(215, 217, 231);
-  line-height: normal !important;
-}
-
-.light .mylang .Junior {
-  color: #e26537 !important;
-}
-.light .mylang .Beginner {
-  color: #91ff00 !important;
-}
-.light .mylang .Intermediate {
-  color: #d823ba !important;
-}
-.light .mylang .Experienced {
-  color: #e6227d !important;
+  .progress-container { padding: 50px 16px 60px; }
+  .lang-img { width: 60px; height: 60px; }
+  .mylang h3 { font-size: 0.72rem; }
 }

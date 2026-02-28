@@ -1,25 +1,48 @@
 import "./Testimonials.css";
 import SectionHeading from "../SectionHeading/SectionHeading";
 
-/* Placeholder testimonials – replace with useGetTestimonialsQuery() when API is ready */
 const TESTIMONIALS = [
   {
     id: 1,
-    quote: "Delivered exactly what we needed on time. Clear communication and solid technical skills.",
-    author: "Client",
-    role: "Project lead",
+    quote:
+      "Obed delivered a polished, scalable frontend that aligned perfectly with our product vision. His attention to UI details and performance made a noticeable difference in user engagement. Communication was clear, timelines were respected, and the final result exceeded expectations.",
+    author: "Fann",
+    role: "Product team",
   },
   {
     id: 2,
-    quote: "Professional approach from scoping to deployment. Would work with again.",
-    author: "Client",
-    role: "Startup founder",
+    quote:
+      "From architecture to execution, Obed handled everything professionally. He translated complex requirements into a clean, responsive interface and ensured smooth integration with backend services. A reliable developer who understands both design and functionality.",
+    author: "Viko",
+    role: "Founder",
   },
   {
     id: 3,
-    quote: "Handled complex requirements with ease and kept the codebase clean and maintainable.",
-    author: "Client",
-    role: "CTO",
+    quote:
+      "Obed helped us build a modern, user-friendly platform that customers love using. His ability to optimize performance and improve UX made our service feel premium. Highly recommended for React-based projects.",
+    author: "BookCleany",
+    role: "Product owner",
+  },
+  {
+    id: 4,
+    quote:
+      "Working with Obed was effortless. He delivered a fast, visually appealing website that clearly represents our brand. The project was completed efficiently, and every requested change was handled promptly and professionally.",
+    author: "PopSigns",
+    role: "Marketing team",
+  },
+  {
+    id: 5,
+    quote:
+      "Obed built a clean, professional platform that made our services easy to understand and access for clients. Performance, responsiveness, and clarity were all handled exceptionally well.",
+    author: "Muse Tax",
+    role: "Operations",
+  },
+  {
+    id: 6,
+    quote:
+      "Obed demonstrated strong technical skills and a deep understanding of performance-driven interfaces. The final product was smooth, engaging, and optimized for scale. A great developer to work with.",
+    author: "Hero Gaming",
+    role: "Engineering lead",
   },
 ];
 
