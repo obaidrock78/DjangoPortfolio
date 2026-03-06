@@ -1,7 +1,6 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./App.css";
 import AboutMe from "./components/AboutMe/AboutMe";
-import ContactMe from "./components/ContactMe/ContactMe";
 import Footer from "./components/Footer/Footer";
 import Home from "./components/Hero/Intro";
 import Projects from "./components/MyWork/projects";
@@ -10,12 +9,12 @@ import Process from "./components/Process/Process";
 import Services from "./components/Services/Services";
 import Progress from "./components/SkillBars/progress";
 import Testimonials from "./components/Testimonials/Testimonials";
+import ContactMe from "./components/ContactMe/ContactMe";
 import ProjectDetails from "./pages/ProjectDetails";
 import $ from "jquery";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
-import Email from "./components/EmailMe/Email";
 import { AnimatedCursor } from "./components/animatedCursor";
 
 function App() {
@@ -58,7 +57,6 @@ function App() {
           <Process />
           <Testimonials />
           <ContactMe />
-          <Email />
           <Footer />
         </Route>
       </Switch>

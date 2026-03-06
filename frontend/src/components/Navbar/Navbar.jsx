@@ -46,9 +46,6 @@ const Navbar = () => {
                   <li data-aos="fade-down" data-aos-duration="2100">
                     <a href="#testimonials">Testimonials</a>
                   </li>
-                  <li data-aos="fade-down" data-aos-duration="2400">
-                    <a href="#contact">Contact</a>
-                  </li>
                 </ul>
               </nav>
               <div className="nav-right-group">
@@ -61,11 +58,6 @@ const Navbar = () => {
                   </a>
                 </div>
                 <div className="left-btns">
-                  <div className="CvMe">
-                    <a href="#contact">
-                      <button type="button" className="my-cv">Contact Me</button>
-                    </a>
-                  </div>
                   <div id="theme-button">
                     <Link to="#" className="menuBtn" aria-label="Toggle menu">
                       <span className="lines"></span>
