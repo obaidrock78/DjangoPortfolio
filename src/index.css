@@ -3,32 +3,32 @@
    ============================================ */
 
 :root {
-  /* Backgrounds */
-  --abyss:      #060B14;
-  --navy:       #080F1C;
-  --surface:    #0E1828;
-  --surface2:   #14202F;
+  /* Backgrounds — lifted so content reads clearly */
+  --abyss:      #0D1521;
+  --navy:       #111E30;
+  --surface:    #172539;
+  --surface2:   #1E2F47;
 
   /* Primary accent — warm, premium gold */
-  --gold:       #C9A655;
-  --gold-warm:  #E8C97A;
-  --gold-dim:   rgba(201,166,85,0.10);
-  --gold-glow:  rgba(201,166,85,0.22);
+  --gold:       #D4AF5A;
+  --gold-warm:  #EDD07E;
+  --gold-dim:   rgba(212,175,90,0.12);
+  --gold-glow:  rgba(212,175,90,0.26);
 
   /* Secondary accents */
-  --teal:       #45E3D3;
-  --indigo:     #6B7FE8;
-  --emerald:    #3DD68C;
-  --violet:     #9375B5;
+  --teal:       #4EEADE;
+  --indigo:     #7B8FEE;
+  --emerald:    #45DE99;
+  --violet:     #A585C4;
 
-  /* Text hierarchy */
-  --cream:      #EDE8D8;
-  --pearl:      #C4C8D4;
-  --muted:      #546A8A;
+  /* Text hierarchy — more contrast */
+  --cream:      #F0EBD8;
+  --pearl:      #CDD2DF;
+  --muted:      #7490B0;
 
-  /* Borders */
-  --border:     rgba(201,166,85,0.08);
-  --border-v:   rgba(201,166,85,0.20);
+  /* Borders — slightly more visible */
+  --border:     rgba(212,175,90,0.12);
+  --border-v:   rgba(212,175,90,0.28);
 
   /* Fonts */
   --font-head:  'Cormorant Garamond', serif;
@@ -160,13 +160,13 @@ p {
 
 .gradient-abyss-to-navy {
   height: 90px;
-  background: linear-gradient(to bottom, #060B14, #080F1C);
+  background: linear-gradient(to bottom, #0D1521, #111E30);
   pointer-events: none;
 }
 
 .gradient-navy-to-abyss {
   height: 90px;
-  background: linear-gradient(to bottom, #080F1C, #060B14);
+  background: linear-gradient(to bottom, #111E30, #0D1521);
   pointer-events: none;
 }
 
