@@ -24,6 +24,16 @@ const Intro = () => {
   const lastName = nameParts.slice(1).join(" ") || "Chaudhry";
 
   return (
+    <>
+    <a
+      href="https://wa.me/923034142927"
+      className="whatsapp-float"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Chat on WhatsApp"
+    >
+      <i className="fab fa-whatsapp" />
+    </a>
     <section className="hero-sovereign" id="home">
       <div className="hero-grid">
         {/* Left Column */}
@@ -50,14 +60,31 @@ const Intro = () => {
             <a href={`mailto:${detail.hireMe_link}`} className="cta-primary">
               Hire Me
             </a>
+            <a href="#work" className="cta-secondary">
+              View Work
+            </a>
             <a
               href={detail.cv_link || "https://drive.google.com/file/d/1vJBEV0fe3hdtsToBDl-h6ZfxewlWyEoM/view"}
               target="_blank"
               rel="noopener noreferrer"
-              className="cta-secondary"
+              className="cta-ghost"
             >
               Download CV
             </a>
+          </div>
+
+          <div className="hero-socials">
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hero-social-link" aria-label="GitHub">
+              <i className="fab fa-github" />
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hero-social-link" aria-label="LinkedIn">
+              <i className="fab fa-linkedin-in" />
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hero-social-link" aria-label="Twitter">
+              <i className="fab fa-twitter" />
+            </a>
+            <span className="hero-socials-divider" />
+            <span className="hero-socials-label">Find me online</span>
           </div>
 
           <div className="hero-stats">
@@ -113,6 +140,7 @@ const Intro = () => {
         </div>
       </div>
     </section>
+    </>
   );
 };
 

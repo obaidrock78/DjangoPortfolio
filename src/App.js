@@ -12,6 +12,8 @@ import SkillTicker from "./components/SkillTicker/SkillTicker";
 import WhatIBuild from "./components/WhatIBuild/WhatIBuild";
 import Ventures from "./components/Ventures/Ventures";
 import Email from "./components/EmailMe/Email";
+import Writing from "./components/Writing/Writing";
+import Vision from "./components/Vision/Vision";
 import ConstellationCanvas from "./components/ConstellationCanvas";
 import { AnimatedCursor } from "./components/animatedCursor";
 import $ from "jquery";
@@ -30,11 +32,15 @@ function HomePage() {
       <Ventures />
       <div className="gradient-navy-to-abyss" />
       <Projects />
-      <div className="gradient-abyss-to-navy" />
+      {/* <div className="gradient-abyss-to-navy" /> */}
       <Services />
       <div className="gradient-abyss-to-navy" />
       <Progress />
       <div className="gradient-navy-to-abyss" />
+      {/* <Writing /> */}
+      {/* <div className="gradient-navy-to-abyss" /> */}
+      <Vision />
+      <div className="gradient-abyss-to-navy" />
       <Email />
       <Footer />
     </>

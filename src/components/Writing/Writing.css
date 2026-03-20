@@ -1,0 +1,267 @@
+/* ============================================
+   WRITING — Sovereign Abyss
+   ============================================ */
+
+.writing-sovereign {
+  background: var(--navy);
+  padding: 120px 0;
+}
+
+.writing-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+/* ── Header ──────────────────────────────── */
+
+.writing-header {
+  max-width: 720px;
+  margin-bottom: 64px;
+}
+
+.writing-header .section-heading em {
+  font-style: italic;
+  color: var(--gold-warm);
+}
+
+.writing-subtext {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--pearl);
+  line-height: 1.85;
+  margin-top: 8px;
+}
+
+/* ── Articles grid ───────────────────────── */
+
+.writing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 56px;
+}
+
+/* ── Article card ────────────────────────── */
+
+.writing-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, transform 0.35s cubic-bezier(0.23,1,0.32,1), box-shadow 0.35s;
+}
+
+.writing-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.writing-card:nth-child(1)::before { background: linear-gradient(to right, transparent, var(--teal), transparent); }
+.writing-card:nth-child(2)::before { background: linear-gradient(to right, transparent, var(--gold-warm), transparent); }
+.writing-card:nth-child(3)::before { background: linear-gradient(to right, transparent, var(--violet), transparent); }
+
+.writing-card:hover {
+  border-color: var(--border-v);
+  transform: translateY(-6px);
+  box-shadow: 0 24px 56px rgba(0,0,0,0.45);
+  text-decoration: none;
+  color: inherit;
+}
+
+.writing-card:hover::before {
+  opacity: 1;
+}
+
+.wc-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.wc-category {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+}
+
+.wc-category--teal   { color: var(--teal);    background: rgba(78,234,222,0.10);  border-color: rgba(78,234,222,0.25);  }
+.wc-category--gold   { color: var(--gold-warm); background: rgba(212,175,90,0.10); border-color: rgba(212,175,90,0.25); }
+.wc-category--violet { color: var(--violet);   background: rgba(165,133,196,0.12); border-color: rgba(165,133,196,0.28); }
+
+.wc-read-time {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.wc-title {
+  font-family: var(--font-head);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--cream);
+  line-height: 1.25;
+  margin: 0;
+  transition: color 0.25s;
+}
+
+.writing-card:hover .wc-title {
+  color: var(--gold-warm);
+}
+
+.wc-excerpt {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: var(--pearl);
+  line-height: 1.75;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.wc-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.wc-date {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.wc-arrow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  transition: color 0.25s;
+}
+
+.wc-arrow i {
+  transition: transform 0.25s;
+}
+
+.writing-card:hover .wc-arrow {
+  color: var(--gold-warm);
+}
+
+.writing-card:hover .wc-arrow i {
+  transform: translate(4px, 0);
+}
+
+/* ── CTA ─────────────────────────────────── */
+
+.writing-cta {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.wcta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--abyss);
+  padding: 14px 28px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-warm));
+  border-radius: 999px;
+  text-decoration: none;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.wcta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 32px rgba(212,175,90,0.30);
+  color: var(--abyss);
+  text-decoration: none;
+}
+
+.writing-cta-note {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--muted) !important;
+}
+
+.writing-cta-note a {
+  color: var(--pearl);
+  text-decoration: underline;
+  text-decoration-color: var(--border-v);
+  text-underline-offset: 3px;
+  transition: color 0.2s;
+}
+
+.writing-cta-note a:hover {
+  color: var(--gold-warm);
+}
+
+/* ── Responsive ──────────────────────────── */
+
+@media (max-width: 1024px) {
+  .writing-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .writing-container {
+    padding: 0 24px;
+  }
+
+  .writing-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .writing-cta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 600px) {
+  .writing-sovereign {
+    padding: 80px 0;
+  }
+}

@@ -3,8 +3,8 @@
    ============================================ */
 
 .footer-sovereign {
-  background: var(--abyss);
-  border-top: 1px solid var(--border);
+  background: #09090E;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   padding: 40px 0;
 }
 
@@ -35,48 +35,48 @@
 .footer-logo-mini {
   width: 28px;
   height: 28px;
-  background: var(--surface);
-  border: 1px solid var(--border-v);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-head);
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 0.65rem;
   font-weight: 700;
-  color: var(--gold);
+  color: #C9A655;
 }
 
 .footer-text {
-  font-family: var(--font-mono);
+  font-family: 'JetBrains Mono', monospace;
   font-size: 0.62rem;
   letter-spacing: 0.08em;
-  color: var(--muted);
+  color: #8A8A9A;
 }
 
 .footer-status {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-family: var(--font-mono);
+  font-family: 'JetBrains Mono', monospace;
   font-size: 0.62rem;
   letter-spacing: 0.08em;
-  color: var(--muted);
+  color: #8A8A9A;
 }
 
 .footer-pulse {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--emerald);
+  background: #4ade80;
   animation: pulseGlow 2s ease infinite;
 }
 
 .footer-role {
-  font-family: var(--font-mono);
+  font-family: 'JetBrains Mono', monospace;
   font-size: 0.62rem;
   letter-spacing: 0.08em;
-  color: var(--muted);
+  color: #8A8A9A;
 }
 
 /* Scroll to top button */
@@ -87,12 +87,12 @@
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: var(--surface);
-  border: 1px solid var(--border-v);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--gold);
+  color: #C9A655;
   font-size: 1.2rem;
   cursor: pointer;
   z-index: 100;
@@ -109,7 +109,7 @@
 }
 
 .scroll-top-btn:hover {
-  background: var(--gold-dim);
+  background: rgba(201, 166, 85, 0.12);
 }
 
 /* Responsive */

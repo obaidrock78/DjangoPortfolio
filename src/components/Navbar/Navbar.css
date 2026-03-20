@@ -17,8 +17,8 @@
 }
 
 .nav-sovereign.scrolled {
-  background: rgba(6, 11, 20, 0.93);
-  border-bottom: 1px solid var(--border);
+  background: rgba(9, 9, 14, 0.93);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(26px);
   -webkit-backdrop-filter: blur(26px);
   padding: 15px 48px;
@@ -40,22 +40,22 @@
   width: 36px;
   height: 36px;
   background: var(--surface);
-  border: 1px solid var(--border-v);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-head);
+  font-family: 'Playfair Display', serif;
   font-size: 0.9rem;
   font-weight: 700;
-  color: var(--gold);
+  color: #C9A655;
 }
 
 .nav-logo-name {
-  font-family: var(--font-head);
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1.2rem;
   font-weight: 600;
-  color: var(--cream);
+  color: #F5F0E8;
 }
 
 /* Nav Links */
@@ -66,11 +66,11 @@
 }
 
 .nav-link-item {
-  font-family: var(--font-mono);
+  font-family: 'JetBrains Mono', monospace;
   font-size: 0.6rem;
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  color: var(--pearl);
+  color: #F5F0E8;
   position: relative;
   padding-bottom: 4px;
   transition: color 0.3s ease;
@@ -84,12 +84,12 @@
   left: 0;
   width: 0;
   height: 1px;
-  background: var(--gold);
+  background: #C9A655;
   transition: width 0.3s ease;
 }
 
 .nav-link-item:hover {
-  color: var(--gold-warm);
+  color: #C9A655;
   text-decoration: none;
 }
 
@@ -99,13 +99,13 @@
 
 /* CTA Button */
 .nav-cta {
-  font-family: var(--font-mono);
+  font-family: 'JetBrains Mono', monospace;
   font-size: 0.6rem;
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  color: var(--gold);
+  color: #C9A655;
   padding: 10px 24px;
-  border: 1px solid var(--gold);
+  border: 1px solid #C9A655;
   border-radius: 999px;
   background: transparent;
   transition: background 0.3s, color 0.3s;
@@ -113,8 +113,8 @@
 }
 
 .nav-cta:hover {
-  background: var(--gold);
-  color: var(--abyss);
+  background: #C9A655;
+  color: #09090E;
   text-decoration: none;
 }
 
@@ -131,7 +131,7 @@
 .nav-hamburger span {
   width: 24px;
   height: 2px;
-  background: var(--cream);
+  background: #F5F0E8;
   transition: transform 0.3s, opacity 0.3s;
 }
 
@@ -155,7 +155,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(6, 11, 20, 0.97);
+  background: rgba(9, 9, 14, 0.97);
   backdrop-filter: blur(20px);
   z-index: 999;
   flex-direction: column;
@@ -169,16 +169,16 @@
 }
 
 .nav-mobile-overlay a {
-  font-family: var(--font-head);
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 2rem;
   font-weight: 600;
-  color: var(--cream);
+  color: #F5F0E8;
   transition: color 0.3s;
   text-decoration: none;
 }
 
 .nav-mobile-overlay a:hover {
-  color: var(--gold-warm);
+  color: #C9A655;
 }
 
 /* Responsive */

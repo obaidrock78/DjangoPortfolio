@@ -3,7 +3,7 @@
    ============================================ */
 
 .projects-sovereign {
-  background: var(--abyss);
+  background: #162035;
   padding: 140px 0;
   position: relative;
 }
@@ -13,10 +13,23 @@
   content: '';
   position: absolute;
   top: 0; left: 50%; transform: translateX(-50%);
-  width: 480px;
+  width: 600px;
   height: 1px;
   background: linear-gradient(to right, transparent, var(--gold-warm), transparent);
-  opacity: 0.35;
+  opacity: 0.55;
+}
+
+/* radial light burst behind content */
+.projects-sovereign::after {
+  content: '';
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 500px;
+  background: radial-gradient(ellipse at center, rgba(212,175,90,0.07) 0%, transparent 65%);
+  pointer-events: none;
 }
 
 .projects-container {
@@ -64,8 +77,8 @@
 /* ── Flagship card ───────────────────────── */
 
 .pf-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: #1C2D44;
+  border: 1px solid rgba(212,175,90,0.18);
   border-radius: 20px;
   overflow: hidden;
   display: flex;
@@ -338,8 +351,8 @@
 
 /* individual contract card */
 .contract-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: #1C2D44;
+  border: 1px solid rgba(212,175,90,0.18);
   border-radius: 14px;
   padding: 22px 20px;
   display: flex;

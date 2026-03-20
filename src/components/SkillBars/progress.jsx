@@ -1,85 +1,80 @@
 import "./progress.css";
-import { useGetLanguagesIconsQuery } from "../../Api/api";
+import { baseUrlImages, useGetLanguagesIconsQuery } from "../../Api/api";
 import { useEffect, useState, useRef } from "react";
 
-const ringData = [
-  { name: "Django", pct: 95, color: "#28CA42" },
-  { name: "Python", pct: 95, color: "#3776AB" },
-  { name: "React", pct: 88, color: "#61DAFB" },
-  { name: "JavaScript", pct: 92, color: "#FBBF24" },
-  { name: "SQL", pct: 90, color: "#C9A655" },
-  { name: "Node.js", pct: 85, color: "#34D399" },
-];
+/* Map API exp_level → bar percentage */
+const levelToPct = {
+  Experienced:  93,
+  Intermediate: 72,
+  Junior:       52,
+  Beginner:     35,
+};
+
+/* Per-level accent color */
+const levelColor = {
+  Experienced:  "#45DE99",
+  Intermediate: "#7B8FEE",
+  Junior:       "#D4AF5A",
+  Beginner:     "#4EEADE",
+};
 
 const categories = [
   {
-    title: "Backend & Frameworks",
-    skills: ["Django", "Django REST Framework", "Flask", "Node.js", "Express", "Celery"],
+    icon: "fas fa-server",
+    title: "Backend",
+    color: "teal",
+    skills: ["Django", "DRF", "Flask", "Node.js", "Express", "Celery", "FastAPI"],
   },
   {
-    title: "Frontend & UI",
-    skills: ["React", "Next.js", "Vue.js", "JavaScript", "Tailwind CSS", "CSS3", "HTML5"],
+    icon: "fas fa-desktop",
+    title: "Frontend",
+    color: "indigo",
+    skills: ["React", "Next.js", "Vue.js", "TypeScript", "Tailwind CSS", "HTML5", "CSS3"],
   },
   {
-    title: "Databases & Cloud",
-    skills: ["PostgreSQL", "MySQL", "MongoDB", "Firestore", "AWS", "REST APIs", "Redis"],
+    icon: "fas fa-database",
+    title: "Data & Cloud",
+    color: "emerald",
+    skills: ["PostgreSQL", "MySQL", "MongoDB", "Redis", "Firestore", "AWS", "REST APIs"],
   },
   {
-    title: "DevOps & Tools",
-    skills: ["Git", "GitHub", "Docker", "Postman", "VS Code", "Linux"],
+    icon: "fas fa-link",
+    title: "Blockchain",
+    color: "gold",
+    skills: ["Solidity", "ERC-721", "ERC-3643", "Web3.js", "IPFS", "Hardhat", "LayerZero"],
   },
   {
-    title: "Emerging Tech",
-    skills: ["Solidity", "Blockchain", "Smart Contracts", "AI/ML", "IoT", "OpenAI API"],
+    icon: "fas fa-tools",
+    title: "DevOps & AI",
+    color: "violet",
+    skills: ["Docker", "Git", "Linux", "Postman", "OpenAI API", "AI/ML", "IoT / MQTT"],
   },
 ];
 
-const CIRCUMFERENCE = 2 * Math.PI * 34; // ~213.6
-
-const SkillRing = ({ name, pct, color, animated }) => {
-  const offset = animated ? CIRCUMFERENCE * (1 - pct / 100) : CIRCUMFERENCE;
-
-  return (
-    <div className="skill-ring-item">
-      <svg className="skill-ring-svg" viewBox="0 0 80 80">
-        <circle className="skill-ring-bg" cx="40" cy="40" r="34" />
-        <circle
-          className="skill-ring-progress"
-          cx="40"
-          cy="40"
-          r="34"
-          stroke={color}
-          style={{ strokeDashoffset: offset }}
-        />
-      </svg>
-      <span className="skill-ring-pct">{pct}%</span>
-      <span className="skill-ring-name">{name}</span>
-    </div>
-  );
+const colorMap = {
+  teal:    { text: "var(--teal)",     bg: "rgba(78,234,222,0.10)",  border: "rgba(78,234,222,0.25)"  },
+  indigo:  { text: "var(--indigo)",   bg: "rgba(123,143,238,0.10)", border: "rgba(123,143,238,0.25)" },
+  emerald: { text: "var(--emerald)",  bg: "rgba(69,222,153,0.10)",  border: "rgba(69,222,153,0.25)"  },
+  gold:    { text: "var(--gold-warm)",bg: "rgba(212,175,90,0.10)",  border: "rgba(212,175,90,0.25)"  },
+  violet:  { text: "var(--violet)",   bg: "rgba(165,133,196,0.12)", border: "rgba(165,133,196,0.28)" },
 };
 
 const Progress = () => {
   const { data: langIcons, isFetching } = useGetLanguagesIconsQuery();
-  const [icons, setIcons] = useState(langIcons);
+  const [icons, setIcons]       = useState([]);
   const [animated, setAnimated] = useState(false);
   const sectionRef = useRef(null);
 
   useEffect(() => {
-    setIcons(langIcons);
+    if (langIcons) setIcons(langIcons);
   }, [langIcons]);
 
-  // IntersectionObserver for ring animation
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
-
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setAnimated(true);
-        }
-      },
-      { threshold: 0.12 }
+      ([entry]) => { if (entry.isIntersecting) setAnimated(true); },
+      { threshold: 0.08 }
     );
     observer.observe(el);
     return () => observer.unobserve(el);
@@ -87,53 +82,174 @@ const Progress = () => {
 
   if (isFetching) return null;
 
+  /* Split API icons: top 6 Experienced → bars; rest → icon grid */
+  const experienced = icons.filter(i => i.exp_level === "Experienced");
+  const others      = icons.filter(i => i.exp_level !== "Experienced");
+
+  /* Use experienced icons for bars (up to 6), fallback if API empty */
+  const barItems = experienced.length > 0
+    ? experienced.slice(0, 6)
+    : [
+        { id: 1, lang_name: "Django",     exp_level: "Experienced",  icon: null },
+        { id: 2, lang_name: "Python",     exp_level: "Experienced",  icon: null },
+        { id: 3, lang_name: "JavaScript", exp_level: "Experienced",  icon: null },
+        { id: 4, lang_name: "React",      exp_level: "Experienced",  icon: null },
+        { id: 5, lang_name: "PostgreSQL", exp_level: "Experienced",  icon: null },
+        { id: 6, lang_name: "Solidity",   exp_level: "Intermediate", icon: null },
+      ];
+
+  /* All other levels go into the icon grid */
+  const gridItems = others.length > 0 ? others : [];
+
   return (
     <section className="skills-sovereign" id="skills" ref={sectionRef}>
-      <div className="skills-grid">
+      <div className="skills-container">
+
+        {/* ── Header ── */}
         <div className="skills-header rv">
-          <div className="section-eyebrow">Technical Arsenal</div>
-          <h2 className="section-heading">
-            Skills & <em>Proficiency</em>
-          </h2>
-        </div>
-
-        {/* Left: SVG Progress Rings */}
-        <div className="skills-rings rv d2">
-          {ringData.map((r) => (
-            <SkillRing key={r.name} {...r} animated={animated} />
-          ))}
-        </div>
-
-        {/* Right: Categorized Pills */}
-        <div className="skills-categories rv d3">
-          {categories.map((cat) => (
-            <div className="skills-category" key={cat.title}>
-              <div className="skills-category-title">{cat.title}</div>
-              <div className="skills-pills">
-                {cat.skills.map((s) => (
-                  <span className="skill-pill" key={s}>
-                    {s}
-                  </span>
-                ))}
+          <p className="section-eyebrow">Technical Arsenal</p>
+          <div className="skills-header-inner">
+            <h2 className="section-heading">
+              Built to ship.<br /><em>Skilled to scale.</em>
+            </h2>
+            <div className="skills-stats">
+              <div className="sk-stat">
+                <span className="sk-stat-val">5+</span>
+                <span className="sk-stat-label">Years</span>
+              </div>
+              <div className="sk-stat-div" />
+              <div className="sk-stat">
+                <span className="sk-stat-val">{icons.length || "18"}+</span>
+                <span className="sk-stat-label">Technologies</span>
+              </div>
+              <div className="sk-stat-div" />
+              <div className="sk-stat">
+                <span className="sk-stat-val">12+</span>
+                <span className="sk-stat-label">Projects</span>
               </div>
             </div>
-          ))}
+          </div>
         </div>
 
-        {/* Icons from API */}
-        {icons && icons.length > 0 && (
-          <div className="skills-icons-grid rv d4">
-            {icons.map((detail) => (
-              <div className="skill-icon-card" key={detail.id}>
-                <img src={detail.icon} alt={detail.lang_name} />
-                <h4>{detail.lang_name}</h4>
-                <span className={`exp-badge ${detail.exp_level}`}>
-                  {detail.exp_level}
-                </span>
-              </div>
-            ))}
+        {/* ── Top: bars + description ── */}
+        <div className="skills-top">
+
+          {/* Left — animated bars from API "Experienced" items */}
+          <div className="skills-bars rv d2">
+            <p className="skills-bars-label">Core Proficiencies</p>
+            {barItems.map((item, i) => {
+              const pct   = levelToPct[item.exp_level] || 70;
+              const color = levelColor[item.exp_level] || "#D4AF5A";
+              const imgSrc = item.icon
+                ? (item.icon.startsWith("http") ? item.icon : `${baseUrlImages}${item.icon}`)
+                : null;
+
+              return (
+                <div className="skbar-row" key={item.id}>
+                  <div className="skbar-meta">
+                    <div className="skbar-name-group">
+                      {imgSrc && (
+                        <img className="skbar-icon" src={imgSrc} alt={item.lang_name} />
+                      )}
+                      <span className="skbar-name">{item.lang_name}</span>
+                    </div>
+                    <div className="skbar-right">
+                      <span
+                        className="skbar-level"
+                        style={{ color, borderColor: `${color}55`, background: `${color}18` }}
+                      >
+                        {item.exp_level}
+                      </span>
+                      <span className="skbar-pct">{pct}%</span>
+                    </div>
+                  </div>
+                  <div className="skbar-track">
+                    <div
+                      className="skbar-fill"
+                      style={{
+                        width: animated ? `${pct}%` : "0%",
+                        background: `linear-gradient(to right, ${color}66, ${color})`,
+                        transitionDelay: `${i * 0.12}s`,
+                      }}
+                    />
+                    <div
+                      className="skbar-glow"
+                      style={{
+                        left: animated ? `${pct}%` : "0%",
+                        background: color,
+                        transitionDelay: `${i * 0.12}s`,
+                      }}
+                    />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Right — categorized pills */}
+          <div className="skills-cats-col rv d3">
+            <p className="skills-bars-label">Full Stack</p>
+            <div className="skills-categories">
+              {categories.map((cat) => {
+                const c = colorMap[cat.color];
+                return (
+                  <div className="skcat" key={cat.title}>
+                    <div className="skcat-header" style={{ color: c.text }}>
+                      <i className={cat.icon} />
+                      <span>{cat.title}</span>
+                    </div>
+                    <div className="skcat-pills">
+                      {cat.skills.map((s) => (
+                        <span
+                          className="skcat-pill"
+                          key={s}
+                          style={{
+                            "--pill-color":  c.text,
+                            "--pill-bg":     c.bg,
+                            "--pill-border": c.border,
+                          }}
+                        >
+                          {s}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* ── API icon grid (Intermediate / Junior / Beginner) ── */}
+        {gridItems.length > 0 && (
+          <div className="skills-icon-section rv d4">
+            <div className="skills-icon-header">
+              <span className="skills-icon-label">Also in the Arsenal</span>
+              <div className="skills-icon-line" />
+            </div>
+            <div className="skills-icon-grid">
+              {gridItems.map((item) => {
+                const color  = levelColor[item.exp_level] || "#7490B0";
+                const imgSrc = item.icon
+                  ? (item.icon.startsWith("http") ? item.icon : `${baseUrlImages}${item.icon}`)
+                  : null;
+                return (
+                  <div className="skicon-card" key={item.id}>
+                    {imgSrc && <img src={imgSrc} alt={item.lang_name} />}
+                    <span className="skicon-name">{item.lang_name}</span>
+                    <span
+                      className="skicon-badge"
+                      style={{ color, borderColor: `${color}55`, background: `${color}18` }}
+                    >
+                      {item.exp_level}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         )}
+
       </div>
     </section>
   );
