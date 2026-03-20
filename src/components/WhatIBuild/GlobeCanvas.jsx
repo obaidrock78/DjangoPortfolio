@@ -35,11 +35,19 @@ const GlobeCanvas = ({ pillars = [] }) => {
     const ctx    = canvas.getContext('2d');
     let animId;
 
-    /* size to parent */
+    /* size to parent — honour device pixel ratio for crisp text */
+    let cssW = 560, cssH = 560;
     const resize = () => {
       const rect = canvas.parentElement.getBoundingClientRect();
-      canvas.width  = rect.width  || 560;
-      canvas.height = rect.height || 560;
+      const dpr  = window.devicePixelRatio || 1;
+      cssW = rect.width  || 560;
+      cssH = rect.height || 560;
+      canvas.width  = cssW * dpr;
+      canvas.height = cssH * dpr;
+      canvas.style.width  = cssW + 'px';
+      canvas.style.height = cssH + 'px';
+      ctx.resetTransform();
+      ctx.scale(dpr, dpr);
     };
     resize();
     const ro = new ResizeObserver(resize);
@@ -89,8 +97,8 @@ const GlobeCanvas = ({ pillars = [] }) => {
 
     /* ─── draw loop ─── */
     const draw = () => {
-      const W    = canvas.width;
-      const H    = canvas.height;
+      const W    = cssW;
+      const H    = cssH;
       const cx   = W / 2;
       const cy   = H / 2;
       const half = Math.min(W, H) / 2;
