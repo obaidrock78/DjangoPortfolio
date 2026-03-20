@@ -29,12 +29,12 @@ function HomePage() {
       <div className="gradient-abyss-to-navy" />
       <Ventures />
       <div className="gradient-navy-to-abyss" />
+      <Projects />
+      <div className="gradient-abyss-to-navy" />
       <Services />
       <div className="gradient-abyss-to-navy" />
       <Progress />
       <div className="gradient-navy-to-abyss" />
-      <Projects />
-      <div className="gradient-abyss-to-navy" />
       <Email />
       <Footer />
     </>
