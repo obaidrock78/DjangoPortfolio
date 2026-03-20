@@ -1,228 +1,231 @@
-.progress-container {
-  color: var(--color-info-light);
-  padding: 20px 50px 120px 50px;
-  background: var(--color-background-2);
-}
-.progress-row2 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.fullwidth {
-  background-color: rgb(114 226 174/0.2);
-  height: 13px;
-  width: 100%;
-  bottom: 0;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  border-radius: 10px;
-  position: relative;
+/* ============================================
+   SKILLS — Sovereign Abyss
+   ============================================ */
+
+.skills-sovereign {
+  background: var(--navy);
+  padding: 120px 0;
 }
 
-.progress-bar2 {
-  height: 45px;
-  width: 100%;
-  position: relative;
-  border-radius: 5px;
-  margin-bottom: 30px;
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 48px;
 }
-.progress-container .skill-info {
-  display: flex;
-  padding: 10px 0px;
-  justify-content: space-between;
-}
-.skill-bar {
-  position: absolute;
-  left: 0;
-  background: var(--color-button-hover);
-  height: 13px;
-  bottom: 0;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  border-radius: 10px;
-}
-.skill-detail {
-  display: flex !important;
-  flex-direction: row;
-}
-.skill-name {
-  margin-left: 10px;
-  text-transform: uppercase;
-  font-size: 12px !important;
-  letter-spacing: 1px;
-}
-.skill-info {
-  padding-top: 10px;
-}
-.progress-title {
-  margin-bottom: 50px;
+
+.skills-header {
+  grid-column: 1 / -1;
   text-align: center;
-}
-.progress {
-  width: 100%;
-  height: 50px;
-}
-.progress-title h2 {
-  font-size: 14px;
-  font-weight: 300;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: 10px;
-  color: var(--color-title);
-  letter-spacing: 3px;
-  color: var(--color-title);
-  font-weight: 600;
-}
-.progress-title h3 {
-  text-transform: capitalize;
-  font-size: 2.5rem;
+  margin-bottom: 40px;
 }
 
-.fa-html5 {
-  color: #f35f29;
-}
-.fa-css3 {
-  color: #00aeff;
-}
-.fa-js-square {
-  color: #e9b50a;
-}
-.fa-react {
-  color: #00aeff;
-}
-.fa-facebook {
-  color: #5656be;
-}
-.fa-python {
-  color: #57a4d1;
+/* Left: SVG Circular Progress Rings */
+.skills-rings {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 36px;
 }
 
-.fa-database {
-  color: #0cf;
-}
-.progress-container .bxl-django {
-  color: green;
-  font-size: 3.7rem !important;
-  margin-top: 3px;
-}
-.bxl-firebase {
-  color: yellow;
-}
-.bxs-component {
-  color: rgb(115, 240, 84);
-}
-.bx-code-block {
-  color: rgb(255, 0, 179);
-}
-.mylang {
-  background: var(--color-card2);
-  margin-right: 15px;
+.skill-ring-item {
   display: flex;
-  justify-content: center;
-  border-radius: 10px;
-  cursor: pointer;
-  padding: 10px 0;
-  align-items: center;
-  border: 1px solid rgba(146, 146, 165, 0.1);
-}
-.mylang h3 {
-  color: rgb(255, 255, 255);
-  font-size: 1.2rem;
-}
-.mylang p {
-  border: 1px solid rgb(37, 43, 88);
-  border-radius: 10px;
-  padding: 0 20px;
-}
-
-.lang {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-  justify-content: space-between !important;
-  flex-wrap: wrap;
-  width: 100%;
-}
-.lang-img {
-  font-size: 3.7rem;
-  width: 70px;
-  margin-bottom: 20px;
-  cursor: pointer;
-  height: 70px;
-  margin-top: 5px;
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  background: rgb(23, 32, 61);
-  /* box-shadow: 0px 3px 5px rgb(16 70 197 / 20%); */
-}
-.lang-info {
-  display: flex;
-  justify-content: flex-start;
   flex-direction: column;
   align-items: center;
+  gap: 12px;
 }
-.lang-info img {
-  width: 48px;
-  height: 48px;
+
+.skill-ring-svg {
+  width: 80px;
+  height: 80px;
+  transform: rotate(-90deg);
 }
-.lang-info p {
-  font-size: 13px;
+
+.skill-ring-bg {
+  fill: none;
+  stroke: var(--surface);
+  stroke-width: 4;
 }
-.mylang .Junior {
-  color: #eb997c !important;
+
+.skill-ring-progress {
+  fill: none;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 213.6;
+  stroke-dashoffset: 213.6;
+  transition: stroke-dashoffset 1.8s cubic-bezier(0.23, 1, 0.32, 1);
 }
-.mylang .Beginner {
-  color: #e6cc79 !important;
+
+.skill-ring-pct {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--cream);
+  margin-top: -52px;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
 }
-.mylang .Intermediate {
-  color: #c774b9 !important;
+
+.skill-ring-name {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  text-align: center;
 }
-.mylang .Experienced {
-  color: #dd83dd !important;
+
+/* Right: Categorized Tech Pills */
+.skills-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
 }
-/* responsive */
-@media only screen and (max-width: 768px) {
-  .progress-title {
-    text-align: center;
+
+.skills-category {
+  margin-bottom: 8px;
+}
+
+.skills-category-title {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--gold);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.skills-category-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border-v);
+}
+
+.skills-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-pill {
+  font-family: var(--font-mono);
+  font-size: 0.63rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 5px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  cursor: default;
+}
+
+.skill-pill:hover {
+  color: var(--gold-warm);
+  border-color: var(--border-v);
+  background: var(--gold-dim);
+}
+
+/* Language icons carousel fallback */
+.skills-icons-grid {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.skill-icon-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  min-width: 100px;
+  transition: border-color 0.3s, transform 0.25s;
+}
+
+.skill-icon-card:hover {
+  border-color: var(--border-v);
+  transform: translateY(-4px);
+}
+
+.skill-icon-card img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.skill-icon-card h4 {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--cream);
+  text-align: center;
+}
+
+.skill-icon-card .exp-badge {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+}
+
+.skill-icon-card .exp-badge.Experienced {
+  color: var(--emerald);
+  border-color: rgba(61, 214, 140, 0.3);
+}
+
+.skill-icon-card .exp-badge.Intermediate {
+  color: var(--violet);
+  border-color: rgba(147, 117, 181, 0.3);
+}
+
+.skill-icon-card .exp-badge.Junior {
+  color: var(--gold);
+  border-color: rgba(201, 166, 85, 0.3);
+}
+
+.skill-icon-card .exp-badge.Beginner {
+  color: var(--teal);
+  border-color: rgba(69, 227, 211, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    padding: 0 24px;
   }
-  .progress-title h3 {
-    font-size: 2rem;
+
+  .skills-rings {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
   }
 }
 
-@media only screen and (max-width: 425px) {
-  .progress-container {
-    padding: 50px 20px;
+@media (max-width: 480px) {
+  .skills-sovereign {
+    padding: 80px 0;
   }
-}
-/*light theme  */
-.light .skill-bar {
-  background: var(--btn-background);
-}
-.light .mylang h3 {
-  color: #000;
-}
-.light .lang-img {
-  background: rgb(240, 239, 239);
-}
-.light .mylang p {
-  border: 1px solid rgb(215, 217, 231);
-  line-height: normal !important;
-}
 
-.light .mylang .Junior {
-  color: #e26537 !important;
-}
-.light .mylang .Beginner {
-  color: #91ff00 !important;
-}
-.light .mylang .Intermediate {
-  color: #d823ba !important;
-}
-.light .mylang .Experienced {
-  color: #e6227d !important;
+  .skills-rings {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

@@ -1,233 +1,99 @@
-import React from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 
-function useEventListener(eventName, handler, element = document) {
-    const savedHandler = React.useRef()
-  
-    React.useEffect(() => {
-      savedHandler.current = handler
-    }, [handler])
-  
-    React.useEffect(() => {
-      const isSupported = element && element.addEventListener
-      if (!isSupported) return
-  
-      const eventListener = (event) => savedHandler.current(event)
-  
-      element.addEventListener(eventName, eventListener)
-  
-      return () => {
-        element.removeEventListener(eventName, eventListener)
-      }
-    }, [eventName, element])
-  }
-  
-  /**
-   * Animated Cursor
-   * Replaces the native cursor with a custom animated cursor.
-   *
-   * @author Stephen Scaff
-   */
-  export function AnimatedCursor({
-    color = '220, 90, 90',
-    outerAlpha = 0.4,
-    outerAlpha2 = 0.4,
-    innerSize = 8,
-    outerSize = 8,
-    outerSize2 = 6,
-    outerScale = 5,
-    outerScale2 = 10,
-    innerScale = 0.7
-  }) {
-    const cursorOuterRef = React.useRef()
-    const cursorInnerRef = React.useRef()
-    const cursorOuterRef2 = React.useRef()
-    const requestRef = React.useRef()
-    const previousTimeRef = React.useRef()
-    const [coords, setCoords] = React.useState({ x: 0, y: 0 })
-    const [coords2, setCoords2] = React.useState({ x: 0, y: 0 })
-    const [isVisible, setIsVisible] = React.useState(true)
-    const [isActive, setIsActive] = React.useState(false)
-    const [isActiveClickable, setIsActiveClickable] = React.useState(false)
-    let endX = React.useRef(0)
-    let endY = React.useRef(0)
-  
-    const onMouseMove = React.useCallback(({ clientX, clientY }) => {
-      setCoords({ x: clientX, y: clientY })
-      setCoords2({ x: clientX, y: clientY })
-      cursorInnerRef.current.style.top = clientY + 'px'
-      cursorInnerRef.current.style.left = clientX + 'px'
-      endX.current = clientX
-      endY.current = clientY
-    }, [])
-  
-    const animateOuterCursor = React.useCallback(
-      (time) => {
-        if (previousTimeRef.current !== undefined) {
-          coords.x += (endX.current - coords.x) / 8
-          coords.y += (endY.current - coords.y) / 8
-          cursorOuterRef.current.style.top = coords.y + 'px'
-          cursorOuterRef.current.style.left = coords.x + 'px'
-        }
-        previousTimeRef.current = time
-        requestRef.current = requestAnimationFrame(animateOuterCursor)
-      },
-      [requestRef] // eslint-disable-line
-    )
-    const animateOuterCursor2 = React.useCallback(
-        (time) => {
-          if (previousTimeRef.current !== undefined) {
-            coords2.x += (endX.current - coords2.x) / 16
-            coords2.y += (endY.current - coords2.y) / 16
-            cursorOuterRef2.current.style.top = (coords2.y) + 'px'
-            cursorOuterRef2.current.style.left = (coords2.x) + 'px'
-          }
-          previousTimeRef.current = time
-          requestRef.current = requestAnimationFrame(animateOuterCursor2)
-        },
-        [requestRef] // eslint-disable-line
-      )
-  
-    React.useEffect(() => requestRef.current = requestAnimationFrame(animateOuterCursor), [animateOuterCursor])
-    React.useEffect(() => requestRef.current = requestAnimationFrame(animateOuterCursor2), [animateOuterCursor2])
-  
-    const onMouseDown  = React.useCallback(() => setIsActive(true), [])
-    const onMouseUp    = React.useCallback(() => setIsActive(false), [])
-    const onMouseEnter = React.useCallback(() => setIsVisible(true), [])
-    const onMouseLeave = React.useCallback(() => setIsVisible(false), [])
-  
-    useEventListener('mousemove', onMouseMove, document)
-    useEventListener('mousedown', onMouseDown, document)
-    useEventListener('mouseup', onMouseUp, document)
-    useEventListener('mouseenter', onMouseEnter, document)
-    useEventListener('mouseleave', onMouseLeave, document)
-  
-    React.useEffect(() => {
-      if (isActive) {
-        cursorInnerRef.current.style.transform = `scale(${innerScale})`
-        cursorOuterRef.current.style.transform = `scale(${outerScale})`
-        cursorOuterRef2.current.style.transform = `scale(${outerScale2})`
-      } else {
-        cursorInnerRef.current.style.transform = 'scale(1)'
-        cursorOuterRef.current.style.transform = 'scale(1)'
-        cursorOuterRef2.current.style.transform = 'scale(1)'
-      }
-    }, [innerScale, outerScale, outerScale2, isActive])
-  
-    React.useEffect(() => {
-      if (isActiveClickable) {
-        cursorInnerRef.current.style.transform = `scale(${innerScale * 1.3})`
-        cursorOuterRef.current.style.transform = `scale(${outerScale * 1.4})`
-        cursorOuterRef2.current.style.transform = `scale(${outerScale2 * 1.4})`
-      }
-    }, [innerScale, outerScale, outerScale2, isActiveClickable])
-  
-    React.useEffect(() => {
-      if (isVisible) {
-        cursorInnerRef.current.style.opacity = 1
-        cursorOuterRef.current.style.opacity = 1
-        cursorOuterRef2.current.style.opacity = 1
-      } else {
-        cursorInnerRef.current.style.opacity = 0
-        cursorOuterRef.current.style.opacity = 0
-        cursorOuterRef2.current.style.opacity = 0
-      }
-    }, [isVisible])
-  
-    React.useEffect(() => {
-      const clickables = document.querySelectorAll(
-        'a, input[type="submit"], input[type="image"], label[for], select, button, .link'
-      )
-      clickables.forEach((el) => {
-        el.style.cursor = 'none'
-  
-        el.addEventListener('mouseover', () => {
-          setIsActive(true)
-        })
-        el.addEventListener('click', () => {
-          setIsActive(true)
-          setIsActiveClickable(false)
-        })
-        el.addEventListener('mousedown', () => {
-          setIsActiveClickable(true)
-        })
-        el.addEventListener('mouseup', () => {
-          setIsActive(true)
-        })
-        el.addEventListener('mouseout', () => {
-          setIsActive(false)
-          setIsActiveClickable(false)
-        })
-      })
-  
-      return () => {
-        clickables.forEach((el) => {
-          el.removeEventListener('mouseover', () => {
-            setIsActive(true)
-          })
-          el.removeEventListener('click', () => {
-            setIsActive(true)
-            setIsActiveClickable(false)
-          })
-          el.removeEventListener('mousedown', () => {
-            setIsActiveClickable(true)
-          })
-          el.removeEventListener('mouseup', () => {
-            setIsActive(true)
-          })
-          el.removeEventListener('mouseout', () => {
-            setIsActive(false)
-            setIsActiveClickable(false)
-          })
-        })
-      }
-    }, [isActive])
-  
-    const styles = {
-      cursor: {
-        zIndex: 9999,
-        position: 'fixed',
-        opacity: 1,
-        pointerEvents: 'none',
-        transition: 'opacity 0.15s ease-in-out, transform 0.15s ease-in-out'
-      },
-      cursorInner: {
-        zIndex: 9999,
-        position: 'fixed',
-        borderRadius: '50%',
-        width: innerSize,
-        height: innerSize,
-        pointerEvents: 'none',
-        backgroundColor: `rgba(${color}, 1)`,
-        transition: 'opacity 0.15s ease-in-out, transform 0.25s ease-in-out'
-      },
-      cursorOuter: {
-        zIndex: 9999,
-        position: 'fixed',
-        borderRadius: '50%',
-        pointerEvents: 'none',
-        width: outerSize,
-        height: outerSize,
-        backgroundColor: `rgba(${color}, ${outerAlpha})`,
-        transition: 'opacity 0.15s ease-in-out, transform 0.15s ease-in-out'
-      },
-      cursorOuter2: {
-        zIndex: 9999,
-        position: 'fixed',
-        borderRadius: '50%',
-        pointerEvents: 'none',
-        width: outerSize2,
-        height: outerSize2,
-        backgroundColor: `rgba(${color}, ${outerAlpha2})`,
-        transition: 'opacity 0.15s ease-in-out, transform 0.20s ease-in-out'
-      }
+export function AnimatedCursor() {
+  const dotRef = useRef(null);
+  const ringRef = useRef(null);
+  const mouse = useRef({ x: -100, y: -100 });
+  const ring = useRef({ x: -100, y: -100 });
+  const [isHover, setIsHover] = useState(false);
+
+  const onMouseMove = useCallback((e) => {
+    mouse.current = { x: e.clientX, y: e.clientY };
+    if (dotRef.current) {
+      dotRef.current.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
     }
-  
-    return (
-      <React.Fragment>
-        <div ref={cursorOuterRef2} style={styles.cursorOuter2} />
-        <div ref={cursorOuterRef} style={styles.cursorOuter} />
-        <div ref={cursorInnerRef} style={styles.cursorInner} />
-      </React.Fragment>
-    )
-  }
-  
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener('mousemove', onMouseMove);
+    return () => document.removeEventListener('mousemove', onMouseMove);
+  }, [onMouseMove]);
+
+  // Ring follows with elastic easing
+  useEffect(() => {
+    let animId;
+    const animate = () => {
+      ring.current.x += (mouse.current.x - ring.current.x) * 0.1;
+      ring.current.y += (mouse.current.y - ring.current.y) * 0.1;
+      if (ringRef.current) {
+        ringRef.current.style.transform = `translate(${ring.current.x}px, ${ring.current.y}px) translate(-50%, -50%)`;
+      }
+      animId = requestAnimationFrame(animate);
+    };
+    animate();
+    return () => cancelAnimationFrame(animId);
+  }, []);
+
+  // Detect hoverable elements
+  useEffect(() => {
+    const onOver = () => setIsHover(true);
+    const onOut = () => setIsHover(false);
+
+    const attachListeners = () => {
+      const clickables = document.querySelectorAll(
+        'a, button, input[type="submit"], label[for], select, .link, [role="button"]'
+      );
+      clickables.forEach((el) => {
+        el.style.cursor = 'none';
+        el.addEventListener('mouseenter', onOver);
+        el.addEventListener('mouseleave', onOut);
+      });
+    };
+
+    // Initial + observe DOM changes
+    attachListeners();
+    const observer = new MutationObserver(attachListeners);
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const dotSize = isHover ? 18 : 9;
+  const ringSize = isHover ? 66 : 42;
+
+  return (
+    <>
+      <div
+        ref={dotRef}
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: dotSize,
+          height: dotSize,
+          background: 'var(--gold-warm)',
+          borderRadius: '50%',
+          mixBlendMode: 'screen',
+          pointerEvents: 'none',
+          zIndex: 10000,
+          transition: 'width 0.25s, height 0.25s',
+        }}
+      />
+      <div
+        ref={ringRef}
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: ringSize,
+          height: ringSize,
+          border: `1px solid rgba(201,166,85, ${isHover ? 0.4 : 0.35})`,
+          borderRadius: '50%',
+          pointerEvents: 'none',
+          zIndex: 10000,
+          transition: 'width 0.25s, height 0.25s, border-color 0.25s',
+        }}
+      />
+    </>
+  );
+}

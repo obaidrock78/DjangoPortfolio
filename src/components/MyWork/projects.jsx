@@ -1,157 +1,104 @@
 import { baseUrlImages, useGetProjectsQuery } from "../../Api/api";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "./projects.css";
-import React from "react";
-import OwlCarousel from "react-owl-carousel";
-import "owl.carousel/dist/assets/owl.carousel.css";
-import "owl.carousel/dist/assets/owl.theme.default.css";
-import { Button, Modal } from "react-bootstrap";
 
 const Projects = () => {
   const { data: projects, isFetching } = useGetProjectsQuery();
   const img_300 = baseUrlImages;
 
-  
   const [projectsDetails, setProjectsDetails] = useState(projects);
-  const [modalShow, setModalShow] = useState(false);
-  const [modalData, setModalData] = useState(null);
+
   useEffect(() => {
     setProjectsDetails(projects);
   }, [projectsDetails, projects]);
 
-const renderCouresel = useMemo(() => {
-  const options = {
-    margin: 30,
-    responsiveClass: true,
-    nav: true,
-    dots: true,
-    autoplay: false,
-    navContainerClass: "owl-nav custom-owl-nav",
-    navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
-    smartSpeed: 1000,
-    mouseDrag: true,
-    touchDrag: true,
-    responsive: {
-      0: {
-        items: 1,
-      },
-      310: {
-        items: 1,
-      },
-      500: {
-        items: 1,
-      },
-      600: {
-        items: 1,
-      },
-      740: {
-        items: 2,
-      },
-      1000: {
-        items: 2.7,
-      },
-      1300: {
-        items: 3,
-      },
-      1440: {
-        items: 3,
-      },
-    },
+  if (isFetching) return null;
+
+  // Parse tech tags from language_used string
+  const parseTech = (str) => {
+    if (!str) return [];
+    return str
+      .split(/[,·|]+/)
+      .map((s) => s.trim())
+      .filter(Boolean);
   };
 
-return (
-  <OwlCarousel className="owl-theme" {...options}>
-            {projectsDetails?.map((details) => (
-              <div className="project" style={{cursor: 'pointer'}} data-aos="fade-up" onClick={() => {
-                setModalData(details);
-                setModalShow(true);
-              }}>
-                <div className="project-img">
-                  <img
-                    src={`${img_300}${details.image}`}
-                    alt=""
-                    className="work-img"
-                  />
-                </div>
+  // Determine platform badges from language/tech string
+  const getPlatforms = (str) => {
+    if (!str) return [];
+    const lower = str.toLowerCase();
+    const platforms = [];
+    if (lower.includes("ios") || lower.includes("swift")) platforms.push("ios");
+    if (lower.includes("android") || lower.includes("kotlin")) platforms.push("android");
+    if (lower.includes("react native")) platforms.push("react-native");
+    if (
+      lower.includes("react") ||
+      lower.includes("web") ||
+      lower.includes("html") ||
+      lower.includes("django")
+    )
+      platforms.push("web");
+    if (platforms.length === 0) platforms.push("web");
+    return platforms;
+  };
 
-                <div className="date-posted">
-                  <div className="who-post">
-                    <p className="admin">{details.language_used}</p>
-                  </div>
-                </div>
-                <div className="work-details">
-                  <h2 style={{marginBottom: 0}}>{details.Project_title}</h2>
+  return (
+    <section className="projects-sovereign" id="work">
+      <div className="projects-container">
+        <div className="projects-header rv">
+          <div className="section-eyebrow">Portfolio</div>
+          <h2 className="section-heading">
+            Selected <em>Work</em>
+          </h2>
+        </div>
+
+        <div className="projects-grid">
+          {projectsDetails?.map((details, idx) => (
+            <Link
+              to={`/project/${details.id}`}
+              className={`project-card rv d${Math.min(idx + 1, 5)} ${
+                idx === 0 ? "featured" : ""
+              }`}
+              key={details.id || idx}
+            >
+              <div className="project-card-img">
+                <img
+                  src={`${img_300}${details.image}`}
+                  alt={details.Project_title}
+                />
+              </div>
+
+              <div className="project-card-top">
+                <div className="project-card-badges">
+                  {getPlatforms(details.language_used).map((p) => (
+                    <span className={`platform-pill ${p}`} key={p}>
+                      {p === "react-native" ? "RN" : p.toUpperCase()}
+                    </span>
+                  ))}
                 </div>
               </div>
-            ))}
-          </OwlCarousel>
-)
-}, [projectsDetails]);
-if (isFetching) return "loading";
-  return (<>
-    <div className="mywork " id="work">
-      <div className="mywork-title">
-        <h2>Check Out My Reacet Projects</h2>
 
-        <h3>My Work</h3>
-      </div>
-      <div className="project-row">
-        {projectsDetails?.length && renderCouresel}
-      </div>
-    </div>
-    <Modal
-      size="md"
-      centered
-      show={modalShow}
-      onHide={() => setModalShow(false)}
-      contentClassName="modalStyle"
-    >
-      <div className="project" data-aos="fade-down">
-                <div className="project-img">
-                  <img
-                    src={`${img_300}${modalData?.image}`}
-                    alt=""
-                    className="work-img"
-                  />
-                </div>
+              <h3 className="project-card-title">{details.Project_title}</h3>
 
-                <div className="date-posted">
-                  <div className="who-post">
-                    <p className="admin">{modalData?.language_used}</p>
-                  </div>
-                </div>
-                <div className="work-details">
-                  <h2>{modalData?.Project_title}</h2>
-                  <p className="work-info">{modalData?.Project_info}</p>
-                  <div className="project-links">
-                    <a
-                      href={modalData?.demo_link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <h6 className="learnmore">
-                        <i class="fa fa-laptop" aria-hidden="true"></i>&nbsp;
-                        Live Demo
-                      </h6>
-                    </a>
-                    <a
-                      href={modalData?.project_link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <h6 className="learnmore">
-                        <i class="fa fa-github" aria-hidden="true"></i> &nbsp;
-                        Source Code
-                      </h6>
-                    </a>
-                  </div>
-                </div>
-                <div style={{display: 'flex', justifyContent: 'flex-end', margin: '-10px 18px 0 0'}}><Button onClick={() => {
-                  setModalShow(false);
-                }} size="sm"><i class="fa fa-close"></i>&nbsp;Close</Button></div>
+              <div className="project-card-tech">
+                {parseTech(details.language_used)
+                  .slice(0, 4)
+                  .map((t) => (
+                    <span className="project-tech-tag" key={t}>
+                      {t}
+                    </span>
+                  ))}
               </div>
-    </Modal>
-    </>
+
+              <span className="project-card-arrow">
+                View Project <i className="fas fa-arrow-right" />
+              </span>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 };
 

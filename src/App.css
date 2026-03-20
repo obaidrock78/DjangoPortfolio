@@ -1,115 +1,58 @@
-.App {
-  text-align: center;
-  background: var(--color-background);
-}
-.cursor-dot,
-.cursor-dot-outline {
-  z-index: 9000;
-  pointer-events: none;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  opacity: 1;
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-}
+/* ============================================
+   APP — Global Overrides for Sovereign Abyss
+   ============================================ */
 
-.cursor-dot {
-  width: 8px;
-  height: 8px;
-  background-color: #dcc356;
-}
-.cursor-dot-outline {
-  width: 50px;
-  height: 50px;
-  background-color: transparent;
-  border: 1px solid #dcc356;
-}
-#theme-button3 {
-  position: relative;
-}
-#theme-button3 input {
-  position: absolute;
-  left: 50px;
-  top: 90px;
-}
-
-.load_app {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  margin-top: 130px !important;
-  flex-direction: column;
-}
-
-
-:root {
-  --color-cursor: 220, 90, 90;
-  --cursor-outline-shade: 0.3;
-  --cursor-size: 10px;
-  --cursor-outline-size: 12px;
-}
-
-.flip-box {
-  background-color: transparent;
-  width: 100%;
-  max-width: 650px;
-  height: 600px;
-  perspective: 1000px;
-}
-@media only screen and (max-width: 767px) {
-  .flip-box {
-    height: 280px;
+/* Custom cursor: hide native cursor on desktop */
+@media (min-width: 769px) {
+  body {
+    cursor: none;
   }
 }
 
-.flip-box-inner {
+/* Content sits above canvas and grain */
+.sovereign-app {
   position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
+  z-index: 2;
 }
 
-.flip-box:hover .flip-box-inner {
-  transform: rotateY(180deg);
+/* Section backgrounds */
+.section-abyss {
+  background: var(--abyss);
 }
 
-.flip-box-front, .flip-box-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
+.section-navy {
+  background: var(--navy);
 }
 
-.flip-box-front {
-  /* background-color: #bbb; */
-  color: black;
-  display: flex;
-  align-items: center;
+/* Section padding standard */
+.section-padding {
+  padding: 120px 0;
 }
 
-.flip-box-back {
-  /* background-color: #555; */
-  color: white;
-  transform: rotateY(180deg);
-  display: flex;
-  align-items: center;
-}
-
-@media only screen and (min-width: 767px) {
-  .zoomOnHover {
-    transition: transform .3s;
-    margin-left: 20px;
+@media (max-width: 768px) {
+  .section-padding {
+    padding: 80px 0;
   }
 }
 
-.zoomOnHover:hover {
-  -ms-transform: scale(1.1); /* IE 9 */
-  -webkit-transform: scale(1.1); /* Safari 3-8 */
-  transform: scale(1.1); 
+/* Modal override for Sovereign Abyss */
+.modal-content.modalStyle {
+  background: var(--surface) !important;
+  border: 1px solid var(--border-v) !important;
+  border-radius: 16px !important;
+  color: var(--cream) !important;
+}
+
+.modal-content.modalStyle .btn {
+  background: var(--gold) !important;
+  border: none !important;
+  color: var(--abyss) !important;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.modal-backdrop.show {
+  opacity: 0.85 !important;
 }

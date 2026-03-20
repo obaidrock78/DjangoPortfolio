@@ -1,144 +1,118 @@
 import { useEffect, useState } from "react";
-import decor3 from "../../images/decoration/Group-31.png";
-import decor4 from "../../images/decoration/Path-25.png";
 import "./Intro.css";
 import { useGetHomeDetailsQuery } from "../../Api/api";
-import { useGetSocialMediaQuery } from "../../Api/api";
 
 const Intro = () => {
-  const { data: conta } = useGetSocialMediaQuery();
-
   const { data: homeData, isFetching } = useGetHomeDetailsQuery();
   const [homeDetails, setHomeDetails] = useState(homeData);
-  const [contacts1Details, setContact2Details] = useState(conta);
-  const img_300 = "http://drive.google.com/uc?id=";
-  const title_name = homeDetails && homeDetails.map((detail2) => detail2.name);
 
   useEffect(() => {
     setHomeDetails(homeData);
-    setContact2Details(conta);
+    if (homeData) {
+      const title_name = homeData.map((d) => d.name);
+      document.title = `${title_name} — Portfolio`;
+    }
+  }, [homeData]);
 
-    document.title = title_name;
-    // console.log(conta);
-  }, [homeDetails, homeData, contacts1Details, conta, title_name]);
-  if (isFetching) return "loading";
+  if (isFetching) return null;
+
+  const detail = homeDetails && homeDetails[0];
+  if (!detail) return null;
+
+  const nameParts = detail.name ? detail.name.split(" ") : ["Obed", "Chaudhry"];
+  const firstName = nameParts[0] || "Obed";
+  const lastName = nameParts.slice(1).join(" ") || "Chaudhry";
 
   return (
-    <>
-      {homeDetails &&
-        homeDetails.map((detail) => (
-          <section className=" intro-page" id="home" key={detail.id}>
-            <div className="decorations">
-              <div className="decor-dot2">
-                <img src={decor3} alt="" />
-              </div>
+    <section className="hero-sovereign" id="home">
+      <div className="hero-grid">
+        {/* Left Column */}
+        <div className="hero-content">
+          <div className="hero-eyebrow">
+            <span className="pulse-dot" />
+            <span>Available for new opportunities</span>
+          </div>
 
-              <div className="parcol"></div>
+          <div className="hero-name">
+            <span className="first-name">{firstName}</span>
+            <span className="last-name">{lastName}</span>
+          </div>
+
+          <div className="hero-role">
+            {detail.job_title} · Django · Python · React · Full-Stack
+          </div>
+
+          <p className="hero-description">
+            {detail.par_inro}
+          </p>
+
+          <div className="hero-ctas">
+            <a href={`mailto:${detail.hireMe_link}`} className="cta-primary">
+              Hire Me
+            </a>
+            <a
+              href={detail.cv_link || "https://drive.google.com/file/d/1vJBEV0fe3hdtsToBDl-h6ZfxewlWyEoM/view"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cta-secondary"
+            >
+              Download CV
+            </a>
+          </div>
+
+          <div className="hero-stats">
+            <div className="hero-stat">
+              <div className="hero-stat-value">12+</div>
+              <div className="hero-stat-label">Projects</div>
             </div>
-            <div className="small-intro">
-              <div className="intro-row">
-                <div className="col-lg-5  col-md-6 col-sm-12 intro-left">
-                  <div className="intro-name">
-                    <h3
-                      className="hello"
-                      data-aos="fade-down"
-                      data-aos-duration="1500"
-                    >
-                      {detail.job_title}
-                    </h3>
-                    <h3
-                      className="name"
-                      data-aos="fade-down"
-                      data-aos-duration="1600"
-                    >
-                      Hey! I Am
-                    </h3>
-                    <h3
-                      className="job  text-animate"
-                      data-aos="fade-down"
-                      data-aos-duration="1700"
-                    >
-                      {detail.name}
-                    </h3>
-                    <p
-                      className="myinfo"
-                      data-aos="fade-down"
-                      data-aos-duration="1800"
-                    >
-                      {detail.par_inro}
-                    </p>
-                  </div>
-                  <div
-                    className="intro-btns"
-                    data-aos="fade-up"
-                    data-aos-duration="1900"
-                  >
-                    <a
-                      href={`mailto:${detail.hireMe_link}`}
-                      className="contactMe"
-                    >
-                      <button className="contact-me">
-                        Hire me <i class="bx bx-send "></i>
-                      </button>
-                    </a>
-                  </div>
-                  <div
-                    class="intro-contact"
-                    data-aos="fade-up"
-                    data-aos-duration="1800"
-                  >
-                    <span>Follow Me:</span>
-                    <ul>
-                      <li>
-                        {contacts1Details &&
-                          contacts1Details.map((data1) => (
-                            <a
-                              href={data1.link}
-                              className="icon-link"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              key={data1.id}
-                            >
-                              <i className={data1.social_icon}></i>
-                            </a>
-                          ))}
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div
-                  className="col-lg-7 col-md-6 col-sm-12 left-img "
-                  data-aos="fade-down-left"
-                >
-                  <div className="ff">
-                    {/* <img
-                      className="intro-img"
-                      src="https://drive.google.com/uc?id=1iyVyaGyw5HniEugxd1-qZ54rpFpn2UTc"
-                      alt=""
-                    /> */}
-                    {/* <img
-                      className="intro-img"
-                      src={`${img_300}${detail.avatar_img}`}
-                      alt=""
-                    /> */}
-                    {/* <img src="/python-service.png" alt=""/> */}
-                    <div class="flip-box">
-                      <div class="flip-box-inner">
-                        <div class="flip-box-front">
-                          <img src="/python-service-1.png" alt="" />
-                        </div>
-                        <div class="flip-box-back">
-                          <img src="/welcome-to-portfolio.png" alt="" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <div className="hero-stat">
+              <div className="hero-stat-value">7+</div>
+              <div className="hero-stat-label">Technologies</div>
+            </div>
+            <div className="hero-stat">
+              <div className="hero-stat-value">3+</div>
+              <div className="hero-stat-label">Frameworks</div>
+            </div>
+            <div className="hero-stat">
+              <div className="hero-stat-value">∞</div>
+              <div className="hero-stat-label">Commits</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Column — Code Editor Mockup */}
+        <div className="hero-visual">
+          <div className="editor-frame">
+            <div className="editor-titlebar">
+              <div className="editor-dots">
+                <span className="ed-dot ed-dot-red" />
+                <span className="ed-dot ed-dot-yellow" />
+                <span className="ed-dot ed-dot-green" />
               </div>
+              <span className="editor-filename">portfolio.py</span>
             </div>
-          </section>
-        ))}
-    </>
+            <div className="editor-body">
+              <div className="code-line"><span className="code-ln">1</span><span className="code-keyword">class</span> <span className="code-class">SoftwareEngineer</span><span className="code-punc">:</span></div>
+              <div className="code-line"><span className="code-ln">2</span>  <span className="code-keyword">def</span> <span className="code-func">__init__</span><span className="code-punc">(</span><span className="code-param">self</span><span className="code-punc">):</span></div>
+              <div className="code-line"><span className="code-ln">3</span>    <span className="code-param">self</span><span className="code-punc">.</span><span className="code-var">name</span> <span className="code-punc">=</span> <span className="code-str">"Obed Chaudhry"</span></div>
+              <div className="code-line"><span className="code-ln">4</span>    <span className="code-param">self</span><span className="code-punc">.</span><span className="code-var">role</span> <span className="code-punc">=</span> <span className="code-str">"Full-Stack Dev"</span></div>
+              <div className="code-line"><span className="code-ln">5</span>    <span className="code-param">self</span><span className="code-punc">.</span><span className="code-var">stack</span> <span className="code-punc">=</span> <span className="code-punc">[</span></div>
+              <div className="code-line"><span className="code-ln">6</span>      <span className="code-str">"Django"</span><span className="code-punc">,</span> <span className="code-str">"Python"</span><span className="code-punc">,</span></div>
+              <div className="code-line"><span className="code-ln">7</span>      <span className="code-str">"React"</span><span className="code-punc">,</span> <span className="code-str">"JavaScript"</span><span className="code-punc">,</span></div>
+              <div className="code-line"><span className="code-ln">8</span>      <span className="code-str">"PostgreSQL"</span><span className="code-punc">,</span> <span className="code-str">"REST APIs"</span></div>
+              <div className="code-line"><span className="code-ln">9</span>    <span className="code-punc">]</span></div>
+              <div className="code-line"><span className="code-ln">10</span></div>
+              <div className="code-line"><span className="code-ln">11</span>  <span className="code-keyword">def</span> <span className="code-func">build</span><span className="code-punc">(</span><span className="code-param">self</span><span className="code-punc">):</span></div>
+              <div className="code-line"><span className="code-ln">12</span>    <span className="code-keyword">return</span> <span className="code-str">"Production-ready"</span></div>
+              <div className="code-line code-cursor-line"><span className="code-ln">13</span>    <span className="code-cursor">|</span></div>
+            </div>
+          </div>
+          <span className="platform-badge badge-django">Django</span>
+          <span className="platform-badge badge-python">Python</span>
+          <span className="platform-badge badge-react-web">React</span>
+        </div>
+      </div>
+    </section>
   );
 };
 

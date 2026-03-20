@@ -1,61 +1,103 @@
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./App.css";
 import AboutMe from "./components/AboutMe/AboutMe";
-import ContactMe from "./components/ContactMe/ContactMe";
 import Footer from "./components/Footer/Footer";
 import Home from "./components/Hero/Intro";
 import Projects from "./components/MyWork/projects";
+import ProjectDetail from "./components/MyWork/ProjectDetail";
 import Navbar from "./components/Navbar/Navbar";
 import Services from "./components/Services/Services";
 import Progress from "./components/SkillBars/progress";
-import $ from "jquery";
-import AOS from "aos";
-import "aos/dist/aos.css";
-import { useEffect } from "react";
+import SkillTicker from "./components/SkillTicker/SkillTicker";
 import Email from "./components/EmailMe/Email";
+import ConstellationCanvas from "./components/ConstellationCanvas";
 import { AnimatedCursor } from "./components/animatedCursor";
+import $ from "jquery";
+import { useEffect } from "react";
+
+function HomePage() {
+  return (
+    <>
+      <Home />
+      <SkillTicker />
+      <div className="gradient-abyss-to-navy" />
+      <AboutMe />
+      <div className="gradient-navy-to-abyss" />
+      <Services />
+      <div className="gradient-abyss-to-navy" />
+      <Progress />
+      <div className="gradient-navy-to-abyss" />
+      <Projects />
+      <div className="gradient-abyss-to-navy" />
+      <Email />
+      <Footer />
+    </>
+  );
+}
 
 function App() {
   // Preloader
   $(window).on("load", function () {
     if ($("#preloader").length) {
       $("#preloader")
-        .delay(100)
+        .delay(500)
         .fadeOut("slow", function () {
           $(this).remove();
         });
     }
   });
 
+  // Scroll reveal observer — uses MutationObserver to catch dynamically added .rv elements
   useEffect(() => {
-    AOS.init({
-      duration: 1500,
-      once: true,
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("on");
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+
+    const observeAll = () => {
+      document.querySelectorAll(".rv:not(.on)").forEach((el) => {
+        io.observe(el);
+      });
+    };
+
+    observeAll();
+
+    const mo = new MutationObserver(() => {
+      observeAll();
     });
+    mo.observe(document.body, { childList: true, subtree: true });
+
+    return () => {
+      io.disconnect();
+      mo.disconnect();
+    };
   }, []);
 
   return (
-    <>
-      <BrowserRouter>
+    <BrowserRouter>
       {window.innerWidth > 768 && <AnimatedCursor />}
-        <div id="preloader">
-          <img style={{height: '100px', width: '130px'}} src="/giphy.webp" alt="" />
-          <h2 className="name-load  animate-charcter">l O A D I N G</h2>
-        </div>
+      <ConstellationCanvas />
+      <div className="grain-overlay" />
 
-        <div className="homepage">
-          <Navbar />
-          <Home />
-        </div>
-        <AboutMe />
-        <Services />
-        <Progress />
-        <Projects />
-        <ContactMe />
-        <Email />
-        <Footer />
-      </BrowserRouter>
-    </>
+      <div id="preloader">
+        <div className="preloader-bar"></div>
+        <span className="preloader-text">Loading</span>
+      </div>
+
+      <div className="sovereign-app">
+        <Navbar />
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/project/:id" component={ProjectDetail} />
+        </Switch>
+      </div>
+    </BrowserRouter>
   );
 }
 

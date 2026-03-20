@@ -1,7 +1,9 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
 /venv
+
 # dependencies
-/node_modules
+node_modules/
 /.pnp
 .pnp.js
 
@@ -10,11 +12,17 @@
 
 # production
 /build
-*.pyc
+frontend/build/
 
 # misc
 .DS_Store
+*.pyc
+
+# env files
+.env
 .env.local
+.env.example
+.env.staging
 .env.development.local
 .env.test.local
 .env.production.local
@@ -22,13 +30,3 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-'.env' 
-'.env' 
-.env
-<<<<<<< HEAD
-.env
-.env.example
-.env.local
-.env.staging
-=======
->>>>>>> 84cefccd43c36e597e37d9636f19b08cf697a451

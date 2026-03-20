@@ -3,7 +3,7 @@ import "./Email.css";
 import { useGetContactsQuery } from "../../Api/api";
 import emailjs from "@emailjs/browser";
 
-const Email = (e) => {
+const Email = () => {
   const form = useRef();
   const sendEmail = (e) => {
     e.preventDefault();
@@ -25,92 +25,100 @@ const Email = (e) => {
       );
     e.target.reset();
   };
-  const { data: contacts, isFetching } = useGetContactsQuery();
 
+  const { data: contacts, isFetching } = useGetContactsQuery();
   const [contactsDetails, setContactDetails] = useState(contacts);
-  // const img_300 = "http://127.0.0.1:8000";
+
   useEffect(() => {
     setContactDetails(contacts);
   }, [contactsDetails, contacts]);
-  if (isFetching) return "loading";
-  return (
-    <>
-      <div className="reachme-container">
-        <div className="reachme-title2">
-          <h2>I Want To Hear From You</h2>
 
-          <h3>Contact Me</h3>
-        </div>
-        <div className="row">
-          <div className="col-md-5">
-            <div className="reachme-title">
-              <div className="row">
-                {contactsDetails &&
-                  contactsDetails.map((details) => (
-                    <div className="contact-info  " key={details.id}>
-                      <div className="contact-details">
-                        <i className={details.icon}></i>
-                        <div className="contact-mi">
-                          <h4 className="icon-name">{details.contact_name}:</h4>
-                          <p className="d-name">{details.contact_info}</p>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-              </div>
-            </div>
-          </div>
-          <div className="col-md-6 email-me container">
-            <form
-              action=""
-              className="contact-form"
-              ref={form}
-              onSubmit={sendEmail}
+  if (isFetching) return null;
+
+  // Find email from contacts for the header link
+  const emailContact = contactsDetails?.find(
+    (c) => c.contact_name?.toLowerCase().includes("email")
+  );
+
+  return (
+    <section className="contact-sovereign" id="contact">
+      <div className="contact-container">
+        {/* Header */}
+        <div className="contact-header rv">
+          <div className="section-eyebrow">Get in Touch</div>
+          <h2>
+            Let's build something
+            <em>extraordinary.</em>
+          </h2>
+          <p className="contact-subline">
+            Open for freelance projects, collaborations, and full-time
+            opportunities.
+          </p>
+          {emailContact && (
+            <a
+              href={`mailto:${emailContact.contact_info}`}
+              className="contact-email-link"
             >
-              <div className="row">
-                <div className="col-md-12 mb-3 hire-me-title"></div>
-                <div className="col-md-6 ">
-                  <input
-                    type="text"
-                    name="user_name"
-                    id=""
-                    placeholder="Enter Your Name"
-                  />
+              {emailContact.contact_info}
+            </a>
+          )}
+        </div>
+
+        {/* Contact cards */}
+        <div className="contact-cards rv d2">
+          {contactsDetails &&
+            contactsDetails.map((detail) => (
+              <div className="contact-card" key={detail.id}>
+                <div className="contact-card-icon">
+                  <i className={detail.icon} />
                 </div>
-                <div className="col-md-6 ">
-                  <input
-                    type="email"
-                    name="user_email"
-                    id=""
-                    placeholder="Enter Your Email"
-                  />
-                </div>
-                <div className="col-md-12">
-                  <input
-                    type="text"
-                    name="subject"
-                    id=""
-                    placeholder="Enter Subject"
-                  />
-                </div>
-                <div className="col-md-12 mb-2">
-                  <textarea
-                    name="message"
-                    id=""
-                    cols="60"
-                    rows="8"
-                    placeholder="Your Message"
-                  ></textarea>
-                  <button className="hire-btn" type="submit">
-                    Send Message
-                  </button>
+                <div className="contact-card-info">
+                  <h4>{detail.contact_name}</h4>
+                  <p>{detail.contact_info}</p>
                 </div>
               </div>
-            </form>
-          </div>
+            ))}
+        </div>
+
+        {/* Contact form */}
+        <div className="rv d3">
+          <form
+            className="contact-form"
+            ref={form}
+            onSubmit={sendEmail}
+          >
+            <div className="contact-form-row">
+              <input
+                type="text"
+                name="user_name"
+                placeholder="Your Name"
+                required
+              />
+              <input
+                type="email"
+                name="user_email"
+                placeholder="Your Email"
+                required
+              />
+            </div>
+            <input
+              type="text"
+              name="subject"
+              placeholder="Subject"
+            />
+            <textarea
+              name="message"
+              rows="6"
+              placeholder="Tell me about your project..."
+              required
+            />
+            <button className="contact-submit-btn" type="submit">
+              Send Message
+            </button>
+          </form>
         </div>
       </div>
-    </>
+    </section>
   );
 };
 

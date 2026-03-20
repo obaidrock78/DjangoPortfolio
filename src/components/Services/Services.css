@@ -1,196 +1,219 @@
-.service-container {
-  color: var(--color-info-light);
-  max-width: 100%;
-  z-index: 22;
-  padding: 70px 60px;
-  background-color: var(--color-background);
+/* ============================================
+   EXPERIENCE / SERVICES — Sovereign Abyss
+   ============================================ */
+
+.experience-sovereign {
+  background: var(--abyss);
+  padding: 120px 0;
 }
-.service-row {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  flex-wrap: wrap;
+
+.experience-layout {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 80px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 48px;
 }
-.my-service {
-  background: var(--color-card2);
-  margin-bottom: 10px;
-  position: relative;
-  width: 265px;
-  border-radius: 10px !important;
-  padding: 10px 10px;
+
+/* Sticky sidebar */
+.experience-sidebar {
+  position: sticky;
+  top: 120px;
+  align-self: start;
+}
+
+.experience-sidebar .section-eyebrow {
+  margin-bottom: 16px;
+}
+
+.experience-sidebar .section-heading em {
+  font-style: italic;
+  color: var(--gold-warm);
+}
+
+.experience-sidebar-text {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 0.9rem;
+  color: var(--pearl);
+  line-height: 1.8;
+  margin-top: 20px;
+}
+
+.experience-timeline-line {
+  width: 2px;
+  height: 60px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  margin-top: 24px;
+}
+
+/* Service/Experience cards */
+.experience-cards {
   display: flex;
-  min-height: 265px;
-  height: fit-content;
-  overflow: hidden;
-  align-items: center;
   flex-direction: column;
-  cursor: pointer;
-  text-align: center;
-  box-shadow: 0px 30px 60px 0px rgb(0 0 0 / 10%) !important;
-  transition: all 0.5s ease !important;
+  gap: 24px;
 }
-.my-service:hover {
-  transform: scale(1.06) !important;
-  box-shadow: 0px 30px 60px 0px rgb(0 0 0 / 20%) !important;
-  transition: all 0.2s cubic-bezier(0.98, 0.57, 1, 1) 0s;
+
+.exp-card {
+  background: var(--navy);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 44px 48px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, transform 0.35s cubic-bezier(0.23,1,0.32,1);
 }
-.my-service .web {
-  margin: 10px 0;
-  font-size: 17px;
-  color: #fff;
+
+.exp-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, var(--gold), var(--teal));
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.45s ease;
 }
-.ser-back {
+
+.exp-card:hover::before {
+  transform: scaleY(1);
+}
+
+.exp-card:hover {
+  border-color: var(--border-v);
+}
+
+/* Ghost number watermark */
+.exp-card-number {
+  font-family: var(--font-head);
+  font-size: 7rem;
+  font-weight: 800;
+  color: rgba(201,166,85,0.04);
+  position: absolute;
+  right: 24px;
+  bottom: -16px;
+  pointer-events: none;
+  user-select: none;
+  line-height: 1;
+}
+
+/* Card content */
+.exp-card-top {
   display: flex;
-  font-size: 28px;
-  -webkit-box-align: center;
   align-items: center;
-  -webkit-box-pack: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.exp-card-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  color: rgb(2, 12, 27);
-  margin-bottom: 20px;
-  background: #061233;
-  height: 4.5rem;
-  width: 4.5rem;
-  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
 }
-.my-service img {
-  margin: 10px 0;
-  width: 50px;
+
+.exp-card-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
-.my-service:hover .web {
-  color: var(--color-button-hover) !important;
-}
-.my-service span {
-  font-size: 3rem;
-  margin-top: 30px;
-  margin-bottom: 20px;
-}
-.service-info {
-  font-size: 12px;
-  font-weight: 400;
-  color: #676a6a;
-}
-.service-title {
-  margin-bottom: 60px;
-  text-align: center;
-}
-.service-title h2 {
-  font-size: 14px;
-  font-weight: 300;
-  color: var(--color-title);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: 10px;
-  color: var(--color-title);
+
+.exp-card-title {
+  font-family: var(--font-head);
+  font-size: 1.5rem;
   font-weight: 600;
-}
-.service-title h3 {
-  font-size: 2rem;
-  text-transform: capitalize;
+  color: var(--cream);
+  margin-bottom: 8px;
 }
 
-.my-service .web {
-  color: #fff !important;
-  font-weight: 700;
+.exp-card-description {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 0.9rem;
+  color: var(--pearl);
+  line-height: 1.7;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
 }
 
-.shadow-icon {
-  font-size: 195px;
+.exp-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.exp-tag {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 5px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.exp-tag:hover {
+  color: var(--gold-warm);
+  border-color: var(--border-v);
+  background: var(--gold-dim);
+}
+
+/* Shadow icon background (preserved from original) */
+.exp-shadow-icon {
+  font-size: 160px;
   position: absolute;
-  right: -90px;
-  bottom: -100px;
-  opacity: 0.05;
+  right: -50px;
+  bottom: -60px;
+  opacity: 0.03;
   z-index: 0;
+  color: var(--gold);
 }
 
 /* Responsive */
-@media only screen and (min-width: 1738px) {
-  .service-container {
-    padding: 100px 100px;
-  }
-  .service-title h2 {
-    font-size: 2rem;
-  }
-  .my-service {
-    width: 500px !important;
-    padding: 40px 20px !important;
-    margin-bottom: 20px !important;
-    height: 400px;
-  }
-  .my-service .web {
-    margin: 10px 0;
-    font-size: 2.4rem;
-  }
-  .service-title h3 {
-    font-size: 4rem;
-    width: 500px;
-  }
-  .my-service img {
-    margin: 10px 0;
-    width: 40px;
+@media (max-width: 1024px) {
+  .experience-layout {
+    grid-template-columns: 1fr;
+    gap: 48px;
   }
 
-  .service-info {
-    margin-bottom: 30px;
-    font-size: 1.8rem;
-    font-weight: 300;
+  .experience-sidebar {
+    position: relative;
+    top: 0;
   }
-}
-@media only screen and (max-width: 1024px) {
-  .my-service {
-    padding: 10px 10px;
-    margin-right: 10px;
-  }
-}
-@media only screen and (max-width: 768px) {
-  .service-title {
-    text-align: center;
-  }
-  .service-title h3 {
-    font-size: 2rem;
-  }
-  .service-row {
-    justify-content: space-around;
-  }
-  .my-service {
-    margin-bottom: 20px;
-    width: 250px;
 
-    margin-right: 20px;
+  .experience-timeline-line {
+    display: none;
   }
 }
 
-@media only screen and (max-width: 425px) {
-  .my-service {
-    width: 300px;
+@media (max-width: 768px) {
+  .experience-layout {
+    padding: 0 24px;
+  }
+
+  .exp-card {
+    padding: 32px 24px;
   }
 }
 
-@media only screen and (max-width: 375px) {
-  .service-container {
-    padding: 30px 20px !important ;
+@media (max-width: 480px) {
+  .experience-sovereign {
+    padding: 80px 0;
   }
-}
-
-/* light theme */
-.light .my-service {
-  box-shadow: 0px 30px 60px 0px rgb(0 0 0 / 10%) !important;
-}
-.light .my-service:hover {
-  box-shadow: var(--card-box-shadow);
-  font-weight: 700 !important;
-}
-.light .my-service .web {
-  color: black !important;
-  font-weight: 700;
-}
-.light .my-service:hover .web {
-  color: #fb7878 !important;
-}
-.light .service-title h3 {
-  color: rgb(34, 34, 34) !important;
-}
-.light .ser-back {
-  background: #e0e0e0;
 }

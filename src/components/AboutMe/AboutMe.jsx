@@ -1,87 +1,118 @@
 import "./AboutMe.css";
 import { useGetAboutMeQuery, useGetHomeDetailsQuery } from "../../Api/api";
 import { useEffect, useState } from "react";
-import decor1 from "../../images/decoration/dots-1.png";
-import reactagle from "../../images/decoration/Rectangle-7.png";
-import shady from "../../images/decoration/dots.png";
+
+const achievements = [
+  {
+    icon: "fas fa-server",
+    title: "Full-Stack Engineering",
+    desc: "Django backends, React frontends, REST APIs — end-to-end ownership from database to pixel.",
+  },
+  {
+    icon: "fas fa-layer-group",
+    title: "Production-Grade Architecture",
+    desc: "PostgreSQL, Celery task queues, API integrations, and cloud deployments built for scale and reliability.",
+  },
+  {
+    icon: "fas fa-link",
+    title: "Blockchain & Emerging Tech",
+    desc: "Solidity smart contracts, IoT sensor integrations, AI-powered tools — building at the edge of what's possible.",
+  },
+  {
+    icon: "fas fa-rocket",
+    title: "12+ Shipped Products",
+    desc: "From SaaS platforms to e-commerce stores to DeFi ecosystems — delivering production software that real users depend on.",
+  },
+];
 
 const AboutMe = () => {
   const { data: aboutData, isFetching } = useGetAboutMeQuery();
   const [aboutMe, setAboutMe] = useState(aboutData);
-  const img_300 = "https://drive.google.com/uc?id=";
 
   const { data: conta2 } = useGetHomeDetailsQuery();
-  const [contacts1Details, setContact2Details] = useState(conta2);
-  const cv = contacts1Details && contacts1Details.map((data1) => data1.cv_link);
-  console.log(cv);
-  console.log(conta2);
+  const [homeDetails, setHomeDetails] = useState(conta2);
 
   useEffect(() => {
     setAboutMe(aboutData);
-    setContact2Details(conta2);
+    setHomeDetails(conta2);
   }, [aboutData, conta2]);
 
-  return (
-    <>
-      {aboutMe &&
-        aboutMe.map((details) => (
-          <main id="about" key={details.id}>
-            <div className="aboutMe-container">
-              <div className="about-decor">
-                <div className="about-dots">
-                  <img src={decor1} alt="" />
-                </div>
-                <div className="about-rect">
-                  <img src={reactagle} alt="" />
-                </div>
-                <div className="about-shady">
-                  <img src={shady} alt="" />
-                </div>
-              </div>
-              <div className="abouMe-row">
-                <div
-                  className=" col-lg-6 col-md-5 col-sm-12 about-img"
-                  data-aos="fade-up-right"
-                >
-                  {/* <img src={`${img_300}${details.about_avatar}`} alt="" /> */}
-                  <img className="zoomOnHover" src={`/about-me.png`} alt="" />
-                </div>
-                <div
-                  className=" col-lg-6 col-md-7  col-sm-12 about_myinfo"
-                  data-aos="fade-up-left"
-                >
-                  <div className="title">
-                    <h2>{details.title}</h2>
-                    <h3>{details.title_2}</h3>
-                  </div>
-                  <div className="about-description">
-                    <div id="foo" unselectable="on" class="unselectable">
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: `${details.description_one}`,
-                        }}
-                      />
-                    </div>
-                  </div>
+  if (isFetching) return null;
 
-                  <div className="itscv">
-                    <a
-                      href="https://drive.google.com/file/d/1vJBEV0fe3hdtsToBDl-h6ZfxewlWyEoM/view"
-                      download="RESUME.pdf"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <button className="download-cv">
-                        Download Cv <i class="bx bx-download"></i>
-                      </button>
-                    </a>
-                  </div>
+  const details = aboutMe && aboutMe[0];
+  const home = homeDetails && homeDetails[0];
+
+  return (
+    <section className="about-sovereign" id="about">
+      <div className="about-grid">
+        {/* Left: Bio */}
+        <div className="about-bio rv">
+          <div className="section-eyebrow">About Me</div>
+          <h2 className="section-heading">
+            Building products that <em>perform.</em>
+          </h2>
+
+          <div className="about-bio-text">
+            {details ? (
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: details.description_one,
+                }}
+              />
+            ) : (
+              <p>
+                Started as a frontend developer and never stopped going deeper.
+                Today that means owning the entire cross-platform surface —
+                <strong> React.js</strong> for the web,{" "}
+                <strong>React Native</strong> for iOS and Android — and building
+                the state architecture (Redux), real-time infrastructure
+                (Firebase), and API layers that make those surfaces fast and
+                reliable under production load.
+              </p>
+            )}
+          </div>
+
+          {home && (
+            <div className="about-contact-row">
+              {home.hireMe_link && (
+                <div className="about-contact-item">
+                  <i className="fas fa-envelope" />
+                  <span>{home.hireMe_link}</span>
                 </div>
+              )}
+            </div>
+          )}
+
+          <a
+            href={
+              home?.cv_link ||
+              "https://drive.google.com/file/d/1vJBEV0fe3hdtsToBDl-h6ZfxewlWyEoM/view"
+            }
+            download="RESUME.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="about-cv-btn"
+          >
+            Download CV <i className="bx bx-download"></i>
+          </a>
+        </div>
+
+        {/* Right: Achievement cards */}
+        <div className="about-achievements">
+          {achievements.map((a, i) => (
+            <div className={`achievement-card rv d${i + 2}`} key={i}>
+              <div className="achievement-icon">
+                <i className={a.icon} />
+              </div>
+              <div className="achievement-content">
+                <h4>{a.title}</h4>
+                <p>{a.desc}</p>
               </div>
             </div>
-          </main>
-        ))}
-    </>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 };
 

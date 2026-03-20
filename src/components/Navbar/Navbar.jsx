@@ -1,80 +1,105 @@
+import React, { useState, useEffect } from "react";
+import { useHistory, useLocation } from "react-router-dom";
 import "./Navbar.css";
-import { Link } from "react-router-dom";
-import Main from "./nav";
 
 const Navbar = () => {
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const history = useHistory();
+  const location = useLocation();
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const navLinks = [
+    { label: "Home", href: "#home" },
+    { label: "About", href: "#about" },
+    { label: "Experience", href: "#services" },
+    { label: "Skills", href: "#skills" },
+    { label: "Projects", href: "#work" },
+    { label: "Contact", href: "#contact" },
+  ];
+
+  const handleNavClick = (e, href) => {
+    e.preventDefault();
+    setMobileOpen(false);
+
+    // If we're not on the home page, navigate home first then scroll
+    if (location.pathname !== "/") {
+      history.push("/");
+      // Wait for the home page to render before scrolling
+      setTimeout(() => {
+        const el = document.querySelector(href);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }, 300);
+    } else {
+      const el = document.querySelector(href);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const handleLogoClick = (e) => {
+    e.preventDefault();
+    if (location.pathname !== "/") {
+      history.push("/");
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   return (
     <>
-      <Main />
-      <button type="button" className="mobile-nav-toggle d-lg-none">
-        <i className="icofont-navigation-menu"></i>
-      </button>
-      <header id="header" className="fixed-top ">
-        <div className="container-fluid  navbur">
-          <div className="navi">
-            <div className="col-xl-12 d-flex align-items-center lefty">
-              <h5 className="ld-flex mr-auto devman">
-                <img
-                  src="https://code.google.com/images/developers.png"
-                  alt=""
-                />
-                obaidrock78 <span className="blink"> _</span>
-              </h5>
-              <nav className="nav-menu mainMenu">
-                <ul>
-                  <li
-                    className="active"
-                    data-aos="fade-down"
-                    data-aos-duration="300"
-                  >
-                    <a href="#home"> Home</a>
-                  </li>
-                  <li data-aos="fade-down" data-aos-duration="600">
-                    <a href="#about">About</a>
-                  </li>
-                  <li data-aos="fade-down" data-aos-duration="900">
-                    <a href="#services">Services</a>
-                  </li>
-                  <li data-aos="fade-down" data-aos-duration="1200">
-                    <a href="#skills">Skills</a>
-                  </li>
+      <nav className={`nav-sovereign ${scrolled ? "scrolled" : ""}`}>
+        <a href="/" className="nav-logo" onClick={handleLogoClick}>
+          <div className="nav-logo-badge">OC</div>
+          <span className="nav-logo-name">Obed Chaudhry</span>
+        </a>
 
-                  <li data-aos="fade-down" data-aos-duration="1500">
-                    <a href="#work">My Work</a>
-                  </li>
-
-                  <li data-aos="fade-down" data-aos-duration="1800">
-                    <a href="#contact">Contact</a>
-                  </li>
-                </ul>
-              </nav>
-                  <div className="nav-social">
-    <a href="https://github.com/obaidrock78/" target="_blank" rel="noopener noreferrer">
-        <i className="fa fa-github"></i>
-    </a>
-    <a href="https://www.upwork.com/freelancers/~01eb4a1e83b3c6ef9e" target="_blank" rel="noopener noreferrer">
-        <i className="fa-solid fa-address-card"></i>    </a>
-</div>
-              <div className="left-btns">
-                <div class=" " id="theme-button2">
-                  <input id="toggle" class="toggle" type="checkbox"></input>
-                </div>
-                <div>
-                  <div className="CvMe">
-                    <button className="my-cv">Contact Me</button>
-                  </div>
-                </div>
-
-                <div className=" " id="theme-button">
-                  <Link to="#" class="menuBtn">
-                    <span class="lines"></span>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div className="nav-links">
+          {navLinks.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              className="nav-link-item"
+              onClick={(e) => handleNavClick(e, link.href)}
+            >
+              {link.label}
+            </a>
+          ))}
         </div>
-      </header>
+
+        <a
+          href="#contact"
+          className="nav-cta"
+          onClick={(e) => handleNavClick(e, "#contact")}
+        >
+          Let's Talk
+        </a>
+
+        <div
+          className={`nav-hamburger ${mobileOpen ? "active" : ""}`}
+          onClick={() => setMobileOpen(!mobileOpen)}
+        >
+          <span />
+          <span />
+          <span />
+        </div>
+      </nav>
+
+      <div className={`nav-mobile-overlay ${mobileOpen ? "active" : ""}`}>
+        {navLinks.map((link) => (
+          <a
+            key={link.label}
+            href={link.href}
+            onClick={(e) => handleNavClick(e, link.href)}
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
     </>
   );
 };
