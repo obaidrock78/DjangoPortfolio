@@ -10,6 +10,7 @@ import Services from "./components/Services/Services";
 import Progress from "./components/SkillBars/progress";
 import SkillTicker from "./components/SkillTicker/SkillTicker";
 import WhatIBuild from "./components/WhatIBuild/WhatIBuild";
+import Ventures from "./components/Ventures/Ventures";
 import Email from "./components/EmailMe/Email";
 import ConstellationCanvas from "./components/ConstellationCanvas";
 import { AnimatedCursor } from "./components/animatedCursor";
@@ -26,6 +27,8 @@ function HomePage() {
       <div className="gradient-navy-to-abyss" />
       <WhatIBuild />
       <div className="gradient-abyss-to-navy" />
+      <Ventures />
+      <div className="gradient-navy-to-abyss" />
       <Services />
       <div className="gradient-abyss-to-navy" />
       <Progress />
