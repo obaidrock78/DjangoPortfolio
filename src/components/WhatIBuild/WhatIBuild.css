@@ -11,13 +11,13 @@
 
 .wib-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.2fr 1fr;
   gap: 0;
   align-items: center;
   max-width: 1280px;
   width: 100%;
   margin: 0 auto;
-  padding: 0 48px;
+  padding: 0 48px 0 0;   /* no left pad — canvas bleeds to section edge */
 }
 
 /* ── Left: Globe column ──────────────────── */
@@ -25,7 +25,7 @@
 .wib-globe-col {
   position: relative;
   width: 100%;
-  min-height: 600px;
+  min-height: 680px;
 }
 
 .wib-globe-canvas {
@@ -40,7 +40,7 @@
 /* ── Right: Content ──────────────────────── */
 
 .wib-content {
-  padding-left: 16px;
+  padding-left: 40px;
 }
 
 .wib-content .section-heading em {
@@ -106,7 +106,7 @@
   }
 
   .wib-globe-col {
-    min-height: 420px;
+    min-height: 460px;
   }
 
   .wib-content {
@@ -124,6 +124,6 @@
   }
 
   .wib-globe-col {
-    min-height: 340px;
+    min-height: 360px;
   }
 }

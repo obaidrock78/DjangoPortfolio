@@ -71,11 +71,11 @@ const GlobeCanvas = ({ pillars = [] }) => {
     //  tilt   = rotation angle of the orbit plane
     //  speed  = radians / frame
     const ORBIT_DEFS = [
-      { r: 0.20, yScale: 0.38, tilt:  0.20, speed:  0.0009 },
-      { r: 0.30, yScale: 0.30, tilt: -0.50, speed: -0.0007 },
-      { r: 0.40, yScale: 0.42, tilt:  0.80, speed:  0.0006 },
-      { r: 0.50, yScale: 0.26, tilt: -0.25, speed: -0.0005 },
-      { r: 0.60, yScale: 0.36, tilt:  0.55, speed:  0.0004 },
+      { r: 0.22, yScale: 0.38, tilt:  0.20, speed:  0.0009 },
+      { r: 0.34, yScale: 0.30, tilt: -0.50, speed: -0.0007 },
+      { r: 0.46, yScale: 0.42, tilt:  0.80, speed:  0.0006 },
+      { r: 0.58, yScale: 0.26, tilt: -0.25, speed: -0.0005 },
+      { r: 0.70, yScale: 0.36, tilt:  0.55, speed:  0.0004 },
     ];
 
     /* phase state — one per orbit */
@@ -99,7 +99,7 @@ const GlobeCanvas = ({ pillars = [] }) => {
     const draw = () => {
       const W    = cssW;
       const H    = cssH;
-      const cx   = W / 2;
+      const cx   = W * 0.44;   /* shift centre left — labels reach right edge naturally */
       const cy   = H / 2;
       const half = Math.min(W, H) / 2;
       const now  = performance.now() * 0.001;
