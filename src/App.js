@@ -12,7 +12,7 @@ import SkillTicker from "./components/SkillTicker/SkillTicker";
 import WhatIBuild from "./components/WhatIBuild/WhatIBuild";
 import Ventures from "./components/Ventures/Ventures";
 import Email from "./components/EmailMe/Email";
-import Writing from "./components/Writing/Writing";
+// import Writing from "./components/Writing/Writing";
 import Vision from "./components/Vision/Vision";
 import ConstellationCanvas from "./components/ConstellationCanvas";
 import Portfolio from "./components/Portfolio/Portfolio";
