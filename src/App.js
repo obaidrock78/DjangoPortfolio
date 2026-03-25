@@ -15,6 +15,7 @@ import Email from "./components/EmailMe/Email";
 import Writing from "./components/Writing/Writing";
 import Vision from "./components/Vision/Vision";
 import ConstellationCanvas from "./components/ConstellationCanvas";
+import Portfolio from "./components/Portfolio/Portfolio";
 import { AnimatedCursor } from "./components/animatedCursor";
 import $ from "jquery";
 import { useEffect } from "react";
@@ -107,6 +108,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/project/:id" component={ProjectDetail} />
+          <Route path="/portfolio" component={Portfolio} />
         </Switch>
       </div>
     </BrowserRouter>

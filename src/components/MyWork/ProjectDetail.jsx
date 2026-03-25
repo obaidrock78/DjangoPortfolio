@@ -46,8 +46,8 @@ const ProjectDetail = () => {
         <div className="project-detail-container">
           <div className="project-detail-not-found">
             <h2>Project not found</h2>
-            <button className="back-btn" onClick={() => history.push("/")}>
-              <i className="fas fa-arrow-left" /> Back to Portfolio
+            <button className="back-btn" onClick={() => history.goBack()}>
+              <i className="fas fa-arrow-left" /> Back
             </button>
           </div>
         </div>
@@ -62,8 +62,8 @@ const ProjectDetail = () => {
     <section className="project-detail-page">
       <div className="project-detail-container">
         {/* Back button */}
-        <button className="back-btn" onClick={() => history.push("/")}>
-          <i className="fas fa-arrow-left" /> Back to Portfolio
+        <button className="back-btn" onClick={() => history.goBack()}>
+          <i className="fas fa-arrow-left" /> Back
         </button>
 
         {/* Hero image */}
