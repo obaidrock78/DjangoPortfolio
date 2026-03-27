@@ -270,6 +270,7 @@
 .vf-cta {
   font-family: var(--font-mono);
   font-size: 0.62rem;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.14em;
   color: var(--gold-warm);

@@ -1,6 +1,6 @@
 import "./progress.css";
 import { baseUrlImages, useGetLanguagesIconsQuery } from "../../Api/api";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 
 /* Map API exp_level → bar percentage */
 const levelToPct = {
@@ -61,24 +61,11 @@ const colorMap = {
 
 const Progress = () => {
   const { data: langIcons, isFetching } = useGetLanguagesIconsQuery();
-  const [icons, setIcons]       = useState([]);
-  const [animated, setAnimated] = useState(false);
-  const sectionRef = useRef(null);
+  const [icons, setIcons] = useState([]);
 
   useEffect(() => {
     if (langIcons) setIcons(langIcons);
   }, [langIcons]);
-
-  useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setAnimated(true); },
-      { threshold: 0.08 }
-    );
-    observer.observe(el);
-    return () => observer.unobserve(el);
-  }, []);
 
   if (isFetching) return null;
 
@@ -102,7 +89,7 @@ const Progress = () => {
   const gridItems = others.length > 0 ? others : [];
 
   return (
-    <section className="skills-sovereign" id="skills" ref={sectionRef}>
+    <section className="skills-sovereign" id="skills">
       <div className="skills-container">
 
         {/* ── Header ── */}
@@ -167,17 +154,17 @@ const Progress = () => {
                     <div
                       className="skbar-fill"
                       style={{
-                        width: animated ? `${pct}%` : "0%",
+                        "--bar-width": `${pct}%`,
+                        "--bar-delay": `${i * 0.12}s`,
                         background: `linear-gradient(to right, ${color}66, ${color})`,
-                        transitionDelay: `${i * 0.12}s`,
                       }}
                     />
                     <div
                       className="skbar-glow"
                       style={{
-                        left: animated ? `${pct}%` : "0%",
+                        "--bar-width": `${pct}%`,
+                        "--bar-delay": `${i * 0.12}s`,
                         background: color,
-                        transitionDelay: `${i * 0.12}s`,
                       }}
                     />
                   </div>

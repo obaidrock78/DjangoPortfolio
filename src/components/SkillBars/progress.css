@@ -196,12 +196,24 @@
   overflow: visible;
 }
 
+@keyframes growBar {
+  from { width: 0 }
+  to   { width: var(--bar-width) }
+}
+
+@keyframes moveGlow {
+  from { left: 0 }
+  to   { left: var(--bar-width) }
+}
+
 .skbar-fill {
   position: absolute;
   top: 0; left: 0;
   height: 100%;
   border-radius: 999px;
-  transition: width 1.5s cubic-bezier(0.23, 1, 0.32, 1);
+  width: var(--bar-width);
+  animation: growBar 1.4s cubic-bezier(0.23, 1, 0.32, 1) both;
+  animation-delay: var(--bar-delay, 0s);
 }
 
 .skbar-glow {
@@ -213,8 +225,10 @@
   border-radius: 50%;
   opacity: 0.85;
   filter: blur(2px);
-  transition: left 1.5s cubic-bezier(0.23, 1, 0.32, 1);
   pointer-events: none;
+  left: var(--bar-width);
+  animation: moveGlow 1.4s cubic-bezier(0.23, 1, 0.32, 1) both;
+  animation-delay: var(--bar-delay, 0s);
 }
 
 /* ── Category pills (right col) ──────────── */

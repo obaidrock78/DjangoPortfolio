@@ -59,8 +59,8 @@
 .projects-subtext {
   font-family: var(--font-body);
   font-size: 1.05rem;
-  font-weight: 300;
-  color: var(--pearl);
+  font-weight: 400;
+  color: #c8d8ea;
   line-height: 1.8;
   max-width: 600px;
 }
@@ -77,8 +77,8 @@
 /* ── Flagship card ───────────────────────── */
 
 .pf-card {
-  background: #1C2D44;
-  border: 1px solid rgba(212,175,90,0.18);
+  background: #1f3252;
+  border: 1px solid rgba(212,175,90,0.28);
   border-radius: 20px;
   overflow: hidden;
   display: flex;
@@ -103,9 +103,9 @@
 
 .pf-card:hover {
   transform: translateY(-8px);
-  border-color: var(--border-v);
+  border-color: rgba(212,175,90,0.55);
   box-shadow: 0 32px 72px rgba(0,0,0,0.55),
-              0 0 0 1px rgba(212,175,90,0.10);
+              0 0 0 1px rgba(212,175,90,0.15);
   text-decoration: none;
   color: inherit;
 }
@@ -123,21 +123,47 @@
   flex-shrink: 0;
 }
 
+.pf-card:hover .pf-img-wrap img {
+  transform: scale(1.07);
+}
+
+.pf-img-fallback {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.pf-img-fallback-title {
+  font-family: var(--font-head);
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  opacity: 0.85;
+  position: relative;
+  z-index: 1;
+}
+
 .pf-img-wrap img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  z-index: 2;
   transition: transform 0.6s cubic-bezier(0.23,1,0.32,1);
   display: block;
-}
-
-.pf-card:hover .pf-img-wrap img {
-  transform: scale(1.07);
 }
 
 .pf-img-overlay {
   position: absolute;
   inset: 0;
+  z-index: 3;
   background: linear-gradient(
     to bottom,
     rgba(13,21,33,0.15) 0%,
@@ -153,6 +179,7 @@
   display: flex;
   gap: 8px;
   align-items: center;
+  z-index: 4;
 }
 
 .pf-star {
@@ -173,6 +200,7 @@
   position: absolute;
   bottom: 16px;
   left: 16px;
+  z-index: 4;
   font-family: var(--font-mono);
   font-size: 0.56rem;
   text-transform: uppercase;
@@ -209,8 +237,8 @@
 .pf-desc {
   font-family: var(--font-body);
   font-size: 0.875rem;
-  font-weight: 300;
-  color: var(--pearl);
+  font-weight: 400;
+  color: #c8d8ea;
   line-height: 1.75;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -238,16 +266,16 @@
   font-size: 0.54rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--muted);
-  border: 1px solid var(--border);
+  color: #9eb8d4;
+  border: 1px solid rgba(212,175,90,0.20);
   border-radius: 4px;
   padding: 3px 8px;
   transition: color 0.2s, border-color 0.2s;
 }
 
 .pf-card:hover .pf-tech {
-  color: var(--pearl);
-  border-color: rgba(212,175,90,0.20);
+  color: var(--cream);
+  border-color: rgba(212,175,90,0.38);
 }
 
 .pf-tech--more {
@@ -263,7 +291,7 @@
   font-size: 0.58rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: var(--muted);
+  color: #9eb8d4;
   white-space: nowrap;
   flex-shrink: 0;
   transition: color 0.25s;
@@ -351,8 +379,8 @@
 
 /* individual contract card */
 .contract-card {
-  background: #1C2D44;
-  border: 1px solid rgba(212,175,90,0.18);
+  background: #1f3252;
+  border: 1px solid rgba(212,175,90,0.28);
   border-radius: 14px;
   padding: 22px 20px;
   display: flex;
@@ -436,7 +464,7 @@
 .cc-sub {
   font-family: var(--font-mono);
   font-size: 0.58rem;
-  color: var(--muted);
+  color: #9eb8d4;
   letter-spacing: 0.06em;
   line-height: 1.5;
 }
@@ -445,9 +473,9 @@
   display: inline-block;
   font-family: var(--font-mono);
   font-size: 0.6rem;
-  color: var(--pearl);
-  background: var(--surface2);
-  border: 1px solid var(--border);
+  color: var(--teal);
+  background: rgba(78,234,222,0.06);
+  border: 1px solid rgba(78,234,222,0.20);
   border-radius: 6px;
   padding: 5px 10px;
   letter-spacing: 0.06em;
@@ -469,6 +497,7 @@
   gap: 10px;
   font-family: var(--font-mono);
   font-size: 0.65rem;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.14em;
   padding: 14px 28px;

@@ -164,6 +164,7 @@
 .contact-submit-btn {
   font-family: var(--font-mono);
   font-size: 0.65rem;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.14em;
   color: var(--abyss);

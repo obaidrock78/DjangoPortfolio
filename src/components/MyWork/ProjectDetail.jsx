@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { baseUrlImages, useGetProjectsQuery } from "../../Api/api";
 import "./ProjectDetail.css";
@@ -26,11 +26,25 @@ const getPlatforms = (str) => {
   return [...new Set(platforms)];
 };
 
+const getCategory = (lang = "") => {
+  const l = lang.toLowerCase();
+  if (l.includes("solidity") || l.includes("web3") || l.includes("blockchain") || l.includes("ipfs"))
+    return { gradient: "linear-gradient(135deg, #1a2a1a 0%, #2a1f0a 50%, #1f3252 100%)", accent: "rgba(212,175,90,0.6)" };
+  if (l.includes("react native") || l.includes("ios") || l.includes("android") || l.includes("swift"))
+    return { gradient: "linear-gradient(135deg, #1a1030 0%, #251540 50%, #1f3252 100%)", accent: "rgba(165,133,196,0.6)" };
+  if (l.includes("django") || l.includes("python") || l.includes("flask") || l.includes("node"))
+    return { gradient: "linear-gradient(135deg, #0a2020 0%, #0d2e2e 50%, #1f3252 100%)", accent: "rgba(78,234,222,0.6)" };
+  if (l.includes("react") || l.includes("next") || l.includes("vue") || l.includes("typescript"))
+    return { gradient: "linear-gradient(135deg, #0f1830 0%, #182040 50%, #1f3252 100%)", accent: "rgba(123,143,238,0.6)" };
+  return { gradient: "linear-gradient(135deg, #0a1e14 0%, #102a1e 50%, #1f3252 100%)", accent: "rgba(69,222,153,0.6)" };
+};
+
 const ProjectDetail = () => {
   const { id } = useParams();
   const history = useHistory();
   const { data: projects, isFetching } = useGetProjectsQuery();
   const img_300 = baseUrlImages;
+  const [imgError, setImgError] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -57,6 +71,7 @@ const ProjectDetail = () => {
 
   const techTags = parseTech(project.language_used);
   const platforms = getPlatforms(project.language_used);
+  const cat = getCategory(project.language_used);
 
   return (
     <section className="project-detail-page">
@@ -68,10 +83,21 @@ const ProjectDetail = () => {
 
         {/* Hero image */}
         <div className="project-detail-hero">
-          <img
-            src={`${img_300}${project.image}`}
-            alt={project.Project_title}
-          />
+          <div
+            className="pdh-fallback"
+            style={{ background: cat.gradient }}
+          >
+            <span className="pdh-fallback-title" style={{ color: cat.accent }}>
+              {project.Project_title}
+            </span>
+          </div>
+          {project.image && !imgError && (
+            <img
+              src={`${img_300}${project.image}`}
+              alt={project.Project_title}
+              onError={() => setImgError(true)}
+            />
+          )}
         </div>
 
         {/* Content */}

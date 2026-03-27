@@ -38,12 +38,31 @@ const categoryColors = {
 
 const FILTERS = ["All", "Blockchain", "Backend", "Frontend", "Mobile", "Full-Stack"];
 
+const fallbackGradients = {
+  "Blockchain": "linear-gradient(135deg, #1a2a1a 0%, #2a1f0a 50%, #1f3252 100%)",
+  "Backend":    "linear-gradient(135deg, #0a2020 0%, #0d2e2e 50%, #1f3252 100%)",
+  "Frontend":   "linear-gradient(135deg, #0f1830 0%, #182040 50%, #1f3252 100%)",
+  "Mobile":     "linear-gradient(135deg, #1a1030 0%, #251540 50%, #1f3252 100%)",
+  "Full-Stack": "linear-gradient(135deg, #0a1e14 0%, #102a1e 50%, #1f3252 100%)",
+};
+
+const fallbackAccents = {
+  "Blockchain": "rgba(212,175,90,0.6)",
+  "Backend":    "rgba(78,234,222,0.6)",
+  "Frontend":   "rgba(123,143,238,0.6)",
+  "Mobile":     "rgba(165,133,196,0.6)",
+  "Full-Stack": "rgba(69,222,153,0.6)",
+};
+
 const Portfolio = () => {
   const history = useHistory();
   const { data: projects, isFetching } = useGetProjectsQuery();
   const [active, setActive] = useState("All");
   const [search, setSearch] = useState("");
   const [visible, setVisible] = useState([]);
+  const [imgErrors, setImgErrors] = useState({});
+
+  const handleImgError = (id) => setImgErrors(prev => ({ ...prev, [id]: true }));
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -167,10 +186,25 @@ const Portfolio = () => {
                 >
                   {/* Image */}
                   <div className="port-img-wrap">
-                    <img
-                      src={`${baseUrlImages}${p.image}`}
-                      alt={p.Project_title}
-                    />
+                    <div
+                      className="port-img-fallback"
+                      style={{ background: fallbackGradients[cat] || fallbackGradients["Full-Stack"] }}
+                    >
+                      <span
+                        className="port-img-fallback-title"
+                        style={{ color: fallbackAccents[cat] || fallbackAccents["Full-Stack"] }}
+                      >
+                        {p.Project_title}
+                      </span>
+                    </div>
+
+                    {p.image && !imgErrors[p.id] && (
+                      <img
+                        src={`${baseUrlImages}${p.image}`}
+                        alt={p.Project_title}
+                        onError={() => handleImgError(p.id)}
+                      />
+                    )}
                     <div className="port-img-overlay" />
 
                     {/* Top badges on image */}

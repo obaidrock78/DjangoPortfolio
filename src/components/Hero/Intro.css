@@ -125,6 +125,7 @@
 .cta-primary {
   font-family: var(--font-mono);
   font-size: 0.65rem;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.14em;
   color: var(--abyss);
@@ -147,6 +148,7 @@
 .cta-secondary {
   font-family: var(--font-mono);
   font-size: 0.65rem;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.14em;
   color: var(--pearl);
@@ -167,6 +169,7 @@
 .cta-ghost {
   font-family: var(--font-mono);
   font-size: 0.65rem;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.14em;
   color: var(--muted);

@@ -16,6 +16,7 @@ import Email from "./components/EmailMe/Email";
 import Vision from "./components/Vision/Vision";
 import ConstellationCanvas from "./components/ConstellationCanvas";
 import Portfolio from "./components/Portfolio/Portfolio";
+import SmartContracts from "./components/SmartContracts/SmartContracts";
 import { AnimatedCursor } from "./components/animatedCursor";
 import $ from "jquery";
 import { useEffect } from "react";
@@ -109,6 +110,7 @@ function App() {
           <Route exact path="/" component={HomePage} />
           <Route path="/project/:id" component={ProjectDetail} />
           <Route path="/portfolio" component={Portfolio} />
+          <Route path="/smart-contracts" component={SmartContracts} />
         </Switch>
       </div>
     </BrowserRouter>

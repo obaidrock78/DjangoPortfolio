@@ -94,13 +94,33 @@ const StatusPill = ({ label }) => {
   );
 };
 
+/* ── Gradient fallback colours per category ─────────────────── */
+const fallbackGradients = {
+  gold:    "linear-gradient(135deg, #1a2a1a 0%, #2a1f0a 50%, #1f3252 100%)",
+  teal:    "linear-gradient(135deg, #0a2020 0%, #0d2e2e 50%, #1f3252 100%)",
+  violet:  "linear-gradient(135deg, #1a1030 0%, #251540 50%, #1f3252 100%)",
+  indigo:  "linear-gradient(135deg, #0f1830 0%, #182040 50%, #1f3252 100%)",
+  emerald: "linear-gradient(135deg, #0a1e14 0%, #102a1e 50%, #1f3252 100%)",
+};
+
+const fallbackAccents = {
+  gold:    "rgba(212,175,90,0.6)",
+  teal:    "rgba(78,234,222,0.6)",
+  violet:  "rgba(165,133,196,0.6)",
+  indigo:  "rgba(123,143,238,0.6)",
+  emerald: "rgba(69,222,153,0.6)",
+};
+
 /* ── Projects component ──────────────────────────────────────── */
 const Projects = () => {
   const { data: projects, isFetching } = useGetProjectsQuery();
   const img_300 = baseUrlImages;
   const [projectsDetails, setProjectsDetails] = useState(projects);
+  const [imgErrors, setImgErrors] = useState({});
 
   useEffect(() => { setProjectsDetails(projects); }, [projects]);
+
+  const handleImgError = (id) => setImgErrors(prev => ({ ...prev, [id]: true }));
 
   if (isFetching) return null;
 
@@ -141,7 +161,27 @@ const Projects = () => {
               >
                 {/* Image */}
                 <div className="pf-img-wrap">
-                  <img src={`${img_300}${d.image}`} alt={d.Project_title} />
+                  {/* Gradient fallback — always rendered as base layer */}
+                  <div
+                    className="pf-img-fallback"
+                    style={{ background: fallbackGradients[cat.color] }}
+                  >
+                    <span
+                      className="pf-img-fallback-title"
+                      style={{ color: fallbackAccents[cat.color] }}
+                    >
+                      {d.Project_title}
+                    </span>
+                  </div>
+
+                  {/* Image rendered on top — removed on error */}
+                  {d.image && !imgErrors[d.id] && (
+                    <img
+                      src={`${img_300}${d.image}`}
+                      alt={d.Project_title}
+                      onError={() => handleImgError(d.id)}
+                    />
+                  )}
                   <div className="pf-img-overlay" />
 
                   {/* Floating badges on image */}

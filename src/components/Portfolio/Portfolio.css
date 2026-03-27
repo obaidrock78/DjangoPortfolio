@@ -37,6 +37,7 @@
   gap: 8px;
   font-family: var(--font-mono);
   font-size: 0.6rem;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.14em;
   color: var(--muted);
@@ -170,6 +171,7 @@
   gap: 8px;
   font-family: var(--font-mono);
   font-size: 0.6rem;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: var(--muted);
@@ -256,12 +258,35 @@
   flex-shrink: 0;
 }
 
+.port-img-fallback {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.port-img-fallback-title {
+  font-family: var(--font-head);
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+  font-weight: 700;
+  text-align: center;
+  opacity: 0.85;
+  position: relative;
+  z-index: 1;
+}
+
 .port-img-wrap img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.6s cubic-bezier(0.23,1,0.32,1);
   display: block;
+  z-index: 2;
 }
 
 .port-card:hover .port-img-wrap img {
@@ -272,6 +297,7 @@
   position: absolute;
   inset: 0;
   background: linear-gradient(to bottom, rgba(13,21,33,0.1) 0%, rgba(13,21,33,0.65) 100%);
+  z-index: 3;
 }
 
 /* Badges on image */
@@ -282,6 +308,7 @@
   display: flex;
   gap: 8px;
   align-items: center;
+  z-index: 4;
 }
 
 .port-status {
@@ -337,6 +364,7 @@
   padding: 4px 10px;
   border-radius: 6px;
   border: 1px solid;
+  z-index: 4;
 }
 
 /* Hover CTA overlay */
@@ -350,11 +378,13 @@
   backdrop-filter: blur(4px);
   opacity: 0;
   transition: opacity 0.3s;
+  z-index: 4;
 }
 
 .port-hover-cta span {
   font-family: var(--font-mono);
   font-size: 0.65rem;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.14em;
   color: var(--gold-warm);
@@ -502,6 +532,7 @@
 .portfolio-empty button {
   font-family: var(--font-mono);
   font-size: 0.6rem;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.14em;
   color: var(--gold-warm);
