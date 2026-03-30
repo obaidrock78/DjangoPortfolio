@@ -20,7 +20,7 @@ const Navbar = () => {
     { label: "Experience", href: "#services" },
     { label: "Skills", href: "#skills" },
     { label: "Projects", href: "#work" },
-    { label: "Contact", href: "#contact" },
+    // { label: "Contact", href: "#contact" },
   ];
 
   const handleNavClick = (e, href) => {

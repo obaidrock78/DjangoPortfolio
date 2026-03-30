@@ -43,7 +43,7 @@ function HomePage() {
       {/* <div className="gradient-navy-to-abyss" /> */}
       <Vision />
       <div className="gradient-abyss-to-navy" />
-      <Email />
+      {/* <Email /> */}
       <Footer />
     </>
   );
