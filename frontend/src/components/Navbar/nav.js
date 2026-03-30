@@ -46,21 +46,10 @@ const Main = () => {
     });
   });
 
-  // toggle light and dark theme (floating switch + any .toggle)
+  // toggle light and dark theme
   $(window).on("load", function () {
-    var storageKey = "portfolio-theme";
-    // Apply saved theme or default to dark
-    var saved = localStorage.getItem(storageKey);
-    if (saved === "light") {
-      $("body").addClass("light");
-      $(".toggle").prop("checked", true);
-    } else {
-      $("body").removeClass("light");
-      $(".toggle").prop("checked", false);
-    }
-    $(".toggle").on("click", function () {
+    $(".toggle").on("click", () => {
       $("body").toggleClass("light");
-      localStorage.setItem(storageKey, $("body").hasClass("light") ? "light" : "dark");
     });
   });
 

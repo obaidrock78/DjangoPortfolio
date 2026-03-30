@@ -1,144 +1,99 @@
-import React from "react";
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 
-function useEventListener(eventName, handler, element = document) {
-  const savedHandler = React.useRef();
+export function AnimatedCursor() {
+  const dotRef = useRef(null);
+  const ringRef = useRef(null);
+  const mouse = useRef({ x: -100, y: -100 });
+  const ring = useRef({ x: -100, y: -100 });
+  const [isHover, setIsHover] = useState(false);
 
-  React.useEffect(() => {
-    savedHandler.current = handler;
-  }, [handler]);
-
-  React.useEffect(() => {
-    const isSupported = element && element.addEventListener;
-    if (!isSupported) return;
-    const eventListener = (event) => savedHandler.current(event);
-    element.addEventListener(eventName, eventListener);
-    return () => element.removeEventListener(eventName, eventListener);
-  }, [eventName, element]);
-}
-
-/**
- * Custom cursor: one dot + one ring with smooth follow.
- * Theme-colored (amber), scales on clickables/hover.
- */
-export function AnimatedCursor({
-  color = "245, 158, 11",
-  innerSize = 8,
-  outerSize = 48,
-  outerBorderWidth = 1.5,
-  followSpeed = 10,
-}) {
-  const innerRef = React.useRef(null);
-  const outerRef = React.useRef(null);
-  // const requestRef = React.useRef(null);
-  const [pos, setPos] = React.useState({ x: 0, y: 0 });
-  const [smoothPos, setSmoothPos] = React.useState({ x: 0, y: 0 });
-  const [visible, setVisible] = React.useState(true);
-  const [hovering, setHovering] = React.useState(false);
-  const targetRef = React.useRef({ x: 0, y: 0 });
-
-  const onMouseMove = React.useCallback((e) => {
-    const { clientX, clientY } = e;
-    setPos({ x: clientX, y: clientY });
-    targetRef.current = { x: clientX, y: clientY };
-    if (innerRef.current) {
-      innerRef.current.style.left = clientX + "px";
-      innerRef.current.style.top = clientY + "px";
+  const onMouseMove = useCallback((e) => {
+    mouse.current = { x: e.clientX, y: e.clientY };
+    if (dotRef.current) {
+      dotRef.current.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
     }
   }, []);
 
-  React.useEffect(() => {
-    let raf;
+  useEffect(() => {
+    document.addEventListener('mousemove', onMouseMove);
+    return () => document.removeEventListener('mousemove', onMouseMove);
+  }, [onMouseMove]);
+
+  // Ring follows with elastic easing
+  useEffect(() => {
+    let animId;
     const animate = () => {
-      setSmoothPos((prev) => ({
-        x: prev.x + (targetRef.current.x - prev.x) / followSpeed,
-        y: prev.y + (targetRef.current.y - prev.y) / followSpeed,
-      }));
-      raf = requestAnimationFrame(animate);
+      ring.current.x += (mouse.current.x - ring.current.x) * 0.1;
+      ring.current.y += (mouse.current.y - ring.current.y) * 0.1;
+      if (ringRef.current) {
+        ringRef.current.style.transform = `translate(${ring.current.x}px, ${ring.current.y}px) translate(-50%, -50%)`;
+      }
+      animId = requestAnimationFrame(animate);
     };
-    raf = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(raf);
-  }, [followSpeed]);
-
-  React.useEffect(() => {
-    if (!outerRef.current) return;
-    outerRef.current.style.left = smoothPos.x + "px";
-    outerRef.current.style.top = smoothPos.y + "px";
-  }, [smoothPos]);
-
-  const onMouseEnter = React.useCallback(() => setVisible(true), []);
-  const onMouseLeave = React.useCallback(() => setVisible(false), []);
-
-  useEventListener("mousemove", onMouseMove, document);
-  useEventListener("mouseenter", onMouseEnter, document);
-  useEventListener("mouseleave", onMouseLeave, document);
-
-  React.useEffect(() => {
-    document.body.style.cursor = visible ? "none" : "";
-    return () => {
-      document.body.style.cursor = "";
-    };
-  }, [visible]);
-
-  React.useEffect(() => {
-    const clickables = document.querySelectorAll(
-      'a, button, input[type="submit"], input[type="button"], input[type="image"], label[for], select, [role="button"], .link'
-    );
-    const onOver = () => setHovering(true);
-    const onOut = () => setHovering(false);
-    clickables.forEach((el) => {
-      el.style.cursor = "none";
-      el.addEventListener("mouseover", onOver);
-      el.addEventListener("mouseout", onOut);
-    });
-    return () => {
-      clickables.forEach((el) => {
-        el.style.cursor = "";
-        el.removeEventListener("mouseover", onOver);
-        el.removeEventListener("mouseout", onOut);
-      });
-    };
+    animate();
+    return () => cancelAnimationFrame(animId);
   }, []);
 
-  const opacity = visible ? 1 : 0;
-  const scale = hovering ? 1.4 : 1;
+  // Detect hoverable elements
+  useEffect(() => {
+    const onOver = () => setIsHover(true);
+    const onOut = () => setIsHover(false);
 
-  const innerStyle = {
-    position: "fixed",
-    left: pos.x,
-    top: pos.y,
-    width: innerSize,
-    height: innerSize,
-    marginLeft: -innerSize / 2,
-    marginTop: -innerSize / 2,
-    borderRadius: "50%",
-    background: `rgb(${color})`,
-    pointerEvents: "none",
-    zIndex: 99999,
-    opacity,
-    transition: "opacity 0.2s ease, transform 0.2s ease",
-    boxShadow: `0 0 12px rgba(${color}, 0.5)`,
-  };
+    const attachListeners = () => {
+      const clickables = document.querySelectorAll(
+        'a, button, input[type="submit"], label[for], select, .link, [role="button"]'
+      );
+      clickables.forEach((el) => {
+        el.style.cursor = 'none';
+        el.addEventListener('mouseenter', onOver);
+        el.addEventListener('mouseleave', onOut);
+      });
+    };
 
-  const outerStyle = {
-    position: "fixed",
-    width: outerSize,
-    height: outerSize,
-    marginLeft: -outerSize / 2,
-    marginTop: -outerSize / 2,
-    borderRadius: "50%",
-    border: `${outerBorderWidth}px solid rgba(${color}, 0.45)`,
-    background: "transparent",
-    pointerEvents: "none",
-    zIndex: 99998,
-    opacity,
-    transform: `scale(${scale})`,
-    transition: "opacity 0.2s ease, transform 0.25s ease",
-  };
+    // Initial + observe DOM changes
+    attachListeners();
+    const observer = new MutationObserver(attachListeners);
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const dotSize = isHover ? 18 : 9;
+  const ringSize = isHover ? 66 : 42;
 
   return (
     <>
-      <div ref={innerRef} style={innerStyle} aria-hidden="true" />
-      <div ref={outerRef} style={outerStyle} aria-hidden="true" />
+      <div
+        ref={dotRef}
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: dotSize,
+          height: dotSize,
+          background: 'var(--gold-warm)',
+          borderRadius: '50%',
+          mixBlendMode: 'screen',
+          pointerEvents: 'none',
+          zIndex: 10000,
+          transition: 'width 0.25s, height 0.25s',
+        }}
+      />
+      <div
+        ref={ringRef}
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: ringSize,
+          height: ringSize,
+          border: `1px solid rgba(201,166,85, ${isHover ? 0.4 : 0.35})`,
+          borderRadius: '50%',
+          pointerEvents: 'none',
+          zIndex: 10000,
+          transition: 'width 0.25s, height 0.25s, border-color 0.25s',
+        }}
+      />
     </>
   );
 }

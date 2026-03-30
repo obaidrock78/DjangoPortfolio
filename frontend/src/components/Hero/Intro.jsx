@@ -1,144 +1,145 @@
 import { useEffect, useState } from "react";
-import decor3 from "../../images/decoration/Group-31.png";
 import "./Intro.css";
 import { useGetHomeDetailsQuery } from "../../Api/api";
-import { useGetSocialMediaQuery } from "../../Api/api";
-
-const HERO_IMAGES = [
-  { src: "/python-service-1.png", alt: "Services" },
-  { src: "/welcome-to-portfolio.png", alt: "Welcome" },
-];
-
-const SLIDE_INTERVAL_MS = 4500;
 
 const Intro = () => {
-  const { data: conta } = useGetSocialMediaQuery();
   const { data: homeData, isFetching } = useGetHomeDetailsQuery();
   const [homeDetails, setHomeDetails] = useState(homeData);
-  const [contacts1Details, setContact2Details] = useState(conta);
-  const [slideIndex, setSlideIndex] = useState(0);
-  // const title_name = homeDetails && homeDetails.map((detail2) => detail2.name);
 
   useEffect(() => {
     setHomeDetails(homeData);
-    setContact2Details(conta);
-    const name = homeDetails?.[0]?.name || homeData?.[0]?.name;
-    if (typeof name === "string" && name.trim()) document.title = name;
-  }, [homeData, conta, homeDetails]);
+    if (homeData) {
+      const title_name = homeData.map((d) => d.name);
+      document.title = `${title_name} — Portfolio`;
+    }
+  }, [homeData]);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setSlideIndex((prev) => (prev + 1) % HERO_IMAGES.length);
-    }, SLIDE_INTERVAL_MS);
-    return () => clearInterval(timer);
-  }, []);
+  if (isFetching) return null;
 
-  if (isFetching) return "loading";
+  const detail = homeDetails && homeDetails[0];
+  if (!detail) return null;
+
+  const nameParts = detail.name ? detail.name.split(" ") : ["Obed", "Chaudhry"];
+  const firstName = nameParts[0] || "Obed";
+  const lastName = nameParts.slice(1).join(" ") || "Chaudhry";
 
   return (
     <>
-      {homeDetails &&
-        homeDetails.map((detail) => (
-          <section className=" intro-page" id="home" key={detail.id}>
-            <div className="decorations">
-              <div className="decor-dot2">
-                <img src={decor3} alt="" />
-              </div>
+    <a
+      href="https://wa.me/923034142927"
+      className="whatsapp-float"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Chat on WhatsApp"
+    >
+      <i className="fab fa-whatsapp" />
+    </a>
+    <section className="hero-sovereign" id="home">
+      <div className="hero-grid">
+        {/* Left Column */}
+        <div className="hero-content">
+          <div className="hero-eyebrow">
+            <span className="pulse-dot" />
+            <span>Available for new opportunities</span>
+          </div>
 
-              <div className="parcol"></div>
+          <div className="hero-name">
+            <span className="first-name">{firstName}</span>
+            <span className="last-name">{lastName}</span>
+          </div>
+
+          <div className="hero-role">
+            {detail.job_title} · Django · Python · React · Full-Stack
+          </div>
+
+          <p className="hero-description">
+            {detail.par_inro}
+          </p>
+
+          <div className="hero-ctas">
+            <a href={`mailto:${detail.hireMe_link}`} className="cta-primary">
+              Hire Me
+            </a>
+            <a href="#work" className="cta-secondary">
+              View Work
+            </a>
+            <a
+              href={detail.cv_link || "https://drive.google.com/file/d/1vJBEV0fe3hdtsToBDl-h6ZfxewlWyEoM/view"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cta-ghost"
+            >
+              Download CV
+            </a>
+          </div>
+
+          <div className="hero-socials">
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hero-social-link" aria-label="GitHub">
+              <i className="fab fa-github" />
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hero-social-link" aria-label="LinkedIn">
+              <i className="fab fa-linkedin-in" />
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hero-social-link" aria-label="Twitter">
+              <i className="fab fa-twitter" />
+            </a>
+            <span className="hero-socials-divider" />
+            <span className="hero-socials-label">Find me online</span>
+          </div>
+
+          <div className="hero-stats">
+            <div className="hero-stat">
+              <div className="hero-stat-value">12+</div>
+              <div className="hero-stat-label">Projects</div>
             </div>
-            <div className="small-intro">
-              <div className="intro-row">
-                <div className="col-lg-5  col-md-6 col-sm-12 intro-left">
-                  <div className="intro-name">
-                    <h3
-                      className="hello"
-                      data-aos="fade-down"
-                      data-aos-duration="1500"
-                    >
-                      {detail.job_title}
-                    </h3>
-                    <h3
-                      className="name"
-                      data-aos="fade-down"
-                      data-aos-duration="1600"
-                    >
-                      Hey! I Am
-                    </h3>
-                    <h3
-                      className="job  text-animate"
-                      data-aos="fade-down"
-                      data-aos-duration="1700"
-                    >
-                      {detail.name}
-                    </h3>
-                    <p
-                      className="myinfo"
-                      data-aos="fade-down"
-                      data-aos-duration="1800"
-                    >
-                      {detail.par_inro}
-                    </p>
-                  </div>
-                  <div
-                    className="intro-btns"
-                    data-aos="fade-up"
-                    data-aos-duration="1900"
-                  >
-                    <a
-                      href={`mailto:${detail.hireMe_link}`}
-                      className="contactMe"
-                    >
-                      <button type="button" className="contact-me">
-                        Hire me <i className="bx bx-send" aria-hidden="true" />
-                      </button>
-                    </a>
-                  </div>
-                  <div
-                    className="intro-contact"
-                    data-aos="fade-up"
-                    data-aos-duration="1800"
-                  >
-                    <span>Follow Me:</span>
-                    <ul>
-                      <li>
-                        {contacts1Details &&
-                          contacts1Details.map((data1) => (
-                            <a
-                              href={data1.link}
-                              className="icon-link"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              key={data1.id}
-                            >
-                              <i className={data1.social_icon}></i>
-                            </a>
-                          ))}
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div
-                  className="col-lg-7 col-md-6 col-sm-12 left-img"
-                  data-aos="fade-down-left"
-                >
-                  <div className="ff">
-                    <div className="hero-slideshow">
-                      {HERO_IMAGES.map((img, i) => (
-                        <img
-                          key={img.src}
-                          src={img.src}
-                          alt={img.alt}
-                          className={`hero-slideshow-img ${i === slideIndex ? "hero-slideshow-active" : ""}`}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </div>
+            <div className="hero-stat">
+              <div className="hero-stat-value">7+</div>
+              <div className="hero-stat-label">Technologies</div>
+            </div>
+            <div className="hero-stat">
+              <div className="hero-stat-value">3+</div>
+              <div className="hero-stat-label">Frameworks</div>
+            </div>
+            <div className="hero-stat">
+              <div className="hero-stat-value">∞</div>
+              <div className="hero-stat-label">Commits</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Column — Code Editor Mockup */}
+        <div className="hero-visual">
+          <div className="editor-frame">
+            <div className="editor-titlebar">
+              <div className="editor-dots">
+                <span className="ed-dot ed-dot-red" />
+                <span className="ed-dot ed-dot-yellow" />
+                <span className="ed-dot ed-dot-green" />
               </div>
+              <span className="editor-filename">portfolio.py</span>
             </div>
-          </section>
-        ))}
+            <div className="editor-body">
+              <div className="code-line"><span className="code-ln">1</span><span className="code-keyword">class</span> <span className="code-class">SoftwareEngineer</span><span className="code-punc">:</span></div>
+              <div className="code-line"><span className="code-ln">2</span>  <span className="code-keyword">def</span> <span className="code-func">__init__</span><span className="code-punc">(</span><span className="code-param">self</span><span className="code-punc">):</span></div>
+              <div className="code-line"><span className="code-ln">3</span>    <span className="code-param">self</span><span className="code-punc">.</span><span className="code-var">name</span> <span className="code-punc">=</span> <span className="code-str">"Obed Chaudhry"</span></div>
+              <div className="code-line"><span className="code-ln">4</span>    <span className="code-param">self</span><span className="code-punc">.</span><span className="code-var">role</span> <span className="code-punc">=</span> <span className="code-str">"Full-Stack Dev"</span></div>
+              <div className="code-line"><span className="code-ln">5</span>    <span className="code-param">self</span><span className="code-punc">.</span><span className="code-var">stack</span> <span className="code-punc">=</span> <span className="code-punc">[</span></div>
+              <div className="code-line"><span className="code-ln">6</span>      <span className="code-str">"Django"</span><span className="code-punc">,</span> <span className="code-str">"Python"</span><span className="code-punc">,</span></div>
+              <div className="code-line"><span className="code-ln">7</span>      <span className="code-str">"React"</span><span className="code-punc">,</span> <span className="code-str">"JavaScript"</span><span className="code-punc">,</span></div>
+              <div className="code-line"><span className="code-ln">8</span>      <span className="code-str">"PostgreSQL"</span><span className="code-punc">,</span> <span className="code-str">"REST APIs"</span></div>
+              <div className="code-line"><span className="code-ln">9</span>    <span className="code-punc">]</span></div>
+              <div className="code-line"><span className="code-ln">10</span></div>
+              <div className="code-line"><span className="code-ln">11</span>  <span className="code-keyword">def</span> <span className="code-func">build</span><span className="code-punc">(</span><span className="code-param">self</span><span className="code-punc">):</span></div>
+              <div className="code-line"><span className="code-ln">12</span>    <span className="code-keyword">return</span> <span className="code-str">"Production-ready"</span></div>
+              <div className="code-line code-cursor-line"><span className="code-ln">13</span>    <span className="code-cursor">|</span></div>
+            </div>
+          </div>
+          <span className="platform-badge badge-django">Django</span>
+          <span className="platform-badge badge-python">Python</span>
+          <span className="platform-badge badge-react-web">React</span>
+        </div>
+      </div>
+    </section>
     </>
   );
 };

@@ -1,246 +1,406 @@
-/* ══════════════════════════════════════
-   SKILLS / PROGRESS — redesigned
-   Matches portfolio: Playfair · DM Sans · Amber #C8860A
-══════════════════════════════════════ */
+/* ============================================
+   SKILLS — Sovereign Abyss
+   ============================================ */
 
-.progress-container {
-  padding: 80px clamp(1.5rem, 4vw, 3rem) 96px;
-  background: var(--color-background-2);
+.skills-sovereign {
+  background: var(--navy);
+  padding: 120px 0;
   position: relative;
-  overflow: hidden;
 }
 
-/* Subtle grain overlay */
-.progress-container::before {
+.skills-sovereign::before {
   content: '';
   position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.4;
-  mix-blend-mode: overlay;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: 480px; height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold-warm), transparent);
+  opacity: 0.3;
 }
 
-/* ── Section heading ── */
-.progress-title {
+.skills-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+/* ── Header ──────────────────────────────── */
+
+.skills-header {
   margin-bottom: 56px;
-  text-align: center;
-  position: relative;
-  z-index: 1;
-}
-.progress-title h2 {
-  font-size: 0.72rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.22em;
-  color: var(--color-title, #C8860A);
-  margin-bottom: 10px;
-}
-.progress-title h3 {
-  font-family: var(--font-display, 'Playfair Display', serif);
-  font-size: clamp(2.2rem, 5vw, 3.6rem);
-  font-weight: 900;
-  line-height: 1.05;
-  color: var(--color-white, #fff);
-  text-transform: capitalize;
 }
 
-/* ── Carousel wrapper ── */
-.progress-row2 {
-  position: relative;
-  z-index: 1;
-}
-.lang { width: 100%; }
-
-/* ─────────────────────────────────────
-   SKILL CARD
-───────────────────────────────────── */
-.mylang {
-  position: relative;
-  margin: 0 8px;
-  padding: 0;
-  cursor: pointer;
-  border-radius: 2px;
-  overflow: hidden;
-  background: transparent;
-  border: none;
-  transition: transform 0.38s cubic-bezier(0.23, 1, 0.32, 1);
+.skills-header .section-heading {
+  margin-bottom: 0;
 }
 
-/* Card face */
-.mylang::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 2px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  transition: border-color 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
-  z-index: 0;
-}
-.mylang:hover {
-  /* transform: translateY(-7px); */
-}
-.mylang:hover::before {
-  border-color: rgba(200, 134, 10, 0.5);
-  background: rgba(200, 134, 10, 0.04);
-  box-shadow:
-    0 0 0 1px rgba(200, 134, 10, 0.12),
-    0 20px 48px rgba(0, 0, 0, 0.5),
-    0 0 60px rgba(200, 134, 10, 0.07);
+.skills-header .section-heading em {
+  font-style: italic;
+  color: var(--gold-warm);
 }
 
-/* Scanline shimmer */
-.mylang::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 40%;
-  top: -40%;
-  background: linear-gradient(
-    to bottom,
-    transparent,
-    rgba(200, 134, 10, 0.07) 50%,
-    transparent
-  );
-  pointer-events: none;
-  z-index: 1;
-}
-.mylang:hover::after {
-  animation: scanline 0.7s ease forwards;
-}
-@keyframes scanline {
-  0%   { top: -40%; }
-  100% { top: 120%; }
+.skills-header-inner {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
 }
 
-/* ── Inner content ── */
-.lang-info {
-  position: relative;
-  z-index: 2;
+/* stats */
+.skills-stats {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-shrink: 0;
+}
+
+.sk-stat {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 28px 18px 24px;
+  gap: 4px;
+  text-align: center;
 }
 
-/* ── Icon circle ── */
-.lang-img {
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
+.sk-stat-val {
+  font-family: var(--font-head);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--cream);
+  line-height: 1;
+}
+
+.sk-stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+}
+
+.sk-stat-div {
+  width: 1px;
+  height: 32px;
+  background: var(--border);
+  margin: 0 20px;
+}
+
+/* ── Two-column body ─────────────────────── */
+
+.skills-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: start;
+  margin-bottom: 64px;
+}
+
+/* section sub-labels */
+.skills-bars-label {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--muted);
+  margin-bottom: 28px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  background: rgba(200, 134, 10, 0.07);
-  border: 1px solid rgba(200, 134, 10, 0.18);
-  font-size: 2.4rem;
-  margin-bottom: 16px;
-  transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
-}
-.mylang:hover .lang-img {
-  background: rgba(200, 134, 10, 0.13);
-  border-color: rgba(200, 134, 10, 0.5);
-  box-shadow: 0 0 24px rgba(200, 134, 10, 0.18);
-}
-.lang-img img {
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
-}
-.lang-info img {
-  width: 40px;
-  height: 40px;
+  gap: 14px;
 }
 
-/* ── Name ── */
-.mylang h3 {
-  font-family: 'DM Sans', var(--font-body, sans-serif);
-  font-size: 0.8rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
+.skills-bars-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── Animated bars ───────────────────────── */
+
+.skills-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.skbar-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.skbar-row:first-of-type {
+  border-top: 1px solid var(--border);
+}
+
+.skbar-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.skbar-name-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.skbar-icon {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.skbar-name {
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--cream);
+}
+
+.skbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.skbar-level {
+  font-family: var(--font-mono);
+  font-size: 0.5rem;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.88);
-  margin-bottom: 10px;
-  text-align: center;
+  letter-spacing: 0.12em;
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1px solid;
   white-space: nowrap;
 }
 
-/* ── Level badge ── */
-.mylang p {
-  font-size: 0.6rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+.skbar-pct {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
   font-weight: 500;
-  padding: 3px 10px;
-  border-radius: 1px;
-  border: 1px solid;
-  line-height: 1.6;
-  margin: 0;
+  color: var(--gold-warm);
+  min-width: 34px;
+  text-align: right;
 }
 
-/* Level colours — dark */
-.mylang .Beginner     { color: #e6cc79; border-color: rgba(230, 204, 121, 0.3); background: rgba(230, 204, 121, 0.05); }
-.mylang .Junior       { color: #eb997c; border-color: rgba(235, 153, 124, 0.3); background: rgba(235, 153, 124, 0.05); }
-.mylang .Intermediate { color: #c774b9; border-color: rgba(199, 116, 185, 0.3); background: rgba(199, 116, 185, 0.05); }
-.mylang .Experienced  { color: #C8860A; border-color: rgba(200, 134, 10, 0.42); background: rgba(200, 134, 10, 0.08); }
+.skbar-track {
+  position: relative;
+  height: 3px;
+  background: var(--surface);
+  border-radius: 999px;
+  overflow: visible;
+}
 
-/* Amber underline reveals on hover */
-.lang-info::after {
-  content: '';
+@keyframes growBar {
+  from { width: 0 }
+  to   { width: var(--bar-width) }
+}
+
+@keyframes moveGlow {
+  from { left: 0 }
+  to   { left: var(--bar-width) }
+}
+
+.skbar-fill {
   position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 2px;
-  background: linear-gradient(to right, transparent, #C8860A, transparent);
-  transition: width 0.45s cubic-bezier(0.23, 1, 0.32, 1);
-}
-.mylang:hover .lang-info::after {
-  width: 65%;
+  top: 0; left: 0;
+  height: 100%;
+  border-radius: 999px;
+  width: var(--bar-width);
+  animation: growBar 1.4s cubic-bezier(0.23, 1, 0.32, 1) both;
+  animation-delay: var(--bar-delay, 0s);
 }
 
-/* ── Alice carousel ── */
-.alice-carousel__stage-item {
-  padding: 6px 0 16px;
+.skbar-glow {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  opacity: 0.85;
+  filter: blur(2px);
+  pointer-events: none;
+  left: var(--bar-width);
+  animation: moveGlow 1.4s cubic-bezier(0.23, 1, 0.32, 1) both;
+  animation-delay: var(--bar-delay, 0s);
 }
 
-/* ── Strip old bar styles ── */
-.progress-bar2, .fullwidth, .skill-bar,
-.skill-info, .skill-detail, .skill-name { display: none; }
+/* ── Category pills (right col) ──────────── */
 
-/* ─────────────────────────────────────
-   LIGHT THEME
-───────────────────────────────────── */
-.light .mylang::before {
-  background: rgba(0, 0, 0, 0.015);
-  border-color: rgba(0, 0, 0, 0.07);
+.skills-cats-col {
+  display: flex;
+  flex-direction: column;
 }
-.light .mylang:hover::before {
-  border-color: rgba(200, 134, 10, 0.4);
-  background: rgba(200, 134, 10, 0.03);
-}
-.light .mylang h3 { color: rgba(26, 18, 8, 0.88); }
-.light .lang-img  { background: rgba(200, 134, 10, 0.06); border-color: rgba(200, 134, 10, 0.2); }
-.light .mylang:hover .lang-img { background: rgba(200, 134, 10, 0.12); }
-.light .mylang .Beginner     { color: #7a6200; border-color: rgba(122, 98, 0, 0.35);    background: rgba(122, 98, 0, 0.06); }
-.light .mylang .Junior       { color: #b34a1a; border-color: rgba(179, 74, 26, 0.35);   background: rgba(179, 74, 26, 0.06); }
-.light .mylang .Intermediate { color: #8e1f80; border-color: rgba(142, 31, 128, 0.35);  background: rgba(142, 31, 128, 0.06); }
-.light .mylang .Experienced  { color: #9a6200; border-color: rgba(154, 98, 0, 0.4);     background: rgba(154, 98, 0, 0.08); }
 
-/* ─────────────────────────────────────
-   RESPONSIVE
-───────────────────────────────────── */
-@media only screen and (max-width: 768px) {
-  .progress-title { text-align: center; }
-  .progress-title h3 { font-size: 2rem; }
-  .progress-container { padding: 60px 20px 80px; }
+.skills-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
-@media only screen and (max-width: 425px) {
-  .progress-container { padding: 50px 16px 60px; }
-  .lang-img { width: 60px; height: 60px; }
-  .mylang h3 { font-size: 0.72rem; }
+
+.skcat {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.skcat-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.skcat-header i {
+  font-size: 0.7rem;
+}
+
+.skcat-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.skcat-pill {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  padding: 4px 10px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background: var(--surface);
+  cursor: default;
+  transition: color 0.2s, border-color 0.2s, background 0.2s, transform 0.2s;
+}
+
+.skcat-pill:hover {
+  color: var(--pill-color, var(--gold-warm));
+  border-color: var(--pill-border, var(--border-v));
+  background: var(--pill-bg, var(--gold-dim));
+  transform: translateX(3px);
+}
+
+/* ── "Also in the Arsenal" icon grid ──────── */
+
+.skills-icon-section {
+  border-top: 1px solid var(--border);
+  padding-top: 48px;
+}
+
+.skills-icon-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.skills-icon-label {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.skills-icon-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.skills-icon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(108px, 1fr));
+  gap: 14px;
+}
+
+.skicon-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 18px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: border-color 0.3s, transform 0.3s cubic-bezier(0.23,1,0.32,1), box-shadow 0.3s;
+  text-align: center;
+}
+
+.skicon-card:hover {
+  border-color: var(--border-v);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.3);
+}
+
+.skicon-card img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
+
+.skicon-name {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--cream);
+}
+
+.skicon-badge {
+  font-family: var(--font-mono);
+  font-size: 0.48rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 2px 7px;
+  border-radius: 999px;
+  border: 1px solid;
+}
+
+/* ── Responsive ──────────────────────────── */
+
+@media (max-width: 1024px) {
+  .skills-top {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}
+
+@media (max-width: 768px) {
+  .skills-container {
+    padding: 0 24px;
+  }
+
+  .skills-header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .skills-icon-grid {
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .skills-sovereign {
+    padding: 80px 0;
+  }
+
+  .sk-stat-val {
+    font-size: 1.8rem;
+  }
 }

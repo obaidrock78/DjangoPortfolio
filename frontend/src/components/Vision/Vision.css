@@ -1,0 +1,200 @@
+/* ============================================
+   VISION / QUOTE — Sovereign Abyss
+   ============================================ */
+
+.vision-sovereign {
+  background: var(--abyss);
+  padding: 0;
+  position: relative;
+}
+
+/* ── Quote block ──────────────────────────── */
+
+.vision-quote-block {
+  text-align: center;
+  padding: 120px 48px 80px;
+  position: relative;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.vision-quote-ornament {
+  font-family: var(--font-head);
+  font-size: 14rem;
+  line-height: 0.5;
+  color: var(--gold-warm);
+  opacity: 0.08;
+  user-select: none;
+  pointer-events: none;
+  position: absolute;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.vision-quote {
+  font-family: var(--font-head);
+  font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--cream);
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 40px;
+}
+
+.vision-quote-author {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.vision-quote-line {
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.5;
+}
+
+.vision-quote-name {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--gold-warm);
+}
+
+.vision-quote-role {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+
+/* ── Values grid ──────────────────────────── */
+
+.vision-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 48px 120px;
+}
+
+.vision-values-header {
+  margin-bottom: 48px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.vision-values-header::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.vision-values-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.vision-value {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: border-color 0.3s, transform 0.35s cubic-bezier(0.23,1,0.32,1);
+  position: relative;
+  overflow: hidden;
+}
+
+.vision-value::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.vision-value:hover {
+  border-color: var(--border-v);
+  transform: translateY(-4px);
+}
+
+.vision-value:hover::before {
+  opacity: 1;
+}
+
+.vv-icon {
+  width: 44px;
+  height: 44px;
+  background: var(--gold-dim);
+  border: 1px solid var(--border-v);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold-warm);
+  font-size: 1rem;
+}
+
+.vv-title {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--cream);
+  line-height: 1.3;
+}
+
+.vv-desc {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: var(--pearl);
+  line-height: 1.75;
+}
+
+/* ── Responsive ──────────────────────────── */
+
+@media (max-width: 1024px) {
+  .vision-values-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .vision-quote-block {
+    padding: 80px 24px 60px;
+  }
+
+  .vision-container {
+    padding: 0 24px 80px;
+  }
+
+  .vision-quote-author {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .vision-quote-line {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .vision-values-grid {
+    grid-template-columns: 1fr;
+  }
+}

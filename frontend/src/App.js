@@ -1,67 +1,118 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./App.css";
 import AboutMe from "./components/AboutMe/AboutMe";
-import ContactMe from "./components/ContactMe/ContactMe";
 import Footer from "./components/Footer/Footer";
 import Home from "./components/Hero/Intro";
 import Projects from "./components/MyWork/projects";
+import ProjectDetail from "./components/MyWork/ProjectDetail";
 import Navbar from "./components/Navbar/Navbar";
-import Process from "./components/Process/Process";
 import Services from "./components/Services/Services";
 import Progress from "./components/SkillBars/progress";
-import Testimonials from "./components/Testimonials/Testimonials";
-import ProjectDetails from "./pages/ProjectDetails";
-import $ from "jquery";
-import AOS from "aos";
-import "aos/dist/aos.css";
-import { useEffect } from "react";
+import SkillTicker from "./components/SkillTicker/SkillTicker";
+import WhatIBuild from "./components/WhatIBuild/WhatIBuild";
+import Ventures from "./components/Ventures/Ventures";
 import Email from "./components/EmailMe/Email";
+// import Writing from "./components/Writing/Writing";
+import Vision from "./components/Vision/Vision";
+import ConstellationCanvas from "./components/ConstellationCanvas";
+import Portfolio from "./components/Portfolio/Portfolio";
+import SmartContracts from "./components/SmartContracts/SmartContracts";
 import { AnimatedCursor } from "./components/animatedCursor";
+import $ from "jquery";
+import { useEffect } from "react";
+
+function HomePage() {
+  return (
+    <>
+      <Home />
+      <SkillTicker />
+      <div className="gradient-abyss-to-navy" />
+      <AboutMe />
+      <div className="gradient-navy-to-abyss" />
+      <WhatIBuild />
+      <div className="gradient-abyss-to-navy" />
+      <Ventures />
+      <div className="gradient-navy-to-abyss" />
+      <Projects />
+      {/* <div className="gradient-abyss-to-navy" /> */}
+      <Services />
+      <div className="gradient-abyss-to-navy" />
+      <Progress />
+      <div className="gradient-navy-to-abyss" />
+      {/* <Writing /> */}
+      {/* <div className="gradient-navy-to-abyss" /> */}
+      <Vision />
+      <div className="gradient-abyss-to-navy" />
+      <Email />
+      <Footer />
+    </>
+  );
+}
 
 function App() {
+  // Preloader
   $(window).on("load", function () {
     if ($("#preloader").length) {
       $("#preloader")
-        .delay(100)
+        .delay(500)
         .fadeOut("slow", function () {
           $(this).remove();
         });
     }
   });
 
+  // Scroll reveal observer — uses MutationObserver to catch dynamically added .rv elements
   useEffect(() => {
-    AOS.init({ duration: 1500, once: true });
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("on");
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+
+    const observeAll = () => {
+      document.querySelectorAll(".rv:not(.on)").forEach((el) => {
+        io.observe(el);
+      });
+    };
+
+    observeAll();
+
+    const mo = new MutationObserver(() => {
+      observeAll();
+    });
+    mo.observe(document.body, { childList: true, subtree: true });
+
+    return () => {
+      io.disconnect();
+      mo.disconnect();
+    };
   }, []);
 
   return (
     <BrowserRouter>
       {window.innerWidth > 768 && <AnimatedCursor />}
+      <ConstellationCanvas />
+      <div className="grain-overlay" />
+
       <div id="preloader">
-        <h2 className="name-load animate-charcter">Loading</h2>
+        <div className="preloader-bar"></div>
+        <span className="preloader-text">Loading</span>
       </div>
 
-      <Switch>
-        <Route path="/project/:id">
-          <Navbar />
-          <ProjectDetails />
-          <Footer />
-        </Route>
-        <Route path="/">
-          <div className="homepage">
-            <Navbar />
-            <Home />
-          </div>
-          <Progress />
-          <Services />
-          <Projects />
-          <AboutMe />
-          <Process />
-          <Testimonials />
-          <ContactMe />
-          <Email />
-          <Footer />
-        </Route>
-      </Switch>
+      <div className="sovereign-app">
+        <Navbar />
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/project/:id" component={ProjectDetail} />
+          <Route path="/portfolio" component={Portfolio} />
+          <Route path="/smart-contracts" component={SmartContracts} />
+        </Switch>
+      </div>
     </BrowserRouter>
   );
 }

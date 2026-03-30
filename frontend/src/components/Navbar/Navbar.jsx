@@ -1,89 +1,104 @@
+import React, { useState, useEffect } from "react";
+import { useHistory, useLocation } from "react-router-dom";
 import "./Navbar.css";
-import { Link } from "react-router-dom";
-import Main from "./nav";
-import CodeLogo from "./CodeLogo";
 
 const Navbar = () => {
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const history = useHistory();
+  const location = useLocation();
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const navLinks = [
+    { label: "Home", href: "#home" },
+    { label: "About", href: "#about" },
+    { label: "Experience", href: "#services" },
+    { label: "Skills", href: "#skills" },
+    { label: "Projects", href: "#work" },
+    { label: "Contact", href: "#contact" },
+  ];
+
+  const handleNavClick = (e, href) => {
+    e.preventDefault();
+    setMobileOpen(false);
+
+    // If we're not on the home page, navigate home first then scroll
+    if (location.pathname !== "/") {
+      history.push("/");
+      // Wait for the home page to render before scrolling
+      setTimeout(() => {
+        const el = document.querySelector(href);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }, 300);
+    } else {
+      const el = document.querySelector(href);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const handleLogoClick = (e) => {
+    e.preventDefault();
+    if (location.pathname !== "/") {
+      history.push("/");
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   return (
     <>
-      <Main />
-      <button type="button" className="mobile-nav-toggle d-lg-none" aria-label="Open menu">
-        <i className="fa fa-bars" aria-hidden="true" />
-      </button>
-      <header id="header" className="fixed-top">
-        <div className="container-fluid navbur">
-          <div className="navi">
-            <div className="col-xl-12 d-flex align-items-center lefty">
-              <a href="#home" className="devman">
-                <CodeLogo size={28} className="code-logo" />
-                <span className="devman-brand">Obed</span>
-                <span className="blink">_</span>
-              </a>
-              <nav className="nav-menu mainMenu">
-                <ul>
-                  <li
-                    className="active"
-                    data-aos="fade-down"
-                    data-aos-duration="300"
-                  >
-                    <a href="#home"> Home</a>
-                  </li>
-                  <li data-aos="fade-down" data-aos-duration="600">
-                    <a href="#skills">Skills</a>
-                  </li>
-                  <li data-aos="fade-down" data-aos-duration="900">
-                    <a href="#services">Services</a>
-                  </li>
-                  <li data-aos="fade-down" data-aos-duration="1200">
-                    <a href="#work">My Work</a>
-                  </li>
-                  <li data-aos="fade-down" data-aos-duration="1500">
-                    <a href="#about">About</a>
-                  </li>
-                  <li data-aos="fade-down" data-aos-duration="1800">
-                    <a href="#process">Process</a>
-                  </li>
-                  <li data-aos="fade-down" data-aos-duration="2100">
-                    <a href="#testimonials">Testimonials</a>
-                  </li>
-                  <li data-aos="fade-down" data-aos-duration="2400">
-                    <a href="#contact">Contact</a>
-                  </li>
-                </ul>
-              </nav>
-              <div className="nav-right-group">
-                <div className="nav-social">
-                  <a href="https://github.com/obaidrock78/" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                    <i className="fa fa-github" />
-                  </a>
-                  <a href="https://www.upwork.com/freelancers/~01eb4a1e83b3c6ef9e" target="_blank" rel="noopener noreferrer" aria-label="Upwork">
-                    <i className="fa-solid fa-address-card" />
-                  </a>
-                </div>
-                <div className="left-btns">
-                  <div className="CvMe">
-                    <a href="#contact">
-                      <button type="button" className="my-cv">Contact Me</button>
-                    </a>
-                  </div>
-                  <div id="theme-button">
-                    <Link to="#" className="menuBtn" aria-label="Toggle menu">
-                      <span className="lines"></span>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+      <nav className={`nav-sovereign ${scrolled ? "scrolled" : ""}`}>
+        <a href="/" className="nav-logo" onClick={handleLogoClick}>
+          <div className="nav-logo-badge">OC</div>
+          <span className="nav-logo-name">Obed Chaudhry</span>
+        </a>
+
+        <div className="nav-links">
+          {navLinks.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              className="nav-link-item"
+              onClick={(e) => handleNavClick(e, link.href)}
+            >
+              {link.label}
+            </a>
+          ))}
         </div>
-      </header>
-      {/* Floating theme switch (light/dark) - always visible */}
-      <div className="theme-switch-floating" id="theme-button2" title="Toggle light/dark theme">
-        <label htmlFor="toggle-theme" className="theme-switch-label">
-          <input id="toggle-theme" className="toggle" type="checkbox" aria-label="Toggle light/dark theme" />
-          <span className="theme-switch-icon theme-switch-dark" aria-hidden="true"><i className="fa fa-moon" /></span>
-          <span className="theme-switch-icon theme-switch-light" aria-hidden="true"><i className="fa fa-sun" /></span>
-        </label>
+
+        <a
+          href="#contact"
+          className="nav-cta"
+          onClick={(e) => handleNavClick(e, "#contact")}
+        >
+          Let's Talk
+        </a>
+
+        <div
+          className={`nav-hamburger ${mobileOpen ? "active" : ""}`}
+          onClick={() => setMobileOpen(!mobileOpen)}
+        >
+          <span />
+          <span />
+          <span />
+        </div>
+      </nav>
+
+      <div className={`nav-mobile-overlay ${mobileOpen ? "active" : ""}`}>
+        {navLinks.map((link) => (
+          <a
+            key={link.label}
+            href={link.href}
+            onClick={(e) => handleNavClick(e, link.href)}
+          >
+            {link.label}
+          </a>
+        ))}
       </div>
     </>
   );

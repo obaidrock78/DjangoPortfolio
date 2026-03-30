@@ -1,61 +1,68 @@
 import "./Services.css";
 import { baseUrlImages, useGetServicesQuery } from "../../Api/api";
-import SectionHeading from "../SectionHeading/SectionHeading";
+import { useEffect, useState } from "react";
 
 const Services = () => {
   const { data: services, isFetching } = useGetServicesQuery();
+  const [servicesDetails, setServicesDetails] = useState(services);
+  const img_300 = baseUrlImages;
 
-  if (isFetching) return "loading";
+  useEffect(() => {
+    setServicesDetails(services);
+  }, [servicesDetails, services]);
 
-  const total = services?.length || 0;
+  if (isFetching) return null;
 
   return (
-    <section id="services">
-      <SectionHeading label="What I Offer You" title="Services" />
+    <section className="experience-sovereign" id="services">
+      <div className="experience-layout">
+        {/* Sticky sidebar */}
+        <div className="experience-sidebar rv">
+          <div className="section-eyebrow">Services & Expertise</div>
+          <h2 className="section-heading">
+            Years of <em>levelling up.</em>
+          </h2>
+          <p className="experience-sidebar-text">
+            Every engagement sharpens the craft. From early freelance builds to
+            enterprise-scale cross-platform systems — each chapter added depth,
+            speed, and architectural conviction.
+          </p>
+          <div className="experience-timeline-line" />
+        </div>
 
-      <div className="services-grid">
-        {services &&
-          services.map((service, index) => {
-            const order = index + 1;
-            const paddedOrder = order.toString().padStart(2, "0");
-            const paddedTotal = total.toString().padStart(2, "0");
+        {/* Cards */}
+        <div className="experience-cards">
+          {services &&
+            services.map((service, idx) => (
+              <div className={`exp-card rv d${Math.min(idx + 1, 5)}`} key={service.id}>
+                <div className="exp-card-number">
+                  {String(idx + 1).padStart(2, "0")}
+                </div>
 
-            return (
-              <div
-                className="service-card"
-                key={service.id}
-                data-aos="fade-up"
-                data-aos-duration="900"
-              >
-                <div className="service-overlay" />
-                <div className="service-bg-num">{paddedOrder}</div>
-                <div className="service-icon">
-                  {service.image ? (
-                    <img
-                      src={`${baseUrlImages}${service.image}`}
-                      alt={service.service_name}
-                    />
-                  ) : (
-                    service.shadow_icon && (
-                      <i className={service.shadow_icon} aria-hidden="true" />
-                    )
+                <div className="exp-card-top">
+                  {service.image && (
+                    <div className="exp-card-icon">
+                      <img
+                        src={`${img_300}${service.image}`}
+                        alt={service.service_name}
+                      />
+                    </div>
                   )}
                 </div>
-                <div className="service-content">
-                  <span className="service-num">
-                    {paddedOrder} / {paddedTotal}
-                  </span>
-                  <div className="service-line" />
-                  <h3 className="service-name">{service.service_name}</h3>
-                  {service.service_description && (
-                    <p className="service-desc">
-                      {service.service_description}
-                    </p>
-                  )}
-                </div>
+
+                <h3 className="exp-card-title">{service.service_name}</h3>
+                <p className="exp-card-description">
+                  {service.service_description}
+                </p>
+
+                {service.shadow_icon && (
+                  <div className="exp-shadow-icon">
+                    <i className={service.shadow_icon}></i>
+                  </div>
+                )}
               </div>
-            );
-          })}
+            ))}
+        </div>
       </div>
     </section>
   );

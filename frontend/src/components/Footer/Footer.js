@@ -1,45 +1,60 @@
 import "./Footer.css";
-import Main from "./scrollTop";
 import { useGetSocialMediaQuery } from "../../Api/api";
 import { useEffect, useState } from "react";
+
 const Footer = () => {
   const { data: social, isFetching } = useGetSocialMediaQuery();
   const [socialDetails, setSocialDetails] = useState(social);
+  const [showScroll, setShowScroll] = useState(false);
 
   useEffect(() => {
     setSocialDetails(social);
-
-    // console.log(socialDetails);
   }, [socialDetails, social]);
-  if (isFetching) return "loading";
+
+  // Scroll to top visibility
+  useEffect(() => {
+    const onScroll = () => setShowScroll(window.scrollY > 300);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  if (isFetching) return null;
 
   return (
     <>
-      <Main />
-      <section>
-        <div className="my-footer">
-          <div className="progress-wrap" aria-label="Scroll to top">
-            <svg
-              className="progress-circle svg-content"
-              width="100%"
-              height="100%"
-              viewBox="-1 -1 102 102"
-              aria-hidden="true"
-            >
-              <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
-            </svg>
-            <i className="bx bx-chevron-up" aria-hidden="true" />
+      <footer className="footer-sovereign">
+        <div className="footer-grid">
+          <div className="footer-col">
+            <div className="footer-logo-mini">OC</div>
+            <span className="footer-text">
+              © {new Date().getFullYear()} Built with purpose.
+            </span>
           </div>
-          <div className="footer-info">
-            <div className="copywrite">
-              <p>
-                © {new Date().getFullYear()} All rights reserved | Made with ❤️
-                by Obed Chaudhry
-              </p>
+
+          <div className="footer-col">
+            <div className="footer-status">
+              <span className="footer-pulse" />
+              Open to opportunities
             </div>
           </div>
+
+          <div className="footer-col">
+            <span className="footer-role">Senior Frontend Developer</span>
+          </div>
         </div>
-      </section>
+      </footer>
+
+      <button
+        className={`scroll-top-btn ${showScroll ? "visible" : ""}`}
+        onClick={scrollToTop}
+        aria-label="Scroll to top"
+      >
+        <i className="bx bx-chevron-up" />
+      </button>
     </>
   );
 };
