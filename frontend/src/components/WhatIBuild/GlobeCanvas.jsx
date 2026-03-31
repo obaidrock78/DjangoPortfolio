@@ -82,18 +82,18 @@ const GlobeCanvas = ({ pillars = [] }) => {
     const phases = ORBIT_DEFS.map((_, i) => (i / ORBIT_DEFS.length) * Math.PI * 2);
 
     /* ── helpers ── */
-    const orbitPoint = (cx, cy, half, def, phase) => {
-      const rx   = def.r * half;
-      const ry   = rx * def.yScale;
-      const cosT = Math.cos(def.tilt);
-      const sinT = Math.sin(def.tilt);
-      const ex   = Math.cos(phase) * rx;
-      const ey   = Math.sin(phase) * ry;
-      return {
-        x: cx + ex * cosT - ey * sinT,
-        y: cy + ex * sinT + ey * cosT,
-      };
-    };
+    // const orbitPoint = (cx, cy, half, def, phase) => {
+    //   const rx   = def.r * half;
+    //   const ry   = rx * def.yScale;
+    //   const cosT = Math.cos(def.tilt);
+    //   const sinT = Math.sin(def.tilt);
+    //   const ex   = Math.cos(phase) * rx;
+    //   const ey   = Math.sin(phase) * ry;
+    //   return {
+    //     x: cx + ex * cosT - ey * sinT,
+    //     y: cy + ex * sinT + ey * cosT,
+    //   };
+    // };
 
     /* ─── draw loop ─── */
     const draw = () => {
