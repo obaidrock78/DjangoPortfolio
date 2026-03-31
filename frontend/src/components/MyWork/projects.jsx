@@ -151,7 +151,7 @@ const Projects = () => {
             const overflow = tech.length > 3 ? tech.length - 3 : 0;
             const cat     = getCategory(d.language_used);
             const status  = getStatus(d.demo_link, d.project_link);
-            const href    = d.demo_link || d.project_link || null;
+            // const href    = d.demo_link || d.project_link || null;
 
             return (
               <Link
