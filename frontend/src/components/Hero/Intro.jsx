@@ -77,12 +77,12 @@ const Intro = () => {
             <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hero-social-link" aria-label="GitHub">
               <i className="fab fa-github" />
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hero-social-link" aria-label="LinkedIn">
+            {/* <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hero-social-link" aria-label="LinkedIn">
               <i className="fab fa-linkedin-in" />
             </a>
             <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hero-social-link" aria-label="Twitter">
               <i className="fab fa-twitter" />
-            </a>
+            </a> */}
             <span className="hero-socials-divider" />
             <span className="hero-socials-label">Find me online</span>
           </div>
