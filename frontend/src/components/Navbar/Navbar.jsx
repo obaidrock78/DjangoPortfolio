@@ -71,13 +71,13 @@ const Navbar = () => {
           ))}
         </div>
 
-        <a
+        {/* <a
           href="#contact"
           className="nav-cta"
           onClick={(e) => handleNavClick(e, "#contact")}
         >
           Let's Talk
-        </a>
+        </a> */}
 
         <div
           className={`nav-hamburger ${mobileOpen ? "active" : ""}`}

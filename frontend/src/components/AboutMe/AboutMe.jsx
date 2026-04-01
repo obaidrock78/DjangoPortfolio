@@ -83,7 +83,7 @@ const AboutMe = () => {
             </div>
           )}
 
-          <a
+          {/* <a
             href={
               home?.cv_link ||
               "https://drive.google.com/file/d/1vJBEV0fe3hdtsToBDl-h6ZfxewlWyEoM/view"
@@ -94,7 +94,7 @@ const AboutMe = () => {
             className="about-cv-btn"
           >
             Download CV <i className="bx bx-download"></i>
-          </a>
+          </a> */}
         </div>
 
         {/* Right: Achievement cards */}

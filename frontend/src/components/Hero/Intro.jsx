@@ -25,7 +25,7 @@ const Intro = () => {
 
   return (
     <>
-    <a
+    {/* <a
       href="https://wa.me/923034142927"
       className="whatsapp-float"
       target="_blank"
@@ -33,7 +33,7 @@ const Intro = () => {
       aria-label="Chat on WhatsApp"
     >
       <i className="fab fa-whatsapp" />
-    </a>
+    </a> */}
     <section className="hero-sovereign" id="home">
       <div className="hero-grid">
         {/* Left Column */}
@@ -63,14 +63,14 @@ const Intro = () => {
             <a href="#work" className="cta-secondary">
               View Work
             </a>
-            <a
+            {/* <a
               href={detail.cv_link || "https://drive.google.com/file/d/1vJBEV0fe3hdtsToBDl-h6ZfxewlWyEoM/view"}
               target="_blank"
               rel="noopener noreferrer"
               className="cta-ghost"
             >
               Download CV
-            </a>
+            </a> */}
           </div>
 
           <div className="hero-socials">
